@@ -1,0 +1,964 @@
+/**
+ * Audio Matching Game Styles
+ * Responsive CSS for the dynamic audio matching game
+ */
+
+/* Enhanced responsive game container for audio games */
+.sarah-loz-game-container {
+    /* Use CSS custom properties from JavaScript */
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    transition: width 0.3s ease, height 0.3s ease;
+    
+    /* Default background from CSS custom property or fallback */
+    background: var(--game-bg-color, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    
+    /* Responsive sizing based on container */
+    min-height: 500px;
+    max-height: 75vh;
+    
+    /* Let the parent container (single-game.php) control the sizing */
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+    padding: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    
+    /* Ensure proper display for game content */
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Mobile-specific adjustments */
+.sarah-loz-game-container.is-mobile {
+    min-height: 300px;
+    max-height: 60vh;
+    padding: 1rem;
+}
+
+/* Landscape mobile adjustments */
+.sarah-loz-game-container.is-mobile.is-landscape {
+    min-height: 250px;
+    max-height: 80vh;
+    padding: 0.75rem;
+}
+
+/* Portrait mobile adjustments */
+.sarah-loz-game-container.is-mobile.is-portrait {
+    min-height: 350px;
+    max-height: 50vh;
+    padding: 1rem;
+}
+
+/* Game content container */
+.sarah-loz-game-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Base audio game container */
+.audio-game-main {
+    font-family: 'Cairo', 'Arial', sans-serif;
+    direction: rtl;
+    text-align: right;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Game header styles */
+.audio-game-header h2 {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 10px 0;
+    font-weight: 800;
+}
+
+.audio-game-header p {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Game board responsive layout */
+.audio-game-board {
+    flex: 1 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem !important;
+    min-height: 350px !important;
+    max-height: calc(100vh - 200px) !important; /* Ensure it fits in viewport */
+    transition: all 0.3s ease;
+    align-items: start !important; /* Changed from stretch to start */
+    align-content: start !important; /* Changed from center to start */
+    justify-content: center !important;
+    width: 100% !important;
+    overflow: hidden;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .audio-game-board {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        padding: 0rem !important;
+        min-height: 400px !important;
+        max-height: calc(100vh - 150px) !important;
+    }
+    
+    .sarah-loz-game-container {
+        padding: 0.75rem !important;
+        min-height: 450px !important;
+        max-height: 90vh !important;
+    }
+    
+    .audio-game-main {
+        padding: 0.75rem !important;
+        height: 100% !important;
+    }
+    
+    .audio-game-header {
+        margin-bottom: 1rem !important;
+        flex: 0 0 auto !important;
+    }
+    
+    .audio-sounds-section,
+    .audio-options-section {
+        padding: 1rem !important;
+        gap: 0.75rem !important;
+        max-height: 40vh !important; /* Use viewport height */
+        overflow-y: auto !important;
+        flex: 1 1 auto !important;
+    }
+    
+    .options-container {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+        max-height: 30vh !important; /* Use viewport height */
+        overflow-y: auto !important;
+    }
+}
+
+/* Audio game main container */
+.audio-game-main {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0rem !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: transparent !important; /* Let parent handle background */
+}
+
+/* Audio game header */
+.audio-game-header {
+    text-align: center !important;
+    margin-bottom: 1.5rem !important;
+    color: white !important;
+    flex: 0 0 auto !important;
+}
+
+.audio-game-header h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem) !important;
+    margin: 0 0 0.5rem 0 !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+    font-weight: 800 !important;
+}
+
+.audio-game-header p {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem) !important;
+    margin: 0 !important;
+    opacity: 0.9 !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
+}
+
+/* Audio game sections styling */
+.audio-sounds-section,
+.audio-options-section {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 16px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    min-height: 200px !important;
+    max-height: calc(100vh - 300px) !important; /* Constrain height based on viewport */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Enable smooth scrolling on iOS */
+    -webkit-overflow-scrolling: touch !important;
+    height: auto !important;
+}
+
+/* Specific audio options section enhancements */
+.audio-options-section {
+    position: relative !important;
+}
+
+.audio-options-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+    pointer-events: none;
+    border-radius: 0 0 16px 16px;
+}
+
+/* Sound buttons section */
+.audio-sounds-section h3,
+.audio-options-section h3 {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem !important;
+    flex: 0 0 auto;
+}
+
+/* Sound button styles */
+.sound-button {
+    font-family: inherit !important;
+    font-weight: 600 !important;
+    border: none !important;
+    outline: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    letter-spacing: 0.5px !important;
+    
+    /* Enhanced sound button styling */
+    width: 100% !important;
+    background: linear-gradient(145deg, #4CAF50, #45a049) !important;
+    color: white !important;
+    border-radius: 12px !important;
+    padding: 1rem 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+    font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+    min-height: 44px !important; /* Touch target minimum */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+}
+
+.sound-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.sound-button:hover::before {
+    left: 100%;
+}
+
+.sound-button.selected {
+    animation: pulseGlow 1.5s infinite;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.6),
+                    0 4px 8px rgba(0,0,0,0.2);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 107, 107, 0.8),
+                    0 6px 12px rgba(0,0,0,0.3);
+        transform: scale(1.02);
+    }
+}
+
+/* Option button styles */
+.option-button {
+    font-family: inherit !important;
+    font-weight: 700 !important;
+    border: 3px solid transparent !important;
+    outline: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    letter-spacing: 0.5px !important;
+    background-clip: padding-box !important;
+    backdrop-filter: blur(5px) !important;
+    
+    /* Enhanced option button styling */
+    width: 100% !important;
+    min-height: 44px !important; /* Touch target minimum */
+    padding: 1rem !important;
+    margin-bottom: 0.75rem !important;
+    border-radius: 12px !important;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #333 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.option-button:not(.correct):not(.wrong):hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.option-button.correct {
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.option-button.wrong {
+    border-color: #f44336 !important;
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.5);
+}
+
+/* Options container responsive grid */
+.options-container {
+    transition: all 0.3s ease;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 1rem !important;
+    width: 100% !important;
+    padding: 0 !important;
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    /* Enable smooth scrolling on iOS */
+    -webkit-overflow-scrolling: touch !important;
+    max-height: calc(100vh - 400px) !important; /* Specific height constraint */
+    min-height: 150px !important;
+}
+
+@media (max-width: 480px) {
+    .options-container {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.75rem !important;
+        max-height: 25vh !important; /* Use viewport height */
+        overflow-y: auto !important;
+        padding-right: 0.5rem !important; /* Space for scrollbar */
+    }
+    
+    .option-button {
+        padding: 1rem 0.75rem !important;
+        font-size: 0.9rem !important;
+        min-height: 44px !important;
+    }
+    
+    .audio-options-section {
+        max-height: 35vh !important; /* Use viewport height */
+        overflow-y: auto !important;
+    }
+    
+    .audio-sounds-section {
+        max-height: 35vh !important; /* Use viewport height */
+        overflow-y: auto !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .options-container {
+        grid-template-columns: 1fr !important;
+        max-height: 20vh !important; /* Use viewport height */
+        overflow-y: auto !important;
+        gap: 0.5rem !important;
+    }
+    
+    .audio-options-section {
+        max-height: 30vh !important; /* Use viewport height */
+        padding: 1rem !important;
+    }
+    
+    .audio-sounds-section {
+        max-height: 30vh !important; /* Use viewport height */
+    }
+    
+    .option-button {
+        padding: 0.875rem 0.5rem !important;
+        font-size: 0.85rem !important;
+    }
+}
+
+/* Feedback area styles */
+.audio-feedback-area {
+    border: 2px solid transparent !important;
+    background-clip: padding-box !important;
+    backdrop-filter: blur(10px) !important;
+    position: relative !important;
+    
+    /* Enhanced feedback area styling */
+    flex: 0 0 auto !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    margin: 1rem 0 !important;
+    text-align: center !important;
+    font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
+    font-weight: 600 !important;
+    min-height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Control buttons styling */
+.control-button {
+    min-height: 44px !important; /* Touch target minimum */
+    padding: 0.75rem 1.5rem !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem) !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    background: #FF9800 !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    margin: 0.5rem !important;
+}
+
+.control-button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.control-button:active {
+    transform: translateY(0) !important;
+}
+
+.audio-feedback-area::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+    border-radius: inherit;
+    z-index: -1;
+    animation: borderGlow 3s linear infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Control buttons */
+.control-button {
+    font-family: inherit;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.control-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.control-button:hover::after {
+    width: 100%;
+    height: 100%;
+}
+
+.control-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3) !important;
+}
+
+.control-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
+/* Animation definitions */
+@keyframes correctAnswer {
+    0%, 100% { 
+        transform: scale(1); 
+        filter: brightness(1);
+    }
+    25% { 
+        transform: scale(1.1); 
+        filter: brightness(1.2);
+    }
+    50% { 
+        transform: scale(1.15); 
+        filter: brightness(1.3);
+    }
+    75% { 
+        transform: scale(1.1); 
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes wrongAnswer {
+    0%, 100% { 
+        transform: translateX(0) rotate(0deg); 
+    }
+    10% { 
+        transform: translateX(-10px) rotate(-2deg); 
+    }
+    20% { 
+        transform: translateX(10px) rotate(2deg); 
+    }
+    30% { 
+        transform: translateX(-8px) rotate(-1deg); 
+    }
+    40% { 
+        transform: translateX(8px) rotate(1deg); 
+    }
+    50% { 
+        transform: translateX(-6px) rotate(-1deg); 
+    }
+    60% { 
+        transform: translateX(6px) rotate(1deg); 
+    }
+    70% { 
+        transform: translateX(-4px) rotate(0deg); 
+    }
+    80% { 
+        transform: translateX(4px) rotate(0deg); 
+    }
+    90% { 
+        transform: translateX(-2px) rotate(0deg); 
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+    }
+    50% { 
+        transform: translateY(-20px) scale(1.05); 
+    }
+}
+
+@keyframes fadeIn {
+    0% { 
+        opacity: 0; 
+        transform: scale(0.8) translateY(20px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
+}
+
+/* Celebration effects */
+.audio-game-celebration {
+    animation: celebrationZoom 0.5s ease-out;
+}
+
+@keyframes celebrationZoom {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+    .audio-game-main {
+        padding: 15px;
+    }
+    
+    .audio-game-header h2 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+    
+    .audio-game-header p {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+    
+    .audio-sounds-section,
+    .audio-options-section {
+        padding: 15px;
+    }
+    
+    .audio-sounds-section h3,
+    .audio-options-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .sound-button {
+        padding: 12px 15px;
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    .audio-feedback-area {
+        padding: 12px;
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    .control-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .audio-game-main {
+        padding: 10px;
+    }
+    
+    .audio-game-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .audio-game-header p {
+        font-size: 0.9rem;
+    }
+    
+    .audio-sounds-section,
+    .audio-options-section {
+        padding: 12px;
+    }
+    
+    .sound-button {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    
+    .audio-feedback-area {
+        padding: 10px;
+        font-size: 0.9rem;
+        min-height: 45px;
+    }
+    
+    .control-button {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .audio-controls {
+        gap: 10px;
+    }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+    .audio-game-main {
+        padding: 10px;
+    }
+    
+    .audio-game-header {
+        margin-bottom: 15px;
+    }
+    
+    .audio-game-header h2 {
+        font-size: 1.6rem;
+        margin-bottom: 5px;
+    }
+    
+    .audio-game-header p {
+        font-size: 0.9rem;
+    }
+    
+    .audio-game-board {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 10px;
+        min-height: 250px;
+    }
+    
+    .audio-sounds-section,
+    .audio-options-section {
+        padding: 10px;
+    }
+    
+    .audio-sounds-section h3,
+    .audio-options-section h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    .sound-button {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+    }
+    
+    .option-button {
+        padding: 12px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .audio-feedback-area {
+        padding: 8px;
+        font-size: 0.8rem;
+        min-height: 40px;
+        margin-bottom: 10px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .sound-button,
+    .option-button,
+    .control-button {
+        border: 2px solid;
+    }
+    
+    .sound-button.selected {
+        border-color: #FF6B6B;
+        background: #FF6B6B !important;
+    }
+    
+    .option-button.correct {
+        border-color: #4CAF50;
+        background: #4CAF50 !important;
+    }
+    
+    .option-button.wrong {
+        border-color: #f44336;
+        background: #f44336 !important;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .sound-button,
+    .option-button,
+    .control-button,
+    .audio-feedback-area {
+        transition: none;
+        animation: none;
+    }
+    
+    .sound-button.selected {
+        animation: none;
+        box-shadow: 0 0 0 3px #FF6B6B;
+    }
+    
+    .option-button.correct,
+    .option-button.wrong {
+        animation: none;
+    }
+    
+    .audio-game-celebration {
+        animation: none;
+    }
+}
+
+/* Focus styles for accessibility */
+.sound-button:focus,
+.option-button:focus,
+.control-button:focus {
+    outline: 3px solid #005fcc;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .audio-game-main {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .sound-button,
+    .option-button,
+    .control-button {
+        border: 2px solid black;
+        background: white !important;
+        color: black !important;
+        box-shadow: none;
+    }
+    
+    .audio-feedback-area {
+        border: 1px solid black;
+        background: white !important;
+        color: black !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .audio-sounds-section,
+    .audio-options-section {
+        background: #2d3748 !important;
+        color: white;
+    }
+    
+    .audio-sounds-section h3,
+    .audio-options-section h3 {
+        color: white;
+        border-bottom-color: #4a5568;
+    }
+    
+    .option-button {
+        border-color: #4a5568;
+    }
+    
+    .audio-feedback-area {
+        background: rgba(45, 55, 72, 0.9) !important;
+        color: white;
+        border-color: #4a5568;
+    }
+}
+
+/* RTL-specific adjustments */
+[dir="rtl"] .sound-button::before {
+    left: 100%;
+}
+
+[dir="rtl"] .sound-button:hover::before {
+    left: -100%;
+}
+
+/* Custom scrollbar for webkit browsers */
+.audio-sounds-section::-webkit-scrollbar,
+.audio-options-section::-webkit-scrollbar,
+.options-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.audio-sounds-section::-webkit-scrollbar-track,
+.audio-options-section::-webkit-scrollbar-track,
+.options-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.audio-sounds-section::-webkit-scrollbar-thumb,
+.audio-options-section::-webkit-scrollbar-thumb,
+.options-container::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.audio-sounds-section::-webkit-scrollbar-thumb:hover,
+.audio-options-section::-webkit-scrollbar-thumb:hover,
+.options-container::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
+/* Mobile scrollbar styling */
+@media (max-width: 768px) {
+    .audio-sounds-section::-webkit-scrollbar,
+    .audio-options-section::-webkit-scrollbar,
+    .options-container::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .audio-sounds-section::-webkit-scrollbar-thumb,
+    .audio-options-section::-webkit-scrollbar-thumb,
+    .options-container::-webkit-scrollbar-thumb {
+        background: rgba(102, 126, 234, 0.8);
+        border-radius: 3px;
+    }
+}
+
+/* Loading state styles */
+.audio-game-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 1.2rem;
+    color: #667eea;
+}
+
+.audio-game-loading::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid #667eea;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    margin-left: 10px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error state styles */
+.audio-game-error {
+    background: linear-gradient(145deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 20px 0;
+    border: 1px solid #f5c6cb;
+}
+
+.audio-game-error h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+}
+
+.audio-game-error p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}

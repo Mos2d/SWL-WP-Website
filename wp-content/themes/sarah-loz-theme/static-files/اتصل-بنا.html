@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اتصل بنا - سارة ولوز</title>
+    <meta
+      name="description"
+      content="تواصل معنا في موقع سارة ولوز التعليمي للأطفال"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg">
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md">
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div id="navMenu" class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0">
+            <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse">
+              <li>
+                <a href="index.html#games" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الألعاب</a>
+              </li>
+              <li>
+                <a href="index.html#activities" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الأنشطة</a>
+              </li>
+              <li>
+                <a href="index.html#store" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">المتجر</a>
+              </li>
+              <li>
+                <a href="index.html#videos" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الفيديوهات</a>
+              </li>
+              <li>
+                <a href="index.html#downloads" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">التحميلات</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile -->
+          <div class="hidden lg:block">
+            <a href="تسجيل-الدخول.html" class="bg-white text-primary py-2 px-4 rounded-full hover:bg-light transition shadow-md">
+              <i class="fas fa-user mr-1"></i> تسجيل الدخول
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+      <div class="max-w-4xl mx-auto">
+        <!-- Contact Header -->
+        <div class="text-center mb-12">
+          <div class="inline-block p-4 bg-primary/10 rounded-full text-primary mb-3">
+            <i class="fas fa-envelope text-4xl floating"></i>
+          </div>
+          <h1 class="text-3xl font-bold text-dark mb-2">اتصل بنا</h1>
+          <p class="text-gray-600 text-lg">نحن هنا للإجابة على استفساراتك ومساعدتك</p>
+        </div>
+
+        <!-- Contact Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <!-- Contact Form -->
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+            <div class="p-8">
+              <h2 class="text-2xl font-bold text-dark mb-6">أرسل رسالة</h2>
+              
+              <form id="contactForm">
+                <!-- Name -->
+                <div class="mb-4">
+                  <label for="name" class="block text-dark font-bold mb-2">الاسم</label>
+                  <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    placeholder="الاسم الكامل"
+                    required
+                  >
+                </div>
+                
+                <!-- Email -->
+                <div class="mb-4">
+                  <label for="email" class="block text-dark font-bold mb-2">البريد الإلكتروني</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    placeholder="example@domain.com"
+                    required
+                  >
+                </div>
+                
+                <!-- Subject -->
+                <div class="mb-4">
+                  <label for="subject" class="block text-dark font-bold mb-2">الموضوع</label>
+                  <select 
+                    id="subject" 
+                    name="subject" 
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    required
+                  >
+                    <option value="" disabled selected>اختر موضوع الرسالة</option>
+                    <option value="general">استفسار عام</option>
+                    <option value="support">الدعم الفني</option>
+                    <option value="account">مشاكل الحساب</option>
+                    <option value="subscription">الاشتراكات</option>
+                    <option value="feedback">اقتراحات وملاحظات</option>
+                    <option value="other">أخرى</option>
+                  </select>
+                </div>
+                
+                <!-- Message -->
+                <div class="mb-6">
+                  <label for="message" class="block text-dark font-bold mb-2">الرسالة</label>
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    rows="5" 
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    placeholder="اكتب رسالتك هنا..."
+                    required
+                  ></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <button 
+                  type="submit"
+                  class="w-full bg-primary text-white py-3 px-4 rounded-lg font-bold hover:bg-primary/90 transition shadow-lg"
+                  onclick="showSuccessMessage(event)"
+                >
+                  إرسال الرسالة
+                </button>
+              </form>
+              
+              <!-- Success Message -->
+              <div id="successMessage" class="mt-8 hidden">
+                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
+                  <div class="flex">
+                    <div class="flex-shrink-0">
+                      <i class="fas fa-check-circle text-green-500 text-lg ml-2"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-green-800 font-bold">تم إرسال رسالتك بنجاح!</h3>
+                      <p class="text-green-700 text-sm">سنرد عليك في أقرب وقت ممكن. شكرًا لتواصلك معنا.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Contact Information -->
+          <div>
+            <!-- Contact Info Card -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden mb-6">
+              <div class="p-8">
+                <h2 class="text-2xl font-bold text-dark mb-6">معلومات الاتصال</h2>
+                
+                <ul class="space-y-4">
+                  <li class="flex items-start">
+                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center ml-4">
+                      <i class="fas fa-envelope text-primary"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-dark">البريد الإلكتروني</h3>
+                      <a href="mailto:info@saralouze.com" class="text-primary hover:underline">info@saralouze.com</a>
+                    </div>
+                  </li>
+                  
+                  <li class="flex items-start">
+                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center ml-4">
+                      <i class="fas fa-phone text-primary"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-dark">رقم الهاتف</h3>
+                      <a href="tel:+966123456789" class="text-gray-600">+966 12 345 6789</a>
+                    </div>
+                  </li>
+                  
+                  <li class="flex items-start">
+                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center ml-4">
+                      <i class="fas fa-map-marker-alt text-primary"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-dark">العنوان</h3>
+                      <p class="text-gray-600">
+                        سارة ولوز<br>
+                        ص.ب 12345<br>
+                        الرياض، المملكة العربية السعودية
+                      </p>
+                    </div>
+                  </li>
+                  
+                  <li class="flex items-start">
+                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center ml-4">
+                      <i class="fas fa-clock text-primary"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-dark">ساعات العمل</h3>
+                      <p class="text-gray-600">
+                        الأحد - الخميس: 9:00 صباحًا - 5:00 مساءً<br>
+                        الجمعة - السبت: مغلق
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- Follow Us -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+              <div class="p-8">
+                <h2 class="text-2xl font-bold text-dark mb-6">تابعنا</h2>
+                
+                <div class="flex flex-wrap gap-4">
+                  <a href="#" class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                    <i class="fab fa-facebook-f text-primary hover:text-white text-xl"></i>
+                  </a>
+                  <a href="#" class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                    <i class="fab fa-twitter text-primary hover:text-white text-xl"></i>
+                  </a>
+                  <a href="#" class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                    <i class="fab fa-instagram text-primary hover:text-white text-xl"></i>
+                  </a>
+                  <a href="#" class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                    <i class="fab fa-youtube text-primary hover:text-white text-xl"></i>
+                  </a>
+                  <a href="#" class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                    <i class="fab fa-linkedin-in text-primary hover:text-white text-xl"></i>
+                  </a>
+                </div>
+                
+                <div class="mt-6">
+                  <p class="text-gray-600">
+                    تابعنا على وسائل التواصل الاجتماعي للحصول على آخر الأخبار والتحديثات والمحتوى الجديد.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden p-8 mb-12">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-dark">أسئلة شائعة</h2>
+            <p class="text-gray-600">إجابات سريعة لبعض الأسئلة الشائعة</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-lg font-bold text-dark mb-2">كم يستغرق الرد على استفساراتي؟</h3>
+              <p class="text-gray-600 mb-4">
+                نحن نسعى للرد على جميع الاستفسارات خلال 24-48 ساعة عمل. قد تستغرق بعض الاستفسارات التقنية وقتًا أطول للرد.
+              </p>
+              
+              <h3 class="text-lg font-bold text-dark mb-2">كيف يمكنني الإبلاغ عن مشكلة فنية؟</h3>
+              <p class="text-gray-600">
+                يمكنك الإبلاغ عن المشكلات الفنية من خلال نموذج الاتصال مع اختيار "الدعم الفني" كموضوع. يساعدنا وصف المشكلة بالتفصيل وإرفاق لقطات شاشة (إن أمكن) في حل المشكلة بشكل أسرع.
+              </p>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-bold text-dark mb-2">كيف يمكنني إلغاء اشتراكي؟</h3>
+              <p class="text-gray-600 mb-4">
+                يمكنك إلغاء اشتراكك في أي وقت من خلال صفحة "حسابي" ثم "الاشتراكات" والنقر على "إلغاء الاشتراك". إذا واجهتك أي مشكلة، يرجى التواصل معنا.
+              </p>
+              
+              <h3 class="text-lg font-bold text-dark mb-2">هل يمكنني طلب استرداد أموالي؟</h3>
+              <p class="text-gray-600">
+                نقدم استرداد الأموال خلال 14 يومًا من تاريخ الاشتراك. لطلب استرداد، يرجى التواصل معنا عبر البريد الإلكتروني مع ذكر رقم الطلب وسبب طلب الاسترداد.
+              </p>
+            </div>
+          </div>
+          
+          <div class="text-center mt-8">
+            <a href="الأسئلة-الشائعة.html" class="inline-flex items-center text-primary hover:underline">
+              <span>المزيد من الأسئلة الشائعة</span>
+              <i class="fas fa-arrow-left mr-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10 mt-16">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- About Column -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">عن سارة ولوز</h3>
+            <p class="text-gray-300 mb-4">
+              موقع تعليمي وترفيهي للأطفال من عمر ٣ إلى ٩ سنوات، يهدف إلى تنمية مهارات الطفل بطريقة ممتعة وتفاعلية.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li><a href="index.html" class="text-gray-300 hover:text-white">الرئيسية</a></li>
+              <li><a href="ألعاب.html" class="text-gray-300 hover:text-white">الألعاب</a></li>
+              <li><a href="أنشطة.html" class="text-gray-300 hover:text-white">الأنشطة</a></li>
+              <li><a href="فيديوهات.html" class="text-gray-300 hover:text-white">الفيديوهات</a></li>
+            </ul>
+          </div>
+
+          <!-- Customer Service -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">خدمة المستخدمين</h3>
+            <ul class="space-y-2">
+              <li><a href="المساعدة.html" class="text-gray-300 hover:text-white">المساعدة</a></li>
+              <li><a href="الأسئلة-الشائعة.html" class="text-gray-300 hover:text-white">أسئلة متكررة</a></li>
+              <li><a href="سياسة-الخصوصية.html" class="text-gray-300 hover:text-white">سياسة الخصوصية</a></li>
+              <li><a href="شروط-الاستخدام.html" class="text-gray-300 hover:text-white">شروط الاستخدام</a></li>
+              <li><a href="اتصل-بنا.html" class="text-gray-300 hover:text-white">اتصل بنا</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a href="mailto:info@saralouze.com" class="text-gray-300 hover:text-white">info@saralouze.com</a>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a href="tel:+966123456789" class="text-gray-300 hover:text-white">+966 12 345 6789</a>
+              </li>
+            </ul>
+            <div class="mt-4">
+              <h4 class="text-lg font-bold mb-2">تابعنا على</h4>
+              <div class="flex space-x-4 space-x-reverse">
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-youtube text-xl"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            &copy; ٢٠٢٣ سارة ولوز - جميع الحقوق محفوظة
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+      
+      // Show success message
+      function showSuccessMessage(event) {
+        event.preventDefault();
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('successMessage').classList.remove('hidden');
+      }
+    </script>
+  </body>
+</html> 

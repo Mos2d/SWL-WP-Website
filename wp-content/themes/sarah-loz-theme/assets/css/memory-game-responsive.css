@@ -1,0 +1,279 @@
+/**
+ * Memory Game Responsive Styles
+ * Additional CSS to enhance mobile responsiveness
+ */
+
+/* Enhanced responsive game container */
+.sarah-loz-game-container {
+    /* Use CSS custom properties from JavaScript */
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    transition: width 0.3s ease, height 0.3s ease;
+    
+    /* Default background from CSS custom property */
+    background-color: var(--game-bg-color, #f0f0f0);
+    
+    /* Responsive sizing based on container */
+    min-height: 400px;
+    max-height: 70vh;
+    
+    /* Let the parent container (single-game.php) control the sizing */
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+    
+    /* Ensure proper display for game content */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile-specific adjustments */
+.sarah-loz-game-container.is-mobile {
+    min-height: 300px;
+    max-height: 60vh;
+}
+
+/* Landscape mobile adjustments */
+.sarah-loz-game-container.is-mobile.is-landscape {
+    min-height: 250px;
+    max-height: 80vh;
+}
+
+/* Portrait mobile adjustments */
+.sarah-loz-game-container.is-mobile.is-portrait {
+    min-height: 350px;
+    max-height: 50vh;
+}
+
+/* Responsive memory game grid */
+.memory-game-grid {
+    display: grid !important;
+    transition: gap 0.3s ease;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+    align-items: stretch;
+    justify-items: stretch;
+    place-content: center;
+}
+
+/* Game content container */
+.sarah-loz-game-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Card styles for better touch interaction */
+.memory-card {
+    touch-action: manipulation; /* Prevents double-tap zoom on mobile */
+    user-select: none; /* Prevents text selection */
+    -webkit-tap-highlight-color: transparent; /* Removes tap highlight on iOS */
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform; /* Optimizes animation performance */
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 8px;
+    min-height: 60px;
+    min-width: 60px;
+    aspect-ratio: 1/1;
+}
+
+/* Slightly bigger touch area for better mobile experience */
+.memory-card:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+}
+
+/* Enhance accessibility for mobile - more obvious hover state */
+@media (hover: hover) {
+    .memory-card:hover {
+        transform: scale(1.05);
+    }
+}
+
+/* Active state for better touch feedback */
+.memory-card:active {
+    transform: scale(0.95);
+}
+
+/* Card front and back styling */
+.card-front, .card-back {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    backface-visibility: hidden !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    color: white !important;
+    overflow: hidden !important;
+}
+
+.card-front {
+    transform: rotateY(180deg) !important;
+}
+
+.card-back {
+    transform: rotateY(0deg) !important;
+    background-color: #2196F3 !important;
+}
+
+/* Flipped state */
+.memory-card.flipped {
+    transform: rotateY(180deg) !important;
+}
+
+/* Matched state */
+.memory-card.matched {
+    opacity: 0.6 !important;
+    transform: scale(0.95) !important;
+}
+
+/* Media queries for different device sizes */
+@media (max-width: 480px) {
+    /* Extra small devices */
+    .memory-game-grid {
+        gap: 5px;
+        padding: 5px;
+    }
+    
+    .memory-card {
+        border-radius: 5px;
+    }
+    
+    .card-front, .card-back {
+        border-radius: 5px;
+    }
+    
+    .sarah-loz-game-ui {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .sarah-loz-game-score, .sarah-loz-game-timer {
+        font-size: 14px;
+        padding: 3px 6px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    /* Small devices */
+    .memory-game-grid {
+        gap: 7px;
+        padding: 7px;
+    }
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+    /* Portrait orientation adjustments */
+    .sarah-loz-game-container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .sarah-loz-game-ui {
+        top: 5px;
+        left: 5px;
+        right: 5px;
+    }
+    
+    /* Scale down celebration elements on smaller screens */
+    .memory-game-celebration {
+        padding: 10px;
+    }
+    
+    .memory-game-celebration div:first-child {
+        font-size: 60px !important;
+    }
+    
+    .memory-game-celebration div:last-child {
+        font-size: 18px !important;
+    }
+    
+    /* Smaller score popup */
+    .memory-game-score-popup {
+        width: 90px !important;
+        height: 90px !important;
+        font-size: 18px !important;
+    }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+    .memory-card {
+        border: 2px solid #000;
+    }
+    
+    .card-back {
+        background-color: #006fb9 !important;
+    }
+    
+    .memory-card.matched {
+        background-color: #00802b !important;
+    }
+    
+    .sarah-loz-game-score, .sarah-loz-game-timer {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        color: #000 !important;
+        border: 1px solid #000;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .sarah-loz-game-container {
+        background-color: #2c2c2c !important;
+    }
+    
+    .sarah-loz-game-score, .sarah-loz-game-timer {
+        background-color: rgba(50, 50, 50, 0.8) !important;
+        color: #fff !important;
+    }
+    
+    .card-front {
+        background-color: #3c3c3c !important;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .memory-card {
+        transition: none !important;
+    }
+    
+    .memory-game-score-popup {
+        transition: opacity 0.1s linear !important;
+    }
+    
+    @keyframes fall {
+        0% { opacity: 1; }
+        100% { opacity: 0; transform: translateY(10px); }
+    }
+    
+    @keyframes bounce {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-5px); }
+    }
+} 

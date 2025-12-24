@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إنشاء حساب جديد - سارة ولوز</title>
+    <meta
+      name="description"
+      content="سجل حساب جديد في موقع سارة ولوز التعليمي للأطفال"
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind with custom colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Font - Tajawal (Arabic) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header
+      class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg"
+    >
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div
+                class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md"
+              >
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div
+            id="navMenu"
+            class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0"
+          >
+            <ul
+              class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse"
+            >
+              <li>
+                <a
+                  href="index.html#games"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الألعاب</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#activities"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الأنشطة</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#store"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >المتجر</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#videos"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الفيديوهات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#downloads"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >التحميلات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile -->
+          <div class="hidden lg:block">
+            <a
+              href="تسجيل-الدخول.html"
+              class="bg-white text-primary py-2 px-4 rounded-full hover:bg-light transition shadow-md"
+            >
+              <i class="fas fa-user mr-1"></i> تسجيل الدخول
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16">
+      <div class="max-w-2xl mx-auto">
+        <!-- Registration Form -->
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-8">
+          <div class="bg-gradient-to-l from-primary to-accent p-6 text-center text-white">
+            <h1 class="text-2xl font-bold mb-1">إنشاء حساب جديد</h1>
+            <p>انضم إلى عائلة سارة ولوز واستمتع بكل المميزات</p>
+          </div>
+          
+          <div class="p-8">
+            <form action="حساب.html" method="get">
+              <!-- Account Type Selection -->
+              <div class="mb-8">
+                <label class="block text-dark font-bold mb-4">نوع الحساب</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <label class="relative p-4 bg-gray-50 rounded-xl border-2 border-transparent cursor-pointer transition hover:border-primary flex items-center">
+                    <input type="radio" name="account_type" value="parent" class="hidden" checked>
+                    <span class="inline-block w-5 h-5 rounded-full border-2 border-gray-400 ml-3 flex-shrink-0 account-radio relative"></span>
+                    <div>
+                      <span class="block font-bold text-lg">ولي أمر</span>
+                      <span class="text-gray-500 text-sm">لإدارة ومتابعة نشاط أطفالك</span>
+                    </div>
+                  </label>
+                  
+                  <label class="relative p-4 bg-gray-50 rounded-xl border-2 border-transparent cursor-pointer transition hover:border-primary flex items-center">
+                    <input type="radio" name="account_type" value="teacher" class="hidden">
+                    <span class="inline-block w-5 h-5 rounded-full border-2 border-gray-400 ml-3 flex-shrink-0 account-radio relative"></span>
+                    <div>
+                      <span class="block font-bold text-lg">معلم</span>
+                      <span class="text-gray-500 text-sm">لإدارة فصول ومتابعة طلابك</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Personal Information -->
+              <div class="border-b border-gray-200 pb-6 mb-6">
+                <h2 class="text-lg font-bold mb-4 text-dark">البيانات الشخصية</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <!-- First Name -->
+                  <div>
+                    <label for="firstName" class="block text-dark font-medium mb-2">الاسم الأول <span class="text-primary">*</span></label>
+                    <input 
+                      type="text" 
+                      id="firstName" 
+                      name="firstName" 
+                      class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      placeholder="أدخل الاسم الأول"
+                      required
+                    >
+                  </div>
+                  
+                  <!-- Last Name -->
+                  <div>
+                    <label for="lastName" class="block text-dark font-medium mb-2">الاسم الأخير <span class="text-primary">*</span></label>
+                    <input 
+                      type="text" 
+                      id="lastName" 
+                      name="lastName" 
+                      class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      placeholder="أدخل الاسم الأخير"
+                      required
+                    >
+                  </div>
+                </div>
+                
+                <!-- Email -->
+                <div class="mb-4">
+                  <label for="email" class="block text-dark font-medium mb-2">البريد الإلكتروني <span class="text-primary">*</span></label>
+                  <div class="relative">
+                    <span class="absolute right-4 top-3 text-gray-500">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      placeholder="أدخل البريد الإلكتروني"
+                      required
+                    >
+                  </div>
+                </div>
+                
+                <!-- Phone -->
+                <div class="mb-4">
+                  <label for="phone" class="block text-dark font-medium mb-2">رقم الجوال <span class="text-primary">*</span></label>
+                  <div class="relative">
+                    <span class="absolute right-4 top-3 text-gray-500">
+                      <i class="fas fa-phone"></i>
+                    </span>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone" 
+                      class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      placeholder="أدخل رقم الجوال"
+                      required
+                    >
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Account Information -->
+              <div class="border-b border-gray-200 pb-6 mb-6">
+                <h2 class="text-lg font-bold mb-4 text-dark">بيانات الحساب</h2>
+                
+                <!-- Username -->
+                <div class="mb-4">
+                  <label for="username" class="block text-dark font-medium mb-2">اسم المستخدم <span class="text-primary">*</span></label>
+                  <div class="relative">
+                    <span class="absolute right-4 top-3 text-gray-500">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <input 
+                      type="text" 
+                      id="username" 
+                      name="username" 
+                      class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      placeholder="أدخل اسم المستخدم"
+                      required
+                    >
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Password -->
+                  <div>
+                    <label for="password" class="block text-dark font-medium mb-2">كلمة المرور <span class="text-primary">*</span></label>
+                    <div class="relative">
+                      <span class="absolute right-4 top-3 text-gray-500">
+                        <i class="fas fa-lock"></i>
+                      </span>
+                      <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        placeholder="أدخل كلمة المرور"
+                        required
+                      >
+                      <button type="button" class="absolute left-4 top-3 text-gray-500 password-toggle" data-target="password">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">يجب أن تحتوي على 8 أحرف على الأقل مع حرف كبير ورقم ورمز</p>
+                  </div>
+                  
+                  <!-- Confirm Password -->
+                  <div>
+                    <label for="confirmPassword" class="block text-dark font-medium mb-2">تأكيد كلمة المرور <span class="text-primary">*</span></label>
+                    <div class="relative">
+                      <span class="absolute right-4 top-3 text-gray-500">
+                        <i class="fas fa-lock"></i>
+                      </span>
+                      <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        placeholder="أكد كلمة المرور"
+                        required
+                      >
+                      <button type="button" class="absolute left-4 top-3 text-gray-500 password-toggle" data-target="confirmPassword">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Terms and Privacy -->
+              <div class="mb-8">
+                <div class="flex items-start mb-4">
+                  <input 
+                    type="checkbox" 
+                    id="terms" 
+                    name="terms"
+                    class="ml-2 mt-1 text-primary focus:ring-primary"
+                    required
+                  >
+                  <label for="terms" class="text-gray-700">
+                    أوافق على <a href="#" class="text-primary hover:underline">شروط الاستخدام</a> و <a href="#" class="text-primary hover:underline">سياسة الخصوصية</a>
+                  </label>
+                </div>
+                
+                <div class="flex items-start">
+                  <input 
+                    type="checkbox" 
+                    id="newsletter" 
+                    name="newsletter"
+                    class="ml-2 mt-1 text-primary focus:ring-primary"
+                  >
+                  <label for="newsletter" class="text-gray-700">
+                    أرغب بالاشتراك في النشرة البريدية للحصول على آخر الأخبار والعروض
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Submit Button -->
+              <button 
+                type="submit"
+                class="w-full bg-primary text-white py-3 px-4 rounded-full font-bold hover:bg-primary/90 transition shadow-lg"
+              >
+                إنشاء الحساب
+              </button>
+            </form>
+            
+            <!-- Login Link -->
+            <div class="text-center mt-6">
+              <p class="text-gray-700">
+                لديك حساب بالفعل؟
+                <a href="تسجيل-الدخول.html" class="text-primary font-bold hover:underline">تسجيل الدخول</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10 mt-16">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- About Column -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">عن سارة ولوز</h3>
+            <p class="text-gray-300 mb-4">
+              موقع تعليمي وترفيهي للأطفال من عمر ٣ إلى ٩ سنوات، يهدف إلى تنمية مهارات الطفل بطريقة ممتعة وتفاعلية.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="index.html" class="text-gray-300 hover:text-white">الرئيسية</a>
+              </li>
+              <li>
+                <a href="ألعاب.html" class="text-gray-300 hover:text-white">الألعاب</a>
+              </li>
+              <li>
+                <a href="أنشطة.html" class="text-gray-300 hover:text-white">الأنشطة</a>
+              </li>
+              <li>
+                <a href="فيديوهات.html" class="text-gray-300 hover:text-white">الفيديوهات</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Customer Service -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">خدمة المستخدمين</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">أسئلة متكررة</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">سياسة الخصوصية</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">شروط الاستخدام</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">اتصل بنا</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a href="mailto:info@saralouze.com" class="text-gray-300 hover:text-white">info@saralouze.com</a>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a href="tel:+966123456789" class="text-gray-300 hover:text-white">+966 12 345 6789</a>
+              </li>
+            </ul>
+            <div class="mt-4">
+              <h4 class="text-lg font-bold mb-2">تابعنا على</h4>
+              <div class="flex space-x-4 space-x-reverse">
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-youtube text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            &copy; ٢٠٢٣ سارة ولوز - جميع الحقوق محفوظة
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+
+      // Account type selection
+      const accountTypeRadios = document.querySelectorAll('input[name="account_type"]');
+      
+      accountTypeRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          // Remove active styles from all labels
+          document.querySelectorAll('input[name="account_type"]').forEach(r => {
+            r.closest('label').classList.remove('border-primary');
+          });
+          
+          // Add active styles to selected label
+          this.closest('label').classList.add('border-primary');
+          
+          // Find all radio indicators and reset them
+          document.querySelectorAll('.account-radio').forEach(indicator => {
+            indicator.style.backgroundColor = 'transparent';
+            indicator.style.borderColor = '#9CA3AF';
+          });
+          
+          // Style the selected radio indicator
+          const indicator = this.nextElementSibling;
+          indicator.style.backgroundColor = '#FF6B6B';
+          indicator.style.borderColor = '#FF6B6B';
+        });
+      });
+      
+      // Trigger change event for default selected radio
+      document.querySelector('input[name="account_type"]:checked').dispatchEvent(new Event('change'));
+
+      // Password visibility toggle
+      const passwordToggles = document.querySelectorAll('.password-toggle');
+
+      passwordToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          const targetId = toggle.getAttribute('data-target');
+          const passwordField = document.getElementById(targetId);
+          
+          const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+          passwordField.setAttribute('type', type);
+          
+          // Toggle icon
+          const icon = toggle.querySelector('i');
+          icon.classList.toggle('fa-eye');
+          icon.classList.toggle('fa-eye-slash');
+        });
+      });
+    </script>
+  </body>
+</html> 

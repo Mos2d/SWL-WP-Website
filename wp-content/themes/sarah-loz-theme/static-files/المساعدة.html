@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المساعدة - سارة ولوز</title>
+    <meta
+      name="description"
+      content="مركز المساعدة لموقع سارة ولوز التعليمي للأطفال"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg">
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md">
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div id="navMenu" class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0">
+            <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse">
+              <li>
+                <a href="index.html#games" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الألعاب</a>
+              </li>
+              <li>
+                <a href="index.html#activities" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الأنشطة</a>
+              </li>
+              <li>
+                <a href="index.html#store" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">المتجر</a>
+              </li>
+              <li>
+                <a href="index.html#videos" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الفيديوهات</a>
+              </li>
+              <li>
+                <a href="index.html#downloads" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">التحميلات</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile -->
+          <div class="hidden lg:block">
+            <a href="تسجيل-الدخول.html" class="bg-white text-primary py-2 px-4 rounded-full hover:bg-light transition shadow-md">
+              <i class="fas fa-user mr-1"></i> تسجيل الدخول
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+      <div class="max-w-4xl mx-auto">
+        <!-- Help Page Header -->
+        <div class="text-center mb-12">
+          <div class="inline-block p-4 bg-primary/10 rounded-full text-primary mb-3">
+            <i class="fas fa-life-ring text-4xl floating"></i>
+          </div>
+          <h1 class="text-3xl font-bold text-dark mb-2">مركز المساعدة</h1>
+          <p class="text-gray-600 text-lg">كيف يمكننا مساعدتك؟</p>
+        </div>
+
+        <!-- Help Categories -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <!-- Getting Started -->
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-rocket text-primary text-xl"></i>
+              </div>
+              <h2 class="text-xl font-bold text-dark mb-3">البداية مع سارة ولوز</h2>
+              <p class="text-gray-600 mb-4">دليلك للبدء باستخدام الموقع والاستفادة من محتواه التعليمي</p>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">كيفية إنشاء حساب جديد</a>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">استكشاف المحتوى التعليمي</a>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">ضبط الإعدادات لتجربة أفضل</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Account & Profile -->
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-user-circle text-primary text-xl"></i>
+              </div>
+              <h2 class="text-xl font-bold text-dark mb-3">الحساب والملف الشخصي</h2>
+              <p class="text-gray-600 mb-4">كل ما يتعلق بإدارة حسابك ومعلوماتك الشخصية</p>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">تعديل بيانات الحساب</a>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">استعادة كلمة المرور</a>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">إدارة الاشتراكات والمدفوعات</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Content & Activities -->
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-gamepad text-primary text-xl"></i>
+              </div>
+              <h2 class="text-xl font-bold text-dark mb-3">المحتوى والأنشطة</h2>
+              <p class="text-gray-600 mb-4">مساعدة حول الألعاب والأنشطة والفيديوهات التعليمية</p>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">كيفية اللعب والتفاعل</a>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">متطلبات تشغيل المحتوى</a>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">حل مشاكل تشغيل الفيديوهات</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Technical Support -->
+          <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                <i class="fas fa-tools text-primary text-xl"></i>
+              </div>
+              <h2 class="text-xl font-bold text-dark mb-3">الدعم الفني</h2>
+              <p class="text-gray-600 mb-4">حل المشكلات التقنية والإبلاغ عن الأخطاء</p>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">مشاكل تسجيل الدخول</a>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">الإبلاغ عن خطأ أو مشكلة</a>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <a href="#" class="hover:text-primary">متطلبات النظام والمتصفح</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Support -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden p-6 mb-12">
+          <div class="text-center mb-6">
+            <div class="inline-block p-4 bg-primary/10 rounded-full text-primary mb-3">
+              <i class="fas fa-headset text-3xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-dark mb-2">لم تجد ما تبحث عنه؟</h2>
+            <p class="text-gray-600">فريق الدعم الخاص بنا جاهز لمساعدتك</p>
+          </div>
+          
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="اتصل-بنا.html" class="inline-flex items-center bg-primary text-white py-3 px-6 rounded-full font-bold hover:bg-primary/90 transition shadow-md">
+              <i class="fas fa-envelope ml-2"></i>
+              راسلنا
+            </a>
+            <a href="#" class="inline-flex items-center bg-secondary text-white py-3 px-6 rounded-full font-bold hover:bg-secondary/90 transition shadow-md">
+              <i class="fas fa-comments ml-2"></i>
+              الدردشة المباشرة
+            </a>
+            <a href="#" class="inline-flex items-center bg-accent text-dark py-3 px-6 rounded-full font-bold hover:bg-accent/90 transition shadow-md">
+              <i class="fas fa-phone ml-2"></i>
+              اتصل بنا
+            </a>
+          </div>
+        </div>
+        
+        <!-- Quick Help Links -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          <a href="الأسئلة-الشائعة.html" class="inline-flex items-center bg-white text-dark py-2 px-4 rounded-full hover:bg-light transition shadow-sm">
+            <i class="fas fa-question-circle ml-2 text-primary"></i>
+            الأسئلة الشائعة
+          </a>
+          <a href="سياسة-الخصوصية.html" class="inline-flex items-center bg-white text-dark py-2 px-4 rounded-full hover:bg-light transition shadow-sm">
+            <i class="fas fa-shield-alt ml-2 text-primary"></i>
+            سياسة الخصوصية
+          </a>
+          <a href="شروط-الاستخدام.html" class="inline-flex items-center bg-white text-dark py-2 px-4 rounded-full hover:bg-light transition shadow-sm">
+            <i class="fas fa-file-contract ml-2 text-primary"></i>
+            شروط الاستخدام
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10 mt-16">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- About Column -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">عن سارة ولوز</h3>
+            <p class="text-gray-300 mb-4">
+              موقع تعليمي وترفيهي للأطفال من عمر ٣ إلى ٩ سنوات، يهدف إلى تنمية مهارات الطفل بطريقة ممتعة وتفاعلية.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li><a href="index.html" class="text-gray-300 hover:text-white">الرئيسية</a></li>
+              <li><a href="ألعاب.html" class="text-gray-300 hover:text-white">الألعاب</a></li>
+              <li><a href="أنشطة.html" class="text-gray-300 hover:text-white">الأنشطة</a></li>
+              <li><a href="فيديوهات.html" class="text-gray-300 hover:text-white">الفيديوهات</a></li>
+            </ul>
+          </div>
+
+          <!-- Customer Service -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">خدمة المستخدمين</h3>
+            <ul class="space-y-2">
+              <li><a href="المساعدة.html" class="text-gray-300 hover:text-white">المساعدة</a></li>
+              <li><a href="الأسئلة-الشائعة.html" class="text-gray-300 hover:text-white">أسئلة متكررة</a></li>
+              <li><a href="سياسة-الخصوصية.html" class="text-gray-300 hover:text-white">سياسة الخصوصية</a></li>
+              <li><a href="شروط-الاستخدام.html" class="text-gray-300 hover:text-white">شروط الاستخدام</a></li>
+              <li><a href="اتصل-بنا.html" class="text-gray-300 hover:text-white">اتصل بنا</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a href="mailto:info@saralouze.com" class="text-gray-300 hover:text-white">info@saralouze.com</a>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a href="tel:+966123456789" class="text-gray-300 hover:text-white">+966 12 345 6789</a>
+              </li>
+            </ul>
+            <div class="mt-4">
+              <h4 class="text-lg font-bold mb-2">تابعنا على</h4>
+              <div class="flex space-x-4 space-x-reverse">
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-youtube text-xl"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            &copy; ٢٠٢٣ سارة ولوز - جميع الحقوق محفوظة
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html> 

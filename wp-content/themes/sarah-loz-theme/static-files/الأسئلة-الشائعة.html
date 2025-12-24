@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الأسئلة الشائعة - سارة ولوز</title>
+    <meta
+      name="description"
+      content="الأسئلة الشائعة حول موقع سارة ولوز التعليمي للأطفال"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg">
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md">
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div id="navMenu" class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0">
+            <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse">
+              <li>
+                <a href="index.html#games" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الألعاب</a>
+              </li>
+              <li>
+                <a href="index.html#activities" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الأنشطة</a>
+              </li>
+              <li>
+                <a href="index.html#store" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">المتجر</a>
+              </li>
+              <li>
+                <a href="index.html#videos" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">الفيديوهات</a>
+              </li>
+              <li>
+                <a href="index.html#downloads" class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition">التحميلات</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile -->
+          <div class="hidden lg:block">
+            <a href="تسجيل-الدخول.html" class="bg-white text-primary py-2 px-4 rounded-full hover:bg-light transition shadow-md">
+              <i class="fas fa-user mr-1"></i> تسجيل الدخول
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+      <div class="max-w-3xl mx-auto">
+        <!-- FAQ Header -->
+        <div class="text-center mb-12">
+          <div class="inline-block p-4 bg-primary/10 rounded-full text-primary mb-3">
+            <i class="fas fa-question-circle text-4xl floating"></i>
+          </div>
+          <h1 class="text-3xl font-bold text-dark mb-2">الأسئلة الشائعة</h1>
+          <p class="text-gray-600 text-lg">إجابات عن الأسئلة المتكررة حول موقع سارة ولوز</p>
+        </div>
+
+        <!-- FAQ Categories -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden mb-8">
+          <div class="p-6">
+            <div class="flex flex-wrap mb-6">
+              <button class="category-btn bg-primary text-white py-2 px-4 rounded-full mr-2 mb-2">عام</button>
+              <button class="category-btn bg-white text-dark py-2 px-4 rounded-full border mr-2 mb-2">الحساب</button>
+              <button class="category-btn bg-white text-dark py-2 px-4 rounded-full border mr-2 mb-2">المحتوى</button>
+              <button class="category-btn bg-white text-dark py-2 px-4 rounded-full border mr-2 mb-2">الاشتراكات</button>
+              <button class="category-btn bg-white text-dark py-2 px-4 rounded-full border mr-2 mb-2">المشاكل التقنية</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden mb-12">
+          <div class="divide-y divide-gray-100">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item">
+              <button class="faq-question w-full text-right p-6 focus:outline-none">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-bold text-dark">ما هو موقع سارة ولوز؟</h3>
+                  <i class="fas fa-chevron-down text-primary transition-transform"></i>
+                </div>
+              </button>
+              <div class="faq-answer px-6 pb-6 pt-0 hidden">
+                <p class="text-gray-600">
+                  موقع سارة ولوز هو منصة تعليمية تفاعلية للأطفال من عمر ٣ إلى ٩ سنوات، يهدف إلى تنمية مهارات الأطفال بطريقة ممتعة وتفاعلية من خلال الألعاب التعليمية، الأنشطة، الفيديوهات، والتحميلات المختلفة التي تساعد على تطوير مهارات الطفل اللغوية والحسابية والإبداعية.
+                </p>
+              </div>
+            </div>
+            
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+              <button class="faq-question w-full text-right p-6 focus:outline-none">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-bold text-dark">هل الموقع مجاني؟</h3>
+                  <i class="fas fa-chevron-down text-primary transition-transform"></i>
+                </div>
+              </button>
+              <div class="faq-answer px-6 pb-6 pt-0 hidden">
+                <p class="text-gray-600">
+                  يقدم موقع سارة ولوز مجموعة من المحتويات المجانية التي يمكن للجميع الوصول إليها، بالإضافة إلى محتوى مميز متاح فقط للمشتركين. يمكنك الاطلاع على خطط الاشتراك المختلفة والمزايا المتاحة لكل خطة من خلال زيارة صفحة الاشتراكات.
+                </p>
+              </div>
+            </div>
+            
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+              <button class="faq-question w-full text-right p-6 focus:outline-none">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-bold text-dark">كيف يمكنني إنشاء حساب؟</h3>
+                  <i class="fas fa-chevron-down text-primary transition-transform"></i>
+                </div>
+              </button>
+              <div class="faq-answer px-6 pb-6 pt-0 hidden">
+                <p class="text-gray-600">
+                  يمكنك إنشاء حساب جديد بسهولة من خلال النقر على "تسجيل الدخول" ثم "إنشاء حساب جديد". ستحتاج إلى تقديم بعض المعلومات الأساسية مثل البريد الإلكتروني وإنشاء كلمة مرور. كما يمكنك أيضًا التسجيل باستخدام حسابك على جوجل أو فيسبوك لتسهيل العملية.
+                </p>
+              </div>
+            </div>
+            
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+              <button class="faq-question w-full text-right p-6 focus:outline-none">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-bold text-dark">ما هي المتطلبات التقنية لاستخدام الموقع؟</h3>
+                  <i class="fas fa-chevron-down text-primary transition-transform"></i>
+                </div>
+              </button>
+              <div class="faq-answer px-6 pb-6 pt-0 hidden">
+                <p class="text-gray-600">
+                  يعمل موقع سارة ولوز على جميع المتصفحات الحديثة مثل كروم، فايرفوكس، سفاري، وإيدج. للحصول على أفضل تجربة، نوصي باستخدام أحدث إصدار من المتصفح. كما يمكن استخدام الموقع على أجهزة الكمبيوتر والأجهزة اللوحية والهواتف الذكية.
+                </p>
+              </div>
+            </div>
+            
+            <!-- FAQ Item 5 -->
+            <div class="faq-item">
+              <button class="faq-question w-full text-right p-6 focus:outline-none">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-bold text-dark">كيف يمكنني تغيير كلمة المرور الخاصة بي؟</h3>
+                  <i class="fas fa-chevron-down text-primary transition-transform"></i>
+                </div>
+              </button>
+              <div class="faq-answer px-6 pb-6 pt-0 hidden">
+                <p class="text-gray-600">
+                  يمكنك تغيير كلمة المرور الخاصة بك من خلال الانتقال إلى صفحة "حسابي" ثم "إعدادات الحساب" والنقر على "تغيير كلمة المرور". إذا كنت قد نسيت كلمة المرور، يمكنك استخدام خيار "نسيت كلمة المرور" في صفحة تسجيل الدخول وسنرسل لك رابطًا لإعادة تعيينها.
+                </p>
+              </div>
+            </div>
+            
+            <!-- FAQ Item 6 -->
+            <div class="faq-item">
+              <button class="faq-question w-full text-right p-6 focus:outline-none">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-bold text-dark">هل المحتوى آمن للأطفال؟</h3>
+                  <i class="fas fa-chevron-down text-primary transition-transform"></i>
+                </div>
+              </button>
+              <div class="faq-answer px-6 pb-6 pt-0 hidden">
+                <p class="text-gray-600">
+                  نعم، جميع محتويات موقع سارة ولوز مصممة خصيصًا للأطفال وتخضع لمراجعة دقيقة للتأكد من أنها آمنة ومناسبة للفئات العمرية المستهدفة. نحن نلتزم بتوفير بيئة تعليمية آمنة وإيجابية للأطفال.
+                </p>
+              </div>
+            </div>
+            
+            <!-- FAQ Item 7 -->
+            <div class="faq-item">
+              <button class="faq-question w-full text-right p-6 focus:outline-none">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-bold text-dark">كيف يمكنني الغاء اشتراكي؟</h3>
+                  <i class="fas fa-chevron-down text-primary transition-transform"></i>
+                </div>
+              </button>
+              <div class="faq-answer px-6 pb-6 pt-0 hidden">
+                <p class="text-gray-600">
+                  يمكنك إلغاء اشتراكك في أي وقت من خلال زيارة صفحة "حسابي" ثم "الاشتراكات" والنقر على "إلغاء الاشتراك". سيظل حسابك نشطًا حتى نهاية فترة الاشتراك الحالية. إذا واجهتك أي مشكلة، يمكنك التواصل مع فريق خدمة العملاء للمساعدة.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Still Have Questions -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden p-6 mb-12">
+          <div class="text-center">
+            <div class="inline-block p-4 bg-primary/10 rounded-full text-primary mb-3">
+              <i class="fas fa-comments text-3xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-dark mb-2">لم تجد إجابة لسؤالك؟</h2>
+            <p class="text-gray-600 mb-6">فريق الدعم الخاص بنا جاهز للإجابة على استفساراتك</p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+              <a href="اتصل-بنا.html" class="inline-flex items-center bg-primary text-white py-3 px-6 rounded-full font-bold hover:bg-primary/90 transition shadow-md">
+                <i class="fas fa-envelope ml-2"></i>
+                راسلنا
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10 mt-16">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- About Column -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">عن سارة ولوز</h3>
+            <p class="text-gray-300 mb-4">
+              موقع تعليمي وترفيهي للأطفال من عمر ٣ إلى ٩ سنوات، يهدف إلى تنمية مهارات الطفل بطريقة ممتعة وتفاعلية.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li><a href="index.html" class="text-gray-300 hover:text-white">الرئيسية</a></li>
+              <li><a href="ألعاب.html" class="text-gray-300 hover:text-white">الألعاب</a></li>
+              <li><a href="أنشطة.html" class="text-gray-300 hover:text-white">الأنشطة</a></li>
+              <li><a href="فيديوهات.html" class="text-gray-300 hover:text-white">الفيديوهات</a></li>
+            </ul>
+          </div>
+
+          <!-- Customer Service -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">خدمة المستخدمين</h3>
+            <ul class="space-y-2">
+              <li><a href="المساعدة.html" class="text-gray-300 hover:text-white">المساعدة</a></li>
+              <li><a href="الأسئلة-الشائعة.html" class="text-gray-300 hover:text-white">أسئلة متكررة</a></li>
+              <li><a href="سياسة-الخصوصية.html" class="text-gray-300 hover:text-white">سياسة الخصوصية</a></li>
+              <li><a href="شروط-الاستخدام.html" class="text-gray-300 hover:text-white">شروط الاستخدام</a></li>
+              <li><a href="اتصل-بنا.html" class="text-gray-300 hover:text-white">اتصل بنا</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a href="mailto:info@saralouze.com" class="text-gray-300 hover:text-white">info@saralouze.com</a>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a href="tel:+966123456789" class="text-gray-300 hover:text-white">+966 12 345 6789</a>
+              </li>
+            </ul>
+            <div class="mt-4">
+              <h4 class="text-lg font-bold mb-2">تابعنا على</h4>
+              <div class="flex space-x-4 space-x-reverse">
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="text-white hover:text-accent transition"><i class="fab fa-youtube text-xl"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            &copy; ٢٠٢٣ سارة ولوز - جميع الحقوق محفوظة
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+      
+      // FAQ accordion
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          const icon = question.querySelector('i');
+          
+          // Toggle current FAQ item
+          answer.classList.toggle('hidden');
+          icon.classList.toggle('rotate-180');
+          
+          // Close other FAQ items
+          faqQuestions.forEach(q => {
+            if (q !== question) {
+              q.nextElementSibling.classList.add('hidden');
+              q.querySelector('i').classList.remove('rotate-180');
+            }
+          });
+        });
+      });
+      
+      // Category buttons
+      const categoryButtons = document.querySelectorAll('.category-btn');
+      
+      categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Reset all buttons
+          categoryButtons.forEach(btn => {
+            btn.classList.remove('bg-primary', 'text-white');
+            btn.classList.add('bg-white', 'text-dark', 'border');
+          });
+          
+          // Set active button
+          button.classList.remove('bg-white', 'text-dark', 'border');
+          button.classList.add('bg-primary', 'text-white');
+        });
+      });
+    </script>
+  </body>
+</html> 

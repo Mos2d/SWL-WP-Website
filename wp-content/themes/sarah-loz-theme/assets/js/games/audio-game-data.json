@@ -1,0 +1,436 @@
+{
+  "gameTemplates": {
+    "colors": {
+      "id": "colors",
+      "title": "لعبة ربط الألوان",
+      "description": "اضغط على الصوت واختر اللون الصحيح",
+      "type": "color",
+      "difficulty": "easy",
+      "ageGroup": "3-6",
+      "instructions": "استمع إلى اسم اللون واختر اللون المناسب من الخيارات المتاحة",
+      "successMessage": "أحسنت! لقد تعلمت الألوان بنجاح!",
+      "questions": [
+        {
+          "id": 1,
+          "text": "أحمر",
+          "sound": "أحمر",
+          "type": "color",
+          "audioUrl": null,
+          "options": [
+            { "text": "أحمر", "color": "#dc3545", "correct": true, "emoji": "🔴" },
+            { "text": "أزرق", "color": "#007bff", "correct": false, "emoji": "🔵" },
+            { "text": "أخضر", "color": "#28a745", "correct": false, "emoji": "🟢" },
+            { "text": "أصفر", "color": "#ffc107", "correct": false, "emoji": "🟡" }
+          ]
+        },
+        {
+          "id": 2,
+          "text": "أزرق",
+          "sound": "أزرق",
+          "type": "color",
+          "audioUrl": null,
+          "options": [
+            { "text": "أحمر", "color": "#dc3545", "correct": false, "emoji": "🔴" },
+            { "text": "أزرق", "color": "#007bff", "correct": true, "emoji": "🔵" },
+            { "text": "أخضر", "color": "#28a745", "correct": false, "emoji": "🟢" },
+            { "text": "أصفر", "color": "#ffc107", "correct": false, "emoji": "🟡" }
+          ]
+        },
+        {
+          "id": 3,
+          "text": "أخضر",
+          "sound": "أخضر",
+          "type": "color",
+          "audioUrl": null,
+          "options": [
+            { "text": "أحمر", "color": "#dc3545", "correct": false, "emoji": "🔴" },
+            { "text": "أزرق", "color": "#007bff", "correct": false, "emoji": "🔵" },
+            { "text": "أخضر", "color": "#28a745", "correct": true, "emoji": "🟢" },
+            { "text": "أصفر", "color": "#ffc107", "correct": false, "emoji": "🟡" }
+          ]
+        },
+        {
+          "id": 4,
+          "text": "أصفر",
+          "sound": "أصفر",
+          "type": "color",
+          "audioUrl": null,
+          "options": [
+            { "text": "أحمر", "color": "#dc3545", "correct": false, "emoji": "🔴" },
+            { "text": "أزرق", "color": "#007bff", "correct": false, "emoji": "🔵" },
+            { "text": "أخضر", "color": "#28a745", "correct": false, "emoji": "🟢" },
+            { "text": "أصفر", "color": "#ffc107", "correct": true, "emoji": "🟡" }
+          ]
+        }
+      ]
+    },
+    "animals": {
+      "id": "animals",
+      "title": "لعبة أصوات الحيوانات",
+      "description": "استمع إلى أصوات الحيوانات واختر الحيوان الصحيح",
+      "type": "animal",
+      "difficulty": "medium",
+      "ageGroup": "4-8",
+      "instructions": "استمع إلى صوت الحيوان واختر الحيوان المناسب من الصور",
+      "successMessage": "رائع! لقد تعلمت أصوات الحيوانات!",
+      "questions": [
+        {
+          "id": 1,
+          "text": "قطة",
+          "sound": "مياو مياو - هذا صوت القطة",
+          "type": "animal",
+          "audioUrl": null,
+          "options": [
+            { "text": "قطة", "image": "🐱", "correct": true, "color": "#ff9500" },
+            { "text": "كلب", "image": "🐶", "correct": false, "color": "#8B4513" },
+            { "text": "بقرة", "image": "🐄", "correct": false, "color": "#000000" },
+            { "text": "خروف", "image": "🐑", "correct": false, "color": "#f5f5dc" }
+          ]
+        },
+        {
+          "id": 2,
+          "text": "كلب",
+          "sound": "هاو هاو - هذا صوت الكلب",
+          "type": "animal",
+          "audioUrl": null,
+          "options": [
+            { "text": "قطة", "image": "🐱", "correct": false, "color": "#ff9500" },
+            { "text": "كلب", "image": "🐶", "correct": true, "color": "#8B4513" },
+            { "text": "بقرة", "image": "🐄", "correct": false, "color": "#000000" },
+            { "text": "خروف", "image": "🐑", "correct": false, "color": "#f5f5dc" }
+          ]
+        },
+        {
+          "id": 3,
+          "text": "بقرة",
+          "sound": "مو مو - هذا صوت البقرة",
+          "type": "animal",
+          "audioUrl": null,
+          "options": [
+            { "text": "قطة", "image": "🐱", "correct": false, "color": "#ff9500" },
+            { "text": "كلب", "image": "🐶", "correct": false, "color": "#8B4513" },
+            { "text": "بقرة", "image": "🐄", "correct": true, "color": "#000000" },
+            { "text": "خروف", "image": "🐑", "correct": false, "color": "#f5f5dc" }
+          ]
+        },
+        {
+          "id": 4,
+          "text": "خروف",
+          "sound": "مي مي - هذا صوت الخروف",
+          "type": "animal",
+          "audioUrl": null,
+          "options": [
+            { "text": "قطة", "image": "🐱", "correct": false, "color": "#ff9500" },
+            { "text": "كلب", "image": "🐶", "correct": false, "color": "#8B4513" },
+            { "text": "بقرة", "image": "🐄", "correct": false, "color": "#000000" },
+            { "text": "خروف", "image": "🐑", "correct": true, "color": "#f5f5dc" }
+          ]
+        }
+      ]
+    },
+    "numbers": {
+      "id": "numbers",
+      "title": "لعبة الأرقام",
+      "description": "استمع إلى الرقم واختر الرقم الصحيح",
+      "type": "number",
+      "difficulty": "easy",
+      "ageGroup": "3-7",
+      "instructions": "استمع إلى الرقم واختر الرقم المناسب من الخيارات",
+      "successMessage": "ممتاز! لقد تعلمت الأرقام بنجاح!",
+      "questions": [
+        {
+          "id": 1,
+          "text": "واحد",
+          "sound": "واحد",
+          "type": "number",
+          "audioUrl": null,
+          "options": [
+            { "text": "1", "number": 1, "correct": true, "color": "#e74c3c" },
+            { "text": "2", "number": 2, "correct": false, "color": "#3498db" },
+            { "text": "3", "number": 3, "correct": false, "color": "#2ecc71" },
+            { "text": "4", "number": 4, "correct": false, "color": "#f39c12" }
+          ]
+        },
+        {
+          "id": 2,
+          "text": "اثنان",
+          "sound": "اثنان",
+          "type": "number",
+          "audioUrl": null,
+          "options": [
+            { "text": "1", "number": 1, "correct": false, "color": "#e74c3c" },
+            { "text": "2", "number": 2, "correct": true, "color": "#3498db" },
+            { "text": "3", "number": 3, "correct": false, "color": "#2ecc71" },
+            { "text": "4", "number": 4, "correct": false, "color": "#f39c12" }
+          ]
+        },
+        {
+          "id": 3,
+          "text": "ثلاثة",
+          "sound": "ثلاثة",
+          "type": "number",
+          "audioUrl": null,
+          "options": [
+            { "text": "1", "number": 1, "correct": false, "color": "#e74c3c" },
+            { "text": "2", "number": 2, "correct": false, "color": "#3498db" },
+            { "text": "3", "number": 3, "correct": true, "color": "#2ecc71" },
+            { "text": "4", "number": 4, "correct": false, "color": "#f39c12" }
+          ]
+        },
+        {
+          "id": 4,
+          "text": "أربعة",
+          "sound": "أربعة",
+          "type": "number",
+          "audioUrl": null,
+          "options": [
+            { "text": "1", "number": 1, "correct": false, "color": "#e74c3c" },
+            { "text": "2", "number": 2, "correct": false, "color": "#3498db" },
+            { "text": "3", "number": 3, "correct": false, "color": "#2ecc71" },
+            { "text": "4", "number": 4, "correct": true, "color": "#f39c12" }
+          ]
+        }
+      ]
+    },
+    "shapes": {
+      "id": "shapes",
+      "title": "لعبة الأشكال الهندسية",
+      "description": "استمع إلى اسم الشكل واختر الشكل الصحيح",
+      "type": "shape",
+      "difficulty": "medium",
+      "ageGroup": "4-8",
+      "instructions": "استمع إلى اسم الشكل الهندسي واختر الشكل المناسب",
+      "successMessage": "عظيم! لقد تعلمت الأشكال الهندسية!",
+      "questions": [
+        {
+          "id": 1,
+          "text": "دائرة",
+          "sound": "دائرة",
+          "type": "shape",
+          "audioUrl": null,
+          "options": [
+            { "text": "دائرة", "shape": "⭕", "correct": true, "color": "#e74c3c" },
+            { "text": "مربع", "shape": "⬜", "correct": false, "color": "#3498db" },
+            { "text": "مثلث", "shape": "🔺", "correct": false, "color": "#2ecc71" },
+            { "text": "نجمة", "shape": "⭐", "correct": false, "color": "#f39c12" }
+          ]
+        },
+        {
+          "id": 2,
+          "text": "مربع",
+          "sound": "مربع",
+          "type": "shape",
+          "audioUrl": null,
+          "options": [
+            { "text": "دائرة", "shape": "⭕", "correct": false, "color": "#e74c3c" },
+            { "text": "مربع", "shape": "⬜", "correct": true, "color": "#3498db" },
+            { "text": "مثلث", "shape": "🔺", "correct": false, "color": "#2ecc71" },
+            { "text": "نجمة", "shape": "⭐", "correct": false, "color": "#f39c12" }
+          ]
+        },
+        {
+          "id": 3,
+          "text": "مثلث",
+          "sound": "مثلث",
+          "type": "shape",
+          "audioUrl": null,
+          "options": [
+            { "text": "دائرة", "shape": "⭕", "correct": false, "color": "#e74c3c" },
+            { "text": "مربع", "shape": "⬜", "correct": false, "color": "#3498db" },
+            { "text": "مثلث", "shape": "🔺", "correct": true, "color": "#2ecc71" },
+            { "text": "نجمة", "shape": "⭐", "correct": false, "color": "#f39c12" }
+          ]
+        },
+        {
+          "id": 4,
+          "text": "نجمة",
+          "sound": "نجمة",
+          "type": "shape",
+          "audioUrl": null,
+          "options": [
+            { "text": "دائرة", "shape": "⭕", "correct": false, "color": "#e74c3c" },
+            { "text": "مربع", "shape": "⬜", "correct": false, "color": "#3498db" },
+            { "text": "مثلث", "shape": "🔺", "correct": false, "color": "#2ecc71" },
+            { "text": "نجمة", "shape": "⭐", "correct": true, "color": "#f39c12" }
+          ]
+        }
+      ]
+    },
+    "fruits": {
+      "id": "fruits",
+      "title": "لعبة الفواكه",
+      "description": "استمع إلى اسم الفاكهة واختر الفاكهة الصحيحة",
+      "type": "fruit",
+      "difficulty": "easy",
+      "ageGroup": "3-7",
+      "instructions": "استمع إلى اسم الفاكهة واختر الفاكهة المناسبة من الصور",
+      "successMessage": "لذيذ! لقد تعلمت أسماء الفواكه!",
+      "questions": [
+        {
+          "id": 1,
+          "text": "تفاحة",
+          "sound": "تفاحة",
+          "type": "fruit",
+          "audioUrl": null,
+          "options": [
+            { "text": "تفاحة", "image": "🍎", "correct": true, "color": "#e74c3c" },
+            { "text": "موزة", "image": "🍌", "correct": false, "color": "#f1c40f" },
+            { "text": "برتقالة", "image": "🍊", "correct": false, "color": "#e67e22" },
+            { "text": "عنب", "image": "🍇", "correct": false, "color": "#9b59b6" }
+          ]
+        },
+        {
+          "id": 2,
+          "text": "موزة",
+          "sound": "موزة",
+          "type": "fruit",
+          "audioUrl": null,
+          "options": [
+            { "text": "تفاحة", "image": "🍎", "correct": false, "color": "#e74c3c" },
+            { "text": "موزة", "image": "🍌", "correct": true, "color": "#f1c40f" },
+            { "text": "برتقالة", "image": "🍊", "correct": false, "color": "#e67e22" },
+            { "text": "عنب", "image": "🍇", "correct": false, "color": "#9b59b6" }
+          ]
+        },
+        {
+          "id": 3,
+          "text": "برتقالة",
+          "sound": "برتقالة",
+          "type": "fruit",
+          "audioUrl": null,
+          "options": [
+            { "text": "تفاحة", "image": "🍎", "correct": false, "color": "#e74c3c" },
+            { "text": "موزة", "image": "🍌", "correct": false, "color": "#f1c40f" },
+            { "text": "برتقالة", "image": "🍊", "correct": true, "color": "#e67e22" },
+            { "text": "عنب", "image": "🍇", "correct": false, "color": "#9b59b6" }
+          ]
+        },
+        {
+          "id": 4,
+          "text": "عنب",
+          "sound": "عنب",
+          "type": "fruit",
+          "audioUrl": null,
+          "options": [
+            { "text": "تفاحة", "image": "🍎", "correct": false, "color": "#e74c3c" },
+            { "text": "موزة", "image": "🍌", "correct": false, "color": "#f1c40f" },
+            { "text": "برتقالة", "image": "🍊", "correct": false, "color": "#e67e22" },
+            { "text": "عنب", "image": "🍇", "correct": true, "color": "#9b59b6" }
+          ]
+        }
+      ]
+    }
+  },
+  "gameSettings": {
+    "speechSettings": {
+      "defaultLanguage": "ar-SA",
+      "alternativeLanguages": ["ar-EG", "ar-AE", "ar"],
+      "speechRate": 0.8,
+      "speechPitch": 1.2,
+      "speechVolume": 1.0,
+      "pauseBetweenWords": 200
+    },
+    "uiSettings": {
+      "showFeedback": true,
+      "autoPlayIntro": true,
+      "shuffleOptions": true,
+      "shuffleQuestions": false,
+      "showProgress": true,
+      "allowSkip": false,
+      "maxAttempts": 3,
+      "showHints": true
+    },
+    "gameplaySettings": {
+      "timeLimit": 0,
+      "showTimer": false,
+      "autoAdvance": false,
+      "autoAdvanceDelay": 3000,
+      "repeatAudio": true,
+      "maxRepeats": 3,
+      "requireCompletionToAdvance": true
+    },
+    "visualSettings": {
+      "animationsEnabled": true,
+      "soundVisualization": true,
+      "celebrationEffects": true,
+      "colorBlindFriendly": false,
+      "highContrast": false,
+      "reducedMotion": false
+    },
+    "accessibilitySettings": {
+      "enableKeyboardNavigation": true,
+      "announceActions": true,
+      "screenReaderSupport": true,
+      "focusManagement": true,
+      "alternativeText": true
+    }
+  },
+  "customizationOptions": {
+    "themes": {
+      "default": {
+        "name": "الافتراضي",
+        "primaryColor": "#667eea",
+        "secondaryColor": "#764ba2",
+        "backgroundColor": "#f8f9fa",
+        "textColor": "#333333",
+        "successColor": "#28a745",
+        "errorColor": "#dc3545",
+        "warningColor": "#ffc107"
+      },
+      "ocean": {
+        "name": "المحيط",
+        "primaryColor": "#006994",
+        "secondaryColor": "#004c6d",
+        "backgroundColor": "#e1f5fe",
+        "textColor": "#01579b",
+        "successColor": "#00796b",
+        "errorColor": "#d32f2f",
+        "warningColor": "#f57c00"
+      },
+      "forest": {
+        "name": "الغابة",
+        "primaryColor": "#2e7d32",
+        "secondaryColor": "#1b5e20",
+        "backgroundColor": "#f1f8e9",
+        "textColor": "#33691e",
+        "successColor": "#388e3c",
+        "errorColor": "#d32f2f",
+        "warningColor": "#f57c00"
+      },
+      "sunset": {
+        "name": "غروب الشمس",
+        "primaryColor": "#ff7043",
+        "secondaryColor": "#d84315",
+        "backgroundColor": "#fff3e0",
+        "textColor": "#bf360c",
+        "successColor": "#388e3c",
+        "errorColor": "#d32f2f",
+        "warningColor": "#f57c00"
+      }
+    },
+    "fonts": {
+      "default": "Cairo, Arial, sans-serif",
+      "large": "Cairo, Arial, sans-serif",
+      "dyslexic": "OpenDyslexic, Arial, sans-serif"
+    },
+    "layouts": {
+      "default": "grid",
+      "list": "vertical",
+      "cards": "card-based"
+    }
+  },
+  "progressTracking": {
+    "enabled": true,
+    "trackAttempts": true,
+    "trackTime": true,
+    "trackErrors": true,
+    "trackProgress": true,
+    "saveToDatabase": true,
+    "showStatistics": true,
+    "parentReports": true
+  },
+  "version": "1.0.0",
+  "lastUpdated": "2024-01-15",
+  "author": "Sarah Loz Theme",
+  "license": "Private Use"
+}

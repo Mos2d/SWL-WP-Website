@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>قصص سارة ولوز المصورة - سارة ولوز</title>
+    <meta
+      name="description"
+      content="قصص سارة ولوز المصورة - مجموعة قصص تعليمية للأطفال من متجر سارة ولوز"
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind with custom colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Font - Tajawal (Arabic) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header
+      class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg"
+    >
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div
+                class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md"
+              >
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div
+            id="navMenu"
+            class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0"
+          >
+            <ul
+              class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse"
+            >
+              <li>
+                <a
+                  href="index.html#games"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الألعاب</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#activities"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الأنشطة</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#store"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >المتجر</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#videos"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الفيديوهات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#downloads"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >التحميلات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile -->
+          <div class="hidden lg:block">
+            <a
+              href="index.html#profile"
+              class="bg-light text-primary py-2 px-4 rounded-full hover:bg-white transition shadow-md"
+            >
+              <i class="fas fa-user mr-1"></i> حسابي
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Product Content -->
+    <main class="container mx-auto px-4 py-10">
+      <!-- Breadcrumb -->
+      <div class="text-sm text-gray-500 mb-6">
+        <a href="index.html" class="hover:text-primary transition">الرئيسية</a>
+        <span class="mx-2">/</span>
+        <a href="متجر.html" class="hover:text-primary transition">المتجر</a>
+        <span class="mx-2">/</span>
+        <span class="text-primary">قصص سارة ولوز المصورة</span>
+      </div>
+
+      <!-- Product Main Info -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+          <!-- Product Image -->
+          <div class="h-96 bg-primary/10 relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="fas fa-book text-8xl text-primary/40"></i>
+            </div>
+            <span class="absolute top-4 right-4 bg-accent text-dark px-3 py-1 rounded-full text-sm font-bold">جديد</span>
+          </div>
+          
+          <!-- Product Details -->
+          <div class="p-8 flex flex-col">
+            <div class="mb-4">
+              <div class="text-sm text-accent mb-1">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span class="text-gray-500 mr-1">٤.٨ (١٢٠ تقييم)</span>
+              </div>
+              <h1 class="text-3xl md:text-4xl font-bold text-dark mb-4">
+                قصص سارة ولوز المصورة
+              </h1>
+              <div class="flex items-center mb-4">
+                <span class="text-2xl font-bold text-primary ml-3">٤٩ ريال</span>
+                <span class="text-gray-500">الكمية المتوفرة: ٥٠</span>
+              </div>
+              <p class="text-gray-600 text-lg mb-6">
+                مجموعة قصص مصورة تعليمية للأطفال تحتوي على مغامرات سارة ولوز. تساعد الأطفال على تعلم القيم والمهارات الحياتية بطريقة ممتعة ومسلية.
+              </p>
+            </div>
+
+            <div class="mt-auto">
+              <div class="flex items-center mb-6">
+                <div class="flex items-center ml-6">
+                  <span class="ml-2">الكمية:</span>
+                  <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                    <button class="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition">-</button>
+                    <span class="px-4 py-1 border-x border-gray-300">١</span>
+                    <button class="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition">+</button>
+                  </div>
+                </div>
+                <div>
+                  <span class="ml-2">العمر المناسب:</span>
+                  <span class="bg-accent text-dark px-3 py-1 rounded-full text-sm">٥-٩ سنوات</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-4">
+                <button class="bg-primary text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-primary/90 transition flex-grow md:flex-grow-0">
+                  <i class="fas fa-cart-plus ml-2"></i>
+                  أضف إلى السلة
+                </button>
+                <button class="bg-accent text-dark px-6 py-3 rounded-full text-lg shadow-lg hover:bg-accent/90 transition flex-grow md:flex-grow-0">
+                  <i class="fas fa-heart ml-2"></i>
+                  أضف للمفضلة
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Details Tabs -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-10">
+        <div class="border-b border-gray-200">
+          <div class="flex overflow-x-auto">
+            <button class="px-6 py-4 text-primary border-b-2 border-primary font-bold">تفاصيل المنتج</button>
+            <button class="px-6 py-4 text-gray-500 hover:text-primary transition">محتويات المجموعة</button>
+            <button class="px-6 py-4 text-gray-500 hover:text-primary transition">تقييمات العملاء</button>
+          </div>
+        </div>
+        
+        <div class="p-8">
+          <h2 class="text-xl font-bold text-dark mb-4">تفاصيل المنتج</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-lg font-bold text-dark mb-2">وصف المنتج</h3>
+              <p class="text-gray-600 mb-4">
+                مجموعة قصص سارة ولوز المصورة هي مجموعة من ١٠ قصص مصورة تحتوي على مغامرات الأصدقاء سارة ولوز. تتناول كل قصة موضوعاً مختلفاً يساعد الأطفال على تعلم القيم والمهارات الحياتية مثل التعاون، الصداقة، المشاركة، الشجاعة، وغيرها.
+              </p>
+              <p class="text-gray-600 mb-4">
+                القصص مكتوبة بلغة عربية بسيطة وواضحة ومناسبة للأطفال من سن ٥ إلى ٩ سنوات. كل قصة تحتوي على رسومات ملونة جميلة تساعد على جذب انتباه الطفل وتحفيز خياله.
+              </p>
+              <p class="text-gray-600">
+                يمكن للأطفال قراءة القصص بمفردهم أو مع أولياء أمورهم، وتحتوي كل قصة على أسئلة في نهايتها لمناقشتها مع الطفل لتعزيز فهمه للقصة والقيم المتضمنة فيها.
+              </p>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-bold text-dark mb-2">المميزات</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center">
+                  <i class="fas fa-check-circle text-secondary ml-2"></i>
+                  ١٠ قصص مصورة ملونة
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check-circle text-secondary ml-2"></i>
+                  رسومات عالية الجودة
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check-circle text-secondary ml-2"></i>
+                  لغة عربية سهلة ومناسبة للأطفال
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check-circle text-secondary ml-2"></i>
+                  أسئلة للمناقشة في نهاية كل قصة
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check-circle text-secondary ml-2"></i>
+                  مناسبة للأطفال من سن ٥ إلى ٩ سنوات
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check-circle text-secondary ml-2"></i>
+                  مطبوعة على ورق عالي الجودة
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check-circle text-secondary ml-2"></i>
+                  غلاف سميك ومتين
+                </li>
+              </ul>
+              
+              <div class="mt-6">
+                <h3 class="text-lg font-bold text-dark mb-2">تفاصيل إضافية</h3>
+                <div class="grid grid-cols-2 gap-4 text-gray-600">
+                  <div>
+                    <p><span class="font-bold">عدد الصفحات:</span> ١٥٠ صفحة</p>
+                    <p><span class="font-bold">الوزن:</span> ٧٥٠ جرام</p>
+                    <p><span class="font-bold">الأبعاد:</span> ٢٠ × ٢٥ سم</p>
+                  </div>
+                  <div>
+                    <p><span class="font-bold">اللغة:</span> العربية</p>
+                    <p><span class="font-bold">دار النشر:</span> سارة ولوز</p>
+                    <p><span class="font-bold">الطبعة:</span> الأولى ٢٠٢٣</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Related Products -->
+      <section class="mb-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-dark mb-8">
+          <span class="border-b-4 border-primary pb-2">منتجات مشابهة</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Product 1 -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition transform hover:-translate-y-2 hover:shadow-xl">
+            <div class="h-48 bg-secondary/10 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-puzzle-piece text-5xl text-secondary/40"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">ألغاز الحروف التعليمية</h3>
+              <p class="text-gray-600 mb-4">مجموعة ألغاز تعليمية لتعلم الحروف العربية بطريقة ممتعة</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xl font-bold text-primary">٧٥ ريال</span>
+                <button class="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">
+                  <i class="fas fa-cart-plus ml-1"></i> أضف للسلة
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Product 2 -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition transform hover:-translate-y-2 hover:shadow-xl">
+            <div class="h-48 bg-accent/10 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-paint-brush text-5xl text-accent/40"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">علبة أدوات الرسم</h3>
+              <p class="text-gray-600 mb-4">علبة متكاملة تحتوي على أدوات الرسم الأساسية مع كتيب تعليمي</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xl font-bold text-primary">٩٩ ريال</span>
+                <button class="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">
+                  <i class="fas fa-cart-plus ml-1"></i> أضف للسلة
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Product 3 -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition transform hover:-translate-y-2 hover:shadow-xl">
+            <div class="h-48 bg-dark/10 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-child text-5xl text-dark/40"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">دمية سارة التعليمية</h3>
+              <p class="text-gray-600 mb-4">دمية قماشية ناعمة على شكل شخصية سارة مع صوتيات تعليمية</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xl font-bold text-primary">١٢٥ ريال</span>
+                <button class="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">
+                  <i class="fas fa-cart-plus ml-1"></i> أضف للسلة
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Product 4 -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition transform hover:-translate-y-2 hover:shadow-xl">
+            <div class="h-48 bg-primary/10 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-book-open text-5xl text-primary/40"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">قصة لوز والأرقام العجيبة</h3>
+              <p class="text-gray-600 mb-4">قصة تعليمية مصورة لتعلم الأرقام بطريقة مبتكرة وممتعة</p>
+              <div class="flex justify-between items-center">
+                <span class="text-xl font-bold text-primary">٣٥ ريال</span>
+                <button class="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">
+                  <i class="fas fa-cart-plus ml-1"></i> أضف للسلة
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- About Column -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">عن سارة ولوز</h3>
+            <p class="text-gray-300 mb-4">
+              موقع تعليمي وترفيهي للأطفال من عمر ٣ إلى ٩ سنوات، يهدف إلى تنمية مهارات الطفل بطريقة ممتعة وتفاعلية.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="index.html" class="text-gray-300 hover:text-white">الرئيسية</a>
+              </li>
+              <li>
+                <a href="index.html#games" class="text-gray-300 hover:text-white">الألعاب</a>
+              </li>
+              <li>
+                <a href="index.html#activities" class="text-gray-300 hover:text-white">الأنشطة</a>
+              </li>
+              <li>
+                <a href="متجر.html" class="text-gray-300 hover:text-white">المتجر</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Customer Service -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">خدمة العملاء</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">أسئلة متكررة</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">سياسة الخصوصية</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">سياسة الإرجاع</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">طرق الدفع</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a href="mailto:info@saralouze.com" class="text-gray-300 hover:text-white">info@saralouze.com</a>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a href="tel:+966123456789" class="text-gray-300 hover:text-white">+966 12 345 6789</a>
+              </li>
+            </ul>
+            <div class="mt-4">
+              <h4 class="text-lg font-bold mb-2">تابعنا على</h4>
+              <div class="flex space-x-4 space-x-reverse">
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-youtube text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            &copy; ٢٠٢٣ سارة ولوز - جميع الحقوق محفوظة
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html> 

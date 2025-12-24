@@ -1,0 +1,541 @@
+/**
+ * Sorting Game Responsive Styles
+ * Additional CSS to enhance mobile responsiveness
+ */
+
+/* Enhanced responsive game container */
+.sarah-loz-game-container {
+    /* Use CSS custom properties from JavaScript */
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    transition: width 0.3s ease, height 0.3s ease;
+    
+    /* Default background from CSS custom property */
+    background-color: var(--game-bg-color, #f0f0f0);
+    
+    /* Responsive sizing based on container */
+    min-height: 500px;
+    max-height: 75vh;
+    
+    /* Let the parent container (single-game.php) control the sizing */
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+    
+    /* Ensure proper display for game content */
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Mobile-specific adjustments */
+.sarah-loz-game-container.is-mobile {
+    min-height: 300px;
+    max-height: 60vh;
+}
+
+/* Landscape mobile adjustments */
+.sarah-loz-game-container.is-mobile.is-landscape {
+    min-height: 250px;
+    max-height: 80vh;
+}
+
+/* Portrait mobile adjustments */
+.sarah-loz-game-container.is-mobile.is-portrait {
+    min-height: 350px;
+    max-height: 50vh;
+}
+
+/* Game layout container */
+.sorting-game-layout {
+    overscroll-behavior: contain; /* Prevent scrolling parent when scrolling container */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: auto;
+    box-sizing: border-box !important;
+    flex: 1;
+    gap: 8px;
+    padding: 12px;
+}
+
+/* Game content container */
+.sarah-loz-game-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Categories section */
+.sorting-categories-section {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    transition: gap 0.3s ease, margin 0.3s ease;
+    gap: 10px !important;
+    margin-bottom: 15px !important;
+    min-height: 120px !important;
+    flex: 0 0 auto;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+}
+
+/* Category containers */
+.category-container {
+    overflow: auto; /* Enable scrolling inside categories */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    /* Prevent text selection inside categories */
+    user-select: none;
+    -webkit-user-select: none;
+    
+    /* Responsive sizing */
+    flex: 1 1 200px;
+    min-width: 150px;
+    max-width: 250px;
+    min-height: 100px;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Sequence containers */
+.sequence-container {
+    transition: all 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    
+    /* Responsive sequence sizing */
+    flex: 0 0 auto;
+    width: 80px;
+    height: 80px;
+    min-width: 60px;
+    min-height: 60px;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    background: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 5px;
+}
+
+/* Sequence number styling */
+.sequence-number {
+    position: absolute !important;
+    top: 5px !important;
+    right: 5px !important;
+    background: #4caf50 !important;
+    color: white !important;
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    z-index: 10;
+}
+
+/* Category title */
+.category-title {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    text-align: center;
+    transition: font-size 0.3s ease, padding 0.3s ease;
+    
+    /* Enhanced title styling */
+    background: #4caf50;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    flex: 0 0 auto;
+}
+
+/* Items section */
+.sorting-items-section {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    transition: all 0.3s ease;
+    
+    /* Enhanced items section styling */
+    flex: 1 1 auto;
+    gap: 8px !important;
+    padding: 15px !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-radius: 8px !important;
+    min-height: 120px !important;
+    max-height: 200px !important;
+    border: 1px solid #ddd;
+}
+
+/* Individual sorting items */
+.sorting-item {
+    touch-action: none; /* Prevents scrolling during drag on touch devices */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    will-change: transform; /* Optimize for animation */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: grab;
+    
+    /* Enhanced item styling */
+    flex: 0 0 auto;
+    min-width: 60px;
+    min-height: 44px; /* Minimum touch target */
+    padding: 8px 12px;
+    background: #fff;
+    border: 2px solid #2196F3;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #2196F3;
+    text-align: center;
+    position: relative;
+}
+
+.sorting-item:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.sorting-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Progress container */
+.sorting-progress-container {
+    transition: height 0.3s ease;
+    flex: 0 0 auto;
+    width: 100%;
+    height: 12px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin-bottom: 8px;
+}
+
+/* Progress bar */
+.sorting-progress-bar {
+    transition: width 0.3s ease;
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50, #45a049);
+    border-radius: inherit;
+}
+
+/* Progress text */
+.sorting-progress-text {
+    flex: 0 0 auto;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Instructions */
+.sorting-instructions {
+    flex: 0 0 auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #e3f2fd;
+    border: 1px solid #2196F3;
+    border-radius: 8px;
+    color: #1976d2;
+}
+
+/* Droppable highlight state */
+.ui-state-hover {
+    background-color: #e0f2f1 !important;
+    border-color: #80cbc4 !important;
+    box-shadow: 0 0 10px rgba(128, 203, 196, 0.4) !important;
+}
+
+/* Correct placement highlight */
+.correct-placement {
+    border: 2px solid #4caf50 !important;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6) !important;
+    animation: pulseGreen 1s ease;
+}
+
+/* Incorrect placement highlight */
+.incorrect-placement {
+    border: 2px solid #f44336 !important;
+    box-shadow: 0 0 8px rgba(244, 67, 54, 0.6) !important;
+}
+
+@keyframes pulseGreen {
+    0% { box-shadow: 0 0 0 rgba(76, 175, 80, 0.6); }
+    50% { box-shadow: 0 0 15px rgba(76, 175, 80, 0.8); }
+    100% { box-shadow: 0 0 8px rgba(76, 175, 80, 0.6); }
+}
+
+/* Game instructions */
+.sorting-instructions {
+    text-align: center;
+    transition: font-size 0.3s ease;
+}
+
+/* Media queries for different device sizes */
+@media (max-width: 480px) {
+    /* Extra small devices */
+    .sorting-game-layout {
+        padding: 8px !important;
+    }
+    
+    .sorting-instructions {
+        font-size: 13px !important;
+        padding: 6px !important;
+    }
+    
+    .sorting-categories-section {
+        gap: 6px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .category-container {
+        padding: 4px !important;
+    }
+    
+    .category-title {
+        padding: 3px 6px !important;
+        font-size: 11px !important;
+    }
+    
+    .sequence-container {
+        width: 65px !important;
+        height: 65px !important;
+    }
+    
+    .sequence-number {
+        width: 18px !important;
+        height: 18px !important;
+        font-size: 10px !important;
+    }
+    
+    .sorting-items-section {
+        gap: 5px !important;
+        padding: 6px !important;
+    }
+    
+    .sorting-progress-text {
+        font-size: 11px !important;
+        margin: 5px 0 !important;
+    }
+    
+    .sarah-loz-game-ui {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .sarah-loz-game-score, .sarah-loz-game-timer {
+        font-size: 14px;
+        padding: 3px 6px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    /* Small devices */
+    .sorting-game-layout {
+        padding: 12px !important;
+    }
+    
+    .sorting-categories-section {
+        gap: 8px !important;
+    }
+    
+    .sorting-items-section {
+        gap: 8px !important;
+    }
+}
+
+/* Portrait orientation on mobile */
+@media (max-width: 767px) and (orientation: portrait) {
+    .sarah-loz-game-container {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .sarah-loz-game-ui {
+        top: 5px;
+        left: 5px;
+        right: 5px;
+    }
+    
+    /* Make categories larger in portrait mode for single column layout */
+    .category-container {
+        min-width: 85% !important;
+        margin-bottom: 10px !important;
+    }
+}
+
+/* Landscape orientation on small screens */
+@media (max-height: 500px) and (orientation: landscape) {
+    .sorting-game-layout {
+        padding: 5px !important;
+    }
+    
+    .sorting-categories-section {
+        min-height: 100px !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .sorting-items-section {
+        min-height: 80px !important;
+        max-height: 150px !important;
+    }
+    
+    .sorting-instructions {
+        margin-bottom: 5px !important;
+    }
+    
+    .sorting-divider {
+        margin: 5px 0 !important;
+    }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+    .category-container, .sequence-container {
+        border: 3px dashed #000 !important;
+        background-color: #f5f5f5 !important;
+    }
+    
+    .category-title {
+        background-color: #000 !important;
+        color: #fff !important;
+    }
+    
+    .sequence-number {
+        background-color: #000 !important;
+    }
+    
+    .sorting-item {
+        border: 2px solid #000 !important;
+        background-color: #fff !important;
+    }
+    
+    .correct-placement {
+        border: 3px solid #006400 !important;
+    }
+    
+    .incorrect-placement {
+        border: 3px solid #8b0000 !important;
+    }
+    
+    .sarah-loz-game-score, .sarah-loz-game-timer {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        color: #000 !important;
+        border: 1px solid #000;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .sarah-loz-game-container {
+        background-color: #2c2c2c !important;
+    }
+    
+    .sorting-instructions {
+        background-color: #3c3c3c !important;
+        color: #f0f0f0 !important;
+        border-color: #555 !important;
+    }
+    
+    .category-container, .sequence-container {
+        background-color: #3c3c3c !important;
+        border-color: #555 !important;
+    }
+    
+    .sorting-item {
+        background-color: #4c4c4c !important;
+        border-color: #666 !important;
+        color: #f0f0f0 !important;
+    }
+    
+    .sorting-divider {
+        background-color: #555 !important;
+    }
+    
+    .sarah-loz-game-score, .sarah-loz-game-timer {
+        background-color: rgba(50, 50, 50, 0.8) !important;
+        color: #fff !important;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .sorting-item, .category-container, .sequence-container, .correct-placement, .incorrect-placement {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    @keyframes pulseGreen {
+        0%, 50%, 100% { box-shadow: 0 0 8px rgba(76, 175, 80, 0.6); }
+    }
+}
+
+/* RTL language support (for Arabic) */
+[dir="rtl"] .sorting-instructions,
+[dir="rtl"] .category-title,
+[dir="rtl"] .sorting-progress-text {
+    text-align: right !important;
+}
+
+/* Helper classes for dragging state */
+.gu-mirror {
+    position: fixed !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
+    opacity: 0.8;
+    transform: rotate(2deg);
+}
+
+.gu-hide {
+    display: none !important;
+}
+
+.gu-unselectable {
+    user-select: none !important;
+}
+
+.gu-transit {
+    opacity: 0.2;
+} 

@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سارة ولوز - موقع ترفيهي وتعليمي للأطفال</title>
+    <meta
+      name="description"
+      content="موقع سارة ولوز - موقع ترفيهي وتعليمي للأطفال من عمر 3 إلى 9 سنوات"
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind with custom colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Font - Tajawal (Arabic) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+
+      .cloud-shape {
+        border-radius: 50px;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header
+      class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg"
+    >
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="#" class="flex items-center">
+              <div
+                class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md"
+              >
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div
+            id="navMenu"
+            class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0"
+          >
+            <ul
+              class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse"
+            >
+              <li>
+                <a
+                  href="#games"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الألعاب</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#activities"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الأنشطة</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#store"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >المتجر</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#videos"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الفيديوهات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#downloads"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >التحميلات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile -->
+          <div class="hidden lg:block">
+            <a
+              href="#profile"
+              class="bg-light text-primary py-2 px-4 rounded-full hover:bg-white transition shadow-md"
+            >
+              <i class="fas fa-user mr-1"></i> حسابي
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="relative overflow-hidden py-10 md:py-20 bg-gradient-to-b from-accent/30 to-light"
+    >
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 text-center md:text-right mb-10 md:mb-0">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-dark mb-4"
+            >
+              مرحباً بكم في عالم
+              <span class="text-primary">سارة</span>
+              و<span class="text-secondary">لوز</span>!
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8">
+              موقع ترفيهي وتعليمي للأطفال من عمر ٣ إلى ٩ سنوات
+            </p>
+            <div class="flex flex-wrap justify-center md:justify-start gap-4">
+              <a
+                href="#games"
+                class="bg-primary text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-primary/90 transition transform hover:-translate-y-1"
+              >
+                <i class="fas fa-gamepad ml-2"></i>
+                العب الآن
+              </a>
+              <a
+                href="#activities"
+                class="bg-secondary text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-secondary/90 transition transform hover:-translate-y-1"
+              >
+                <i class="fas fa-paint-brush ml-2"></i>
+                أنشطة ممتعة
+              </a>
+            </div>
+          </div>
+          <div class="md:w-1/2 relative">
+            <div class="w-72 h-72 md:w-96 md:h-96 mx-auto relative">
+              <!-- Placeholder for hero image - in production, replace with actual images -->
+              <div
+                class="absolute w-64 h-64 md:w-80 md:h-80 bg-primary/30 rounded-bubble floating"
+              ></div>
+              <div
+                class="absolute w-64 h-64 md:w-80 md:h-80 bg-secondary/40 rounded-bubble right-4 top-4 floating"
+                style="animation-delay: 0.5s"
+              ></div>
+              <div
+                class="absolute inset-0 flex items-center justify-center text-6xl font-bold text-white"
+              >
+                <span class="bg-primary px-4 py-2 rounded-xl shadow-lg"
+                  >س&ل</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative elements -->
+      <div
+        class="hidden md:block absolute -top-10 right-10 w-20 h-20 bg-accent rounded-full opacity-40 floating"
+      ></div>
+      <div
+        class="hidden md:block absolute top-20 left-10 w-16 h-16 bg-primary rounded-full opacity-30 floating"
+        style="animation-delay: 0.7s"
+      ></div>
+      <div
+        class="hidden md:block absolute bottom-10 right-20 w-24 h-24 bg-secondary rounded-full opacity-30 floating"
+        style="animation-delay: 1.2s"
+      ></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-12 md:py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-dark mb-12">
+          عالم من المرح والتعلم
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div
+            class="bg-white rounded-2xl shadow-lg p-6 text-center transform transition hover:-translate-y-2 hover:shadow-xl"
+          >
+            <div
+              class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-gamepad text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">ألعاب تفاعلية</h3>
+            <p class="text-gray-600">
+              ألعاب ذكاء وألغاز ممتعة لتنمية مهارات طفلك
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="bg-white rounded-2xl shadow-lg p-6 text-center transform transition hover:-translate-y-2 hover:shadow-xl"
+          >
+            <div
+              class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-paint-brush text-secondary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">أنشطة إبداعية</h3>
+            <p class="text-gray-600">
+              ورش عمل وأنشطة يدوية لتنمية المهارات الإبداعية
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="bg-white rounded-2xl shadow-lg p-6 text-center transform transition hover:-translate-y-2 hover:shadow-xl"
+          >
+            <div
+              class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-shopping-cart text-accent text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">متجر تعليمي</h3>
+            <p class="text-gray-600">
+              ألعاب وأدوات تعليمية ومنتجات خاصة بعلامة سارة ولوز
+            </p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div
+            class="bg-white rounded-2xl shadow-lg p-6 text-center transform transition hover:-translate-y-2 hover:shadow-xl"
+          >
+            <div
+              class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-video text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">فيديوهات تعليمية</h3>
+            <p class="text-gray-600">
+              محتوى مرئي ممتع وقصص مصورة لتعليم المهارات الحياتية
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Sections -->
+    <!-- Games Section -->
+    <section id="games" class="py-16 bg-light">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between mb-10"
+        >
+          <h2 class="text-3xl md:text-4xl font-bold text-dark">
+            <i class="fas fa-gamepad text-primary ml-2"></i>
+            قسم الألعاب
+          </h2>
+          <a
+            href="#"
+            class="mt-4 md:mt-0 bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition"
+            >عرض كل الألعاب</a
+          >
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Game 1 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <div class="h-48 bg-primary/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-puzzle-piece text-6xl text-primary/50"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-3">
+                <h3 class="text-xl font-bold text-dark">لعبة الألغاز</h3>
+                <span class="text-xs bg-accent text-dark px-2 py-1 rounded-full"
+                  >٥-٩ سنوات</span
+                >
+              </div>
+              <p class="text-gray-600 mb-4">
+                ألغاز تفاعلية لتنمية مهارات التفكير والتركيز
+              </p>
+              <a
+                href="#"
+                class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full hover:bg-primary/20 transition"
+                >العب الآن</a
+              >
+            </div>
+          </div>
+
+          <!-- Game 2 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <div class="h-48 bg-secondary/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-paint-roller text-6xl text-secondary/50"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-3">
+                <h3 class="text-xl font-bold text-dark">تلوين الأشكال</h3>
+                <span class="text-xs bg-accent text-dark px-2 py-1 rounded-full"
+                  >٣-٧ سنوات</span
+                >
+              </div>
+              <p class="text-gray-600 mb-4">
+                لعبة تلوين تفاعلية لتعلم الألوان والأشكال
+              </p>
+              <a
+                href="#"
+                class="inline-block bg-secondary/10 text-secondary px-4 py-2 rounded-full hover:bg-secondary/20 transition"
+                >العب الآن</a
+              >
+            </div>
+          </div>
+
+          <!-- Game 3 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <div class="h-48 bg-accent/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-brain text-6xl text-accent/50"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-3">
+                <h3 class="text-xl font-bold text-dark">تحدي الذاكرة</h3>
+                <span class="text-xs bg-accent text-dark px-2 py-1 rounded-full"
+                  >٤-٩ سنوات</span
+                >
+              </div>
+              <p class="text-gray-600 mb-4">
+                لعبة لتنمية الذاكرة والتركيز بطريقة ممتعة
+              </p>
+              <a
+                href="#"
+                class="inline-block bg-accent/10 text-accent px-4 py-2 rounded-full hover:bg-accent/20 transition"
+                >العب الآن</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="py-16 bg-secondary/10">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between mb-10"
+        >
+          <h2 class="text-3xl md:text-4xl font-bold text-dark">
+            <i class="fas fa-paint-brush text-secondary ml-2"></i>
+            قسم الأنشطة
+          </h2>
+          <a
+            href="#"
+            class="mt-4 md:mt-0 bg-secondary text-white px-4 py-2 rounded-full hover:bg-secondary/90 transition"
+            >عرض كل الأنشطة</a
+          >
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Activity 1 -->
+          <div
+            class="bg-white rounded-3xl shadow-lg overflow-hidden transform transition hover:-translate-y-1 hover:shadow-xl"
+          >
+            <div class="h-48 bg-secondary/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-pencil-alt text-6xl text-secondary/50"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-3">ورشة الرسم</h3>
+              <p class="text-gray-600 mb-4">
+                تعلم أساسيات الرسم بطريقة سهلة وممتعة
+              </p>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-500"
+                  ><i class="far fa-clock ml-1"></i> ٣٠ دقيقة</span
+                >
+                <a href="#" class="text-secondary hover:underline">شاهد الآن</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity 2 -->
+          <div
+            class="bg-white rounded-3xl shadow-lg overflow-hidden transform transition hover:-translate-y-1 hover:shadow-xl"
+          >
+            <div class="h-48 bg-primary/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-cut text-6xl text-primary/50"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-3">أشغال يدوية</h3>
+              <p class="text-gray-600 mb-4">
+                صنع أشكال جميلة من خامات متوفرة في المنزل
+              </p>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-500"
+                  ><i class="far fa-clock ml-1"></i> ٤٥ دقيقة</span
+                >
+                <a href="#" class="text-primary hover:underline">شاهد الآن</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity 3 -->
+          <div
+            class="bg-white rounded-3xl shadow-lg overflow-hidden transform transition hover:-translate-y-1 hover:shadow-xl"
+          >
+            <div class="h-48 bg-accent/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-cookie-bite text-6xl text-accent/50"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-3">مطبخ الصغار</h3>
+              <p class="text-gray-600 mb-4">
+                وصفات بسيطة وآمنة يمكن للأطفال إعدادها
+              </p>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-500"
+                  ><i class="far fa-clock ml-1"></i> ٦٠ دقيقة</span
+                >
+                <a href="#" class="text-accent hover:underline">شاهد الآن</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store Section -->
+    <section id="store" class="py-16 bg-light">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between mb-10"
+        >
+          <h2 class="text-3xl md:text-4xl font-bold text-dark">
+            <i class="fas fa-shopping-cart text-accent ml-2"></i>
+            متجر المنتجات
+          </h2>
+          <a
+            href="#"
+            class="mt-4 md:mt-0 bg-accent text-dark px-4 py-2 rounded-full hover:bg-accent/90 transition"
+            >زيارة المتجر</a
+          >
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Product 1 -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="h-40 bg-accent/10 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-box text-4xl text-accent/50"></i>
+              </div>
+              <div
+                class="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded-full"
+              >
+                جديد
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-dark mb-2">
+                مجموعة ألعاب تعليمية
+              </h3>
+              <p class="text-sm text-gray-600 mb-3">
+                مجموعة متكاملة من الألعاب التعليمية للأطفال
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-accent">١٩٩ ريال</span>
+                <button
+                  class="bg-accent/10 text-accent p-2 rounded-full hover:bg-accent/20 transition"
+                >
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="h-40 bg-primary/10 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-tshirt text-4xl text-primary/50"></i>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-dark mb-2">تيشيرت سارة ولوز</h3>
+              <p class="text-sm text-gray-600 mb-3">
+                تيشيرت قطني بتصميم شخصيات سارة ولوز
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-primary">٨٩ ريال</span>
+                <button
+                  class="bg-primary/10 text-primary p-2 rounded-full hover:bg-primary/20 transition"
+                >
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="h-40 bg-secondary/10 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-paint-brush text-4xl text-secondary/50"></i>
+              </div>
+              <div
+                class="absolute top-2 right-2 bg-accent text-white text-xs px-2 py-1 rounded-full"
+              >
+                الأكثر مبيعاً
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-dark mb-2">أدوات رسم آمنة</h3>
+              <p class="text-sm text-gray-600 mb-3">
+                مجموعة ألوان وأدوات رسم آمنة للأطفال
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-secondary">١٢٩ ريال</span>
+                <button
+                  class="bg-secondary/10 text-secondary p-2 rounded-full hover:bg-secondary/20 transition"
+                >
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="h-40 bg-accent/10 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-book text-4xl text-accent/50"></i>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-dark mb-2">كتاب قصص مصور</h3>
+              <p class="text-sm text-gray-600 mb-3">
+                مجموعة قصص مصورة لتنمية مهارات القراءة
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-accent">٧٩ ريال</span>
+                <button
+                  class="bg-accent/10 text-accent p-2 rounded-full hover:bg-accent/20 transition"
+                >
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="py-16 bg-primary/10">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between mb-10"
+        >
+          <h2 class="text-3xl md:text-4xl font-bold text-dark">
+            <i class="fas fa-video text-primary ml-2"></i>
+            مكتبة الفيديوهات
+          </h2>
+          <a
+            href="#"
+            class="mt-4 md:mt-0 bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition"
+            >عرض كل الفيديوهات</a
+          >
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Video 1 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <div class="h-48 bg-primary/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i
+                  class="fas fa-play-circle text-5xl text-primary cursor-pointer hover:text-primary/80 transition"
+                ></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">
+                مغامرات سارة ولوز
+              </h3>
+              <p class="text-gray-600 mb-3">
+                قصة مصورة عن قيمة التعاون والصداقة
+              </p>
+              <div class="flex items-center text-sm text-gray-500">
+                <span class="ml-4"
+                  ><i class="far fa-clock ml-1"></i> ١٠ دقائق</span
+                >
+                <span><i class="far fa-eye ml-1"></i> ٢٣٠٠ مشاهدة</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <div class="h-48 bg-secondary/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i
+                  class="fas fa-play-circle text-5xl text-secondary cursor-pointer hover:text-secondary/80 transition"
+                ></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">
+                تعلم الأرقام والحروف
+              </h3>
+              <p class="text-gray-600 mb-3">
+                تعليم الأرقام والحروف بطريقة ممتعة
+              </p>
+              <div class="flex items-center text-sm text-gray-500">
+                <span class="ml-4"
+                  ><i class="far fa-clock ml-1"></i> ١٥ دقيقة</span
+                >
+                <span><i class="far fa-eye ml-1"></i> ١٨٥٠ مشاهدة</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 3 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <div class="h-48 bg-accent/20 relative">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <i
+                  class="fas fa-play-circle text-5xl text-accent cursor-pointer hover:text-accent/80 transition"
+                ></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">
+                أغاني الأطفال المفضلة
+              </h3>
+              <p class="text-gray-600 mb-3">
+                مجموعة من أغاني الأطفال التعليمية المحببة
+              </p>
+              <div class="flex items-center text-sm text-gray-500">
+                <span class="ml-4"
+                  ><i class="far fa-clock ml-1"></i> ٢٠ دقيقة</span
+                >
+                <span><i class="far fa-eye ml-1"></i> ٣٤٠٠ مشاهدة</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Digital Downloads Section -->
+    <section id="downloads" class="py-16 bg-light">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between mb-10"
+        >
+          <h2 class="text-3xl md:text-4xl font-bold text-dark">
+            <i class="fas fa-download text-secondary ml-2"></i>
+            المبيعات الرقمية
+          </h2>
+          <a
+            href="#"
+            class="mt-4 md:mt-0 bg-secondary text-white px-4 py-2 rounded-full hover:bg-secondary/90 transition"
+            >عرض كل التحميلات</a
+          >
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Download 1 -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+            <div
+              class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-paint-roller text-secondary text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-2">
+              كتيب تلوين الحيوانات
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              كتيب PDF للتلوين يضم ٢٠ صفحة
+            </p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-secondary">١٩ ريال</span>
+              <button
+                class="bg-secondary text-white px-3 py-1 rounded-full text-sm hover:bg-secondary/90 transition"
+              >
+                تحميل
+              </button>
+            </div>
+          </div>
+
+          <!-- Download 2 -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+            <div
+              class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-graduation-cap text-primary text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-2">بطاقات تعليمية</h3>
+            <p class="text-sm text-gray-600 mb-4">
+              بطاقات تعليمية للحروف والأرقام
+            </p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-primary">٢٩ ريال</span>
+              <button
+                class="bg-primary text-white px-3 py-1 rounded-full text-sm hover:bg-primary/90 transition"
+              >
+                تحميل
+              </button>
+            </div>
+          </div>
+
+          <!-- Download 3 -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+            <div
+              class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-book text-accent text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-2">قصة رقمية تفاعلية</h3>
+            <p class="text-sm text-gray-600 mb-4">قصة PDF تفاعلية مع أنشطة</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-accent">٣٩ ريال</span>
+              <button
+                class="bg-accent text-dark px-3 py-1 rounded-full text-sm hover:bg-accent/90 transition"
+              >
+                تحميل
+              </button>
+            </div>
+          </div>
+
+          <!-- Download 4 -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+            <div
+              class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-users text-primary text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-2">
+              دليل التعامل مع الأطفال
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              كورس مبسط للأمهات حول التعامل مع الأطفال
+            </p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-primary">٥٩ ريال</span>
+              <button
+                class="bg-primary text-white px-3 py-1 rounded-full text-sm hover:bg-primary/90 transition"
+              >
+                تحميل
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-gradient-to-r from-primary/20 to-secondary/20">
+      <div class="container mx-auto px-4">
+        <div class="bg-white rounded-3xl shadow-lg p-8 max-w-4xl mx-auto">
+          <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-6 md:mb-0 text-center md:text-right">
+              <h3 class="text-2xl md:text-3xl font-bold text-dark mb-3">
+                انضم إلى نشرتنا الشهرية
+              </h3>
+              <p class="text-gray-600">
+                احصل على أحدث الأنشطة والألعاب ونصائح للأمهات شهرياً
+              </p>
+            </div>
+            <div class="md:w-1/2 md:pr-8">
+              <form class="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="email"
+                  placeholder="البريد الإلكتروني"
+                  class="flex-grow px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <button
+                  type="submit"
+                  class="bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 transition"
+                >
+                  اشتراك
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-light">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-dark mb-12">
+          آراء الأمهات والأطفال
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 relative">
+            <div class="mb-4">
+              <i class="fas fa-quote-right text-3xl text-primary/20"></i>
+            </div>
+            <p class="text-gray-600 mb-6">
+              "ساعد موقع سارة ولوز طفلي على تعلم الحروف والأرقام بطريقة ممتعة
+              جداً، أصبح شغوفاً بالتعلم!"
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center ml-3"
+              >
+                <span class="text-primary font-bold">م.س</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-dark">منى السعيد</h4>
+                <p class="text-sm text-gray-500">أم لطفلين</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 relative">
+            <div class="mb-4">
+              <i class="fas fa-quote-right text-3xl text-secondary/20"></i>
+            </div>
+            <p class="text-gray-600 mb-6">
+              "الألعاب التفاعلية ممتعة جداً وتعليمية بنفس الوقت، ابنتي تقضي
+              وقتاً مفيداً مع موقع سارة ولوز!"
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center ml-3"
+              >
+                <span class="text-secondary font-bold">ن.ف</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-dark">نورة الفهد</h4>
+                <p class="text-sm text-gray-500">أم لطفلة</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 relative">
+            <div class="mb-4">
+              <i class="fas fa-quote-right text-3xl text-accent/20"></i>
+            </div>
+            <p class="text-gray-600 mb-6">
+              "الأنشطة والورشات المنزلية رائعة جداً، ساعدتني على قضاء وقت ممتع
+              ومفيد مع أطفالي في المنزل!"
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center ml-3"
+              >
+                <span class="text-accent font-bold">ع.ر</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-dark">عبير الراشد</h4>
+                <p class="text-sm text-gray-500">أم لثلاثة أطفال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Logo & About -->
+          <div>
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center ml-2"
+              >
+                <span class="text-xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-xl font-bold">سارة ولوز</span>
+            </div>
+            <p class="text-gray-300 mb-4">
+              موقع ترفيهي وتعليمي للأطفال من عمر ٣ إلى ٩ سنوات، يوفر تجربة
+              تعليمية ممتعة وآمنة
+            </p>
+            <div class="flex space-x-4 space-x-reverse">
+              <a href="#" class="text-white hover:text-accent transition"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-white hover:text-accent transition"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-white hover:text-accent transition"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white hover:text-accent transition"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >الصفحة الرئيسية</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#games"
+                  class="text-gray-300 hover:text-white transition"
+                  >الألعاب</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#activities"
+                  class="text-gray-300 hover:text-white transition"
+                  >الأنشطة</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#store"
+                  class="text-gray-300 hover:text-white transition"
+                  >المتجر</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#videos"
+                  class="text-gray-300 hover:text-white transition"
+                  >الفيديوهات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#downloads"
+                  class="text-gray-300 hover:text-white transition"
+                  >التحميلات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h3 class="text-lg font-bold mb-4">الدعم</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >المساعدة</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >الأسئلة الشائعة</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >سياسة الخصوصية</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >شروط الاستخدام</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >اتصل بنا</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-lg font-bold mb-4">اتصل بنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <i class="fas fa-map-marker-alt mt-1 ml-2 text-accent"></i>
+                <span class="text-gray-300"
+                  >الرياض، المملكة العربية السعودية</span
+                >
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a
+                  href="mailto:info@sarewaloze.com"
+                  class="text-gray-300 hover:text-white transition"
+                  >info@sarewaloze.com</a
+                >
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a
+                  href="tel:+966123456789"
+                  class="text-gray-300 hover:text-white transition"
+                  >+966 123 456 789</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-10 pt-6 text-center">
+          <p class="text-gray-400">© 2025 سارة ولوز. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinks = document.querySelectorAll("#navMenu a");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth < 1024) {
+            navMenu.classList.add("hidden");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

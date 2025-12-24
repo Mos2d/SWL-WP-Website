@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حسابي - سارة ولوز</title>
+    <meta
+      name="description"
+      content="صفحة حسابي الشخصي - إدارة الحساب ومتابعة نشاطات وتقدم أطفالك في موقع سارة ولوز"
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind with custom colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Font - Tajawal (Arabic) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header
+      class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg"
+    >
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div
+                class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md"
+              >
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div
+            id="navMenu"
+            class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0"
+          >
+            <ul
+              class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse"
+            >
+              <li>
+                <a
+                  href="index.html#games"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الألعاب</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#activities"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الأنشطة</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#store"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >المتجر</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#videos"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الفيديوهات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#downloads"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >التحميلات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile - Active State -->
+          <div class="hidden lg:block">
+            <a
+              href="حساب.html"
+              class="bg-white text-primary py-2 px-4 rounded-full transition shadow-md"
+            >
+              <i class="fas fa-user mr-1"></i> حسابي
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-10">
+      <!-- Profile Header -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-10">
+        <div class="bg-primary/10 p-8">
+          <div class="flex flex-col md:flex-row items-center gap-6">
+            <div class="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center">
+              <span class="text-3xl font-bold text-primary">أ س</span>
+            </div>
+            <div class="text-center md:text-right">
+              <h1 class="text-3xl font-bold text-dark mb-2">أهلاً أحمد!</h1>
+              <p class="text-gray-600">عضو منذ نوفمبر ٢٠٢٣</p>
+            </div>
+            <div class="md:mr-auto">
+              <a 
+                href="تعديل-الحساب.html" 
+                class="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition inline-flex items-center"
+              >
+                <i class="fas fa-edit ml-2"></i>
+                تعديل الملف الشخصي
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+        <!-- Sidebar -->
+        <div class="md:col-span-1">
+          <!-- Navigation Menu -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-6">
+            <h3 class="bg-dark p-4 text-white font-bold">لوحة التحكم</h3>
+            <ul class="divide-y divide-gray-100">
+              <li>
+                <a href="#dashboard" class="block px-4 py-3 bg-primary/10 text-primary font-bold hover:bg-primary/5 transition">
+                  <i class="fas fa-home ml-2"></i>
+                  الرئيسية
+                </a>
+              </li>
+              <li>
+                <a href="#children" class="block px-4 py-3 hover:bg-primary/5 transition">
+                  <i class="fas fa-child ml-2"></i>
+                  الأطفال
+                </a>
+              </li>
+              <li>
+                <a href="#activities" class="block px-4 py-3 hover:bg-primary/5 transition">
+                  <i class="fas fa-chart-line ml-2"></i>
+                  تقدم الأنشطة
+                </a>
+              </li>
+              <li>
+                <a href="#achievements" class="block px-4 py-3 hover:bg-primary/5 transition">
+                  <i class="fas fa-trophy ml-2"></i>
+                  الإنجازات
+                </a>
+              </li>
+              <li>
+                <a href="#favorites" class="block px-4 py-3 hover:bg-primary/5 transition">
+                  <i class="fas fa-heart ml-2"></i>
+                  المفضلة
+                </a>
+              </li>
+              <li>
+                <a href="#orders" class="block px-4 py-3 hover:bg-primary/5 transition">
+                  <i class="fas fa-shopping-cart ml-2"></i>
+                  الطلبات
+                </a>
+              </li>
+              <li>
+                <a href="#settings" class="block px-4 py-3 hover:bg-primary/5 transition">
+                  <i class="fas fa-cog ml-2"></i>
+                  الإعدادات
+                </a>
+              </li>
+              <li>
+                <a href="تسجيل-الخروج.html" class="block px-4 py-3 hover:bg-red-50 text-red-500 transition">
+                  <i class="fas fa-sign-out-alt ml-2"></i>
+                  تسجيل الخروج
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Premium Badge -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-6 p-6 text-center">
+            <div class="bg-accent/20 rounded-full inline-block p-4 mb-4">
+              <i class="fas fa-crown text-3xl text-accent"></i>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-2">عضوية مميزة</h3>
+            <p class="text-gray-600 mb-4">تنتهي عضويتك في ١٥ ديسمبر ٢٠٢٤</p>
+            <a href="#" class="bg-accent text-dark px-4 py-2 rounded-full font-bold hover:bg-accent/90 transition inline-block">
+              تجديد العضوية
+            </a>
+          </div>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="md:col-span-3">
+          <!-- Welcome Banner -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-6">
+            <div class="bg-gradient-to-l from-secondary/90 to-primary/90 text-white p-6">
+              <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div class="md:w-2/3">
+                  <h2 class="text-2xl font-bold mb-2">مرحباً بك في حسابك الشخصي</h2>
+                  <p class="mb-4">من هنا يمكنك متابعة تقدم أطفالك وإدارة حسابك والاطلاع على الأنشطة الموصى بها.</p>
+                  <a href="#activities" class="bg-white text-primary px-4 py-2 rounded-full inline-block hover:bg-light transition">
+                    استكشف الأنشطة الموصى بها
+                  </a>
+                </div>
+                <div class="md:w-1/3 text-center">
+                  <div class="relative">
+                    <i class="fas fa-medal text-8xl text-accent/80 floating"></i>
+                    <div class="absolute top-0 right-0 bg-accent text-dark text-sm font-bold px-2 py-1 rounded-full">
+                      ٥٠ نقطة
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Children Profiles -->
+          <div id="children" class="bg-white rounded-3xl shadow-lg overflow-hidden mb-6">
+            <div class="p-6 border-b border-gray-100">
+              <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold text-dark">الأطفال</h2>
+                <a href="#" class="text-primary hover:underline">
+                  <i class="fas fa-plus ml-1"></i>
+                  إضافة طفل
+                </a>
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Child 1 -->
+                <div class="bg-light rounded-2xl p-4 flex items-center gap-4">
+                  <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-xl font-bold text-primary">م س</span>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-dark">محمد</h4>
+                    <p class="text-gray-600 text-sm">٨ سنوات</p>
+                    <div class="flex mt-1">
+                      <span class="text-xs px-2 py-0.5 bg-secondary/10 text-secondary rounded-full ml-2">مستوى متقدم</span>
+                      <span class="text-xs px-2 py-0.5 bg-accent/10 text-accent rounded-full">١٢ إنجاز</span>
+                    </div>
+                  </div>
+                  <a href="#" class="mr-auto text-primary">
+                    <i class="fas fa-chevron-left"></i>
+                  </a>
+                </div>
+                
+                <!-- Child 2 -->
+                <div class="bg-light rounded-2xl p-4 flex items-center gap-4">
+                  <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-xl font-bold text-secondary">ر س</span>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-dark">ريم</h4>
+                    <p class="text-gray-600 text-sm">٦ سنوات</p>
+                    <div class="flex mt-1">
+                      <span class="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full ml-2">مستوى متوسط</span>
+                      <span class="text-xs px-2 py-0.5 bg-accent/10 text-accent rounded-full">٧ إنجازات</span>
+                    </div>
+                  </div>
+                  <a href="#" class="mr-auto text-primary">
+                    <i class="fas fa-chevron-left"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Recent Activities -->
+          <div id="activities" class="bg-white rounded-3xl shadow-lg overflow-hidden mb-6">
+            <div class="p-6 border-b border-gray-100">
+              <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold text-dark">النشاطات الأخيرة</h2>
+                <a href="#" class="text-primary hover:underline">عرض الكل</a>
+              </div>
+            </div>
+            
+            <div class="divide-y divide-gray-100">
+              <!-- Activity 1 -->
+              <div class="p-4 flex items-center">
+                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center ml-4 flex-shrink-0">
+                  <i class="fas fa-gamepad text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">أكمل محمد لعبة "مغامرة الأرقام"</h4>
+                  <p class="text-gray-500 text-sm">حصل على ٨٥ نقطة • منذ ساعتين</p>
+                </div>
+                <span class="mr-auto bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">ألعاب</span>
+              </div>
+              
+              <!-- Activity 2 -->
+              <div class="p-4 flex items-center">
+                <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center ml-4 flex-shrink-0">
+                  <i class="fas fa-book text-accent"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">أكملت ريم قصة "الأرنب والسلحفاة"</h4>
+                  <p class="text-gray-500 text-sm">حصلت على شارة القراءة • أمس</p>
+                </div>
+                <span class="mr-auto bg-accent/10 text-accent text-xs px-2 py-1 rounded-full">قراءة</span>
+              </div>
+              
+              <!-- Activity 3 -->
+              <div class="p-4 flex items-center">
+                <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center ml-4 flex-shrink-0">
+                  <i class="fas fa-paint-brush text-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">أكمل محمد نشاط "رسم الحيوانات"</h4>
+                  <p class="text-gray-500 text-sm">تم تحميل الصورة • ٢٠ نوفمبر</p>
+                </div>
+                <span class="mr-auto bg-secondary/10 text-secondary text-xs px-2 py-1 rounded-full">أنشطة</span>
+              </div>
+              
+              <!-- Activity 4 -->
+              <div class="p-4 flex items-center">
+                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center ml-4 flex-shrink-0">
+                  <i class="fas fa-shopping-cart text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">تم شراء "مجموعة قصص سارة ولوز"</h4>
+                  <p class="text-gray-500 text-sm">طلب #٥٦٧٨ • ١٥ نوفمبر</p>
+                </div>
+                <span class="mr-auto bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">متجر</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Recommended Activities -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <div class="p-6 border-b border-gray-100">
+              <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold text-dark">أنشطة موصى بها</h2>
+                <a href="#" class="text-primary hover:underline">المزيد</a>
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Recommended 1 -->
+                <div class="bg-light rounded-2xl overflow-hidden">
+                  <div class="h-32 bg-primary/10 relative">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <i class="fas fa-brain text-5xl text-primary/40"></i>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <div class="flex justify-between items-center mb-2">
+                      <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">ألعاب الذكاء</span>
+                      <span class="text-gray-500 text-xs">٢٠ دقيقة</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">لغز الأشكال الهندسية</h4>
+                    <p class="text-gray-600 text-sm mb-4">مناسب لـ محمد، يساعد في تطوير مهارات التفكير المنطقي</p>
+                    <a href="#" class="bg-primary text-white text-sm px-3 py-1.5 rounded-full hover:bg-primary/90 transition inline-block">
+                      بدء النشاط
+                    </a>
+                  </div>
+                </div>
+                
+                <!-- Recommended 2 -->
+                <div class="bg-light rounded-2xl overflow-hidden">
+                  <div class="h-32 bg-secondary/10 relative">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <i class="fas fa-language text-5xl text-secondary/40"></i>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <div class="flex justify-between items-center mb-2">
+                      <span class="bg-secondary/10 text-secondary text-xs px-2 py-1 rounded-full">اللغة العربية</span>
+                      <span class="text-gray-500 text-xs">١٥ دقيقة</span>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">مغامرة الحروف مع لوز</h4>
+                    <p class="text-gray-600 text-sm mb-4">مناسب لـ ريم، يساعد في تطوير مهارات القراءة والكتابة</p>
+                    <a href="#" class="bg-secondary text-white text-sm px-3 py-1.5 rounded-full hover:bg-secondary/90 transition inline-block">
+                      بدء النشاط
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- About Column -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">عن سارة ولوز</h3>
+            <p class="text-gray-300 mb-4">
+              موقع تعليمي وترفيهي للأطفال من عمر ٣ إلى ٩ سنوات، يهدف إلى تنمية مهارات الطفل بطريقة ممتعة وتفاعلية.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="index.html" class="text-gray-300 hover:text-white">الرئيسية</a>
+              </li>
+              <li>
+                <a href="ألعاب.html" class="text-gray-300 hover:text-white">الألعاب</a>
+              </li>
+              <li>
+                <a href="أنشطة.html" class="text-gray-300 hover:text-white">الأنشطة</a>
+              </li>
+              <li>
+                <a href="فيديوهات.html" class="text-gray-300 hover:text-white">الفيديوهات</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Customer Service -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">خدمة المستخدمين</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">أسئلة متكررة</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">سياسة الخصوصية</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">شروط الاستخدام</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">اتصل بنا</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a href="mailto:info@saralouze.com" class="text-gray-300 hover:text-white">info@saralouze.com</a>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a href="tel:+966123456789" class="text-gray-300 hover:text-white">+966 12 345 6789</a>
+              </li>
+            </ul>
+            <div class="mt-4">
+              <h4 class="text-lg font-bold mb-2">تابعنا على</h4>
+              <div class="flex space-x-4 space-x-reverse">
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-youtube text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            &copy; ٢٠٢٣ سارة ولوز - جميع الحقوق محفوظة
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html> 

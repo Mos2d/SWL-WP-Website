@@ -1,0 +1,284 @@
+/*
+Theme Name: Sarah and Loz
+Theme URI: https://bakry.egydiscovermore.com/
+Author: Bakry Abdelsalam
+Author URI: https://bakry.egydiscovermore.com/
+Description: An Arabic RTL educational/entertainment WordPress theme for children ages 3-9
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: sarah-loz
+Tags: rtl-language-support, education, children, arabic
+*/
+
+/* Base styles will be handled by Tailwind CSS */
+/*
+Theme Name: Sarah and Loz
+Theme URI: https://bakry.egydiscovermore.com/
+Author: Bakry Abdelsalam
+Author URI: https://bakry.egydiscovermore.com/
+Description: An Arabic RTL educational/entertainment WordPress theme for children ages 3-9
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: sarah-loz
+Tags: rtl-language-support, education, children, arabic
+*/
+
+/* Base styles will be handled by Tailwind CSS */
+
+/* Fix for horizontal scrolling on mobile devices */
+@media (max-width: 767px) {
+    
+    /* Improve mobile responsiveness in WooCommerce */
+    .woocommerce {
+      overflow-x: hidden;
+    }
+    
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    
+    /* Fix for RTL direction scrolling */
+    html[dir="rtl"] body {
+      overflow-x: hidden;
+    }
+
+    /* WooCommerce account page fixes for mobile */
+    .woocommerce-account .woocommerce {
+      display: flex;
+      flex-direction: column !important;
+      width: 100%;
+    }
+
+    .woocommerce-MyAccount-navigation {
+      width: 100% !important;
+      margin-bottom: 1.5rem;
+      position: static !important;
+    }
+
+    .woocommerce-MyAccount-content {
+      width: 100% !important;
+      padding: 0.5rem !important;
+      overflow-x: auto;
+    }
+
+    /* Fix content overflow */
+    .woocommerce-MyAccount-content .woocommerce-orders-table,
+    .woocommerce-MyAccount-content .woocommerce-table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+    }
+    
+    /* Fix order list on mobile */
+    .orders-container {
+      padding: 0.75rem !important;
+    }
+    
+    .orders-container .order-item {
+      padding: 0.75rem !important;
+    }
+    
+    .orders-container .order-actions a {
+      display: inline-block;
+      margin: 0.25rem 0;
+      width: auto !important;
+      text-align: center;
+    }
+
+    /* Fix button wrapping */
+    .woocommerce-MyAccount-content .button {
+      margin: 5px 0;
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+
+    /* Login/Register forms */
+    .woocommerce .u-columns {
+      display: flex;
+      flex-direction: column !important;
+      gap: 2rem;
+    }
+
+    .woocommerce-form-login,
+    .woocommerce-form-register {
+      padding: 1rem !important;
+    }
+
+    /* Make input fields full width on mobile */
+    .woocommerce form .form-row input.input-text, 
+    .woocommerce form .form-row select {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Form row spacing */
+    .woocommerce form .form-row {
+      padding: 3px 0;
+      margin: 0 0 10px;
+    }
+    
+    /* Better spacing for profile section on mobile */
+    .woocommerce-MyAccount-content .flex.items-center.space-x-4 {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .woocommerce-MyAccount-content .flex.items-center.space-x-4 > div {
+      margin-top: 0.5rem;
+    }
+    
+    /* Adjust grid layouts for mobile */
+    .woocommerce-MyAccount-content .grid.grid-cols-1.md\:grid-cols-2,
+    .woocommerce-MyAccount-content .grid.grid-cols-1.md\:grid-cols-3 {
+      gap: 1rem !important;
+    }
+}
+
+/* Child-friendly animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+@keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: float 3s ease-in-out 1s infinite;
+}
+
+.animate-float-slow {
+    animation: float 4s ease-in-out 2s infinite;
+}
+
+.animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+}
+
+.animate-wiggle {
+    animation: wiggle 2s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* Enhanced background animations */
+@keyframes float-reverse {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(20px) rotate(5deg); }
+}
+
+@keyframes shooting-star {
+    0% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+    }
+    50% { 
+        transform: translate(-100vw, 100vh) scale(0.2);
+        opacity: 1;
+    }
+    100% { 
+        transform: translate(-100vw, 100vh) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes shooting-star-delayed {
+    0% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+    }
+    50% { 
+        transform: translate(-80vw, 80vh) scale(0.2);
+        opacity: 1;
+    }
+    100% { 
+        transform: translate(-80vw, 80vh) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.4;
+        box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.2);
+    }
+    50% { 
+        transform: scale(1.5);
+        opacity: 0.8;
+        box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.4);
+    }
+}
+
+@keyframes gradient-shift {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% { 
+        opacity: 0.5;
+        transform: translate(2%, 2%) rotate(1deg);
+    }
+    75% { 
+        opacity: 0.4;
+        transform: translate(-2%, -2%) rotate(-1deg);
+    }
+}
+
+/* Animation classes */
+.animate-float-reverse {
+    animation: float-reverse 6s ease-in-out infinite;
+}
+
+.animate-shooting-star {
+    animation: shooting-star 3s ease-out infinite;
+}
+
+.animate-shooting-star-delayed {
+    animation: shooting-star-delayed 3s ease-out 1.5s infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-delayed {
+    animation: pulse-glow 2s ease-in-out 1s infinite;
+}
+
+.animate-gradient-shift {
+    animation: gradient-shift 8s ease-in-out infinite;
+}
+
+/* Enhanced blur effects */
+.blur-sm {
+    backdrop-filter: blur(4px);
+}
+
+.blur-md {
+    backdrop-filter: blur(8px);
+}

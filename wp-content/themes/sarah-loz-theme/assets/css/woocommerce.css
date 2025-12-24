@@ -1,0 +1,180 @@
+/* WooCommerce Custom Styles */
+
+/* Product Grid */
+.woocommerce ul.products li.product {
+    @apply flex flex-col h-full;
+}
+
+/* Ordering and Result Count */
+.woocommerce .woocommerce-ordering {
+    @apply m-0 mb-4 md:mb-0;
+}
+
+.woocommerce .woocommerce-ordering select {
+    @apply bg-light border border-gray-200 rounded-lg py-2 px-4 text-dark focus:ring-2 focus:ring-primary focus:border-primary;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.woocommerce .woocommerce-result-count {
+    @apply m-0 text-gray-600 mt-2 md:mt-0 font-light text-sm md:text-base;
+}
+
+/* RTL fixes for ordering */
+.rtl.woocommerce .woocommerce-ordering select {
+    padding-right: 1rem;
+    padding-left: 2.5rem;
+    background-position: left 0.5rem center;
+}
+
+/* Price Styling */
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.woocommerce ul.products li.product .price {
+    @apply text-primary font-bold;
+}
+
+/* Sale Badge */
+.woocommerce span.onsale {
+    @apply bg-primary text-white px-3 py-1 rounded-full text-sm m-0;
+    min-height: auto;
+    min-width: auto;
+    line-height: normal;
+}
+
+/* Form Fields */
+.woocommerce form .form-row input.input-text,
+.woocommerce form .form-row textarea {
+    @apply rounded-lg border-gray-300 p-2 w-full;
+}
+
+/* Cart Table */
+.woocommerce table.shop_table {
+    @apply rounded-lg;
+}
+
+.woocommerce table.shop_table th {
+    @apply py-4 px-2;
+}
+
+/* Quantity Input */
+.woocommerce .quantity .qty {
+    @apply rounded-lg border-gray-300 p-2;
+}
+
+/* Messages */
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+    @apply rounded-lg mb-4 p-4 border-l-4;
+}
+
+.woocommerce-message {
+    @apply bg-green-50 border-green-500 text-green-700;
+}
+
+.woocommerce-info {
+    @apply bg-blue-50 border-blue-500 text-blue-700;
+}
+
+.woocommerce-error {
+    @apply bg-red-50 border-red-500 text-red-700;
+}
+
+/* Star Rating */
+.woocommerce .star-rating {
+    @apply text-accent;
+}
+
+/* Pagination */
+.woocommerce nav.woocommerce-pagination {
+    @apply my-8;
+}
+
+.woocommerce nav.woocommerce-pagination ul {
+    @apply border-0;
+}
+
+.woocommerce nav.woocommerce-pagination ul li {
+    @apply border-0 mx-1;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a,
+.woocommerce nav.woocommerce-pagination ul li span {
+    @apply bg-white rounded-lg px-4 py-2 text-dark hover:bg-primary hover:text-white transition-colors;
+}
+
+.woocommerce nav.woocommerce-pagination ul li span.current {
+    @apply bg-primary text-white;
+}
+
+/* RTL Specific Styles */
+.rtl.woocommerce div.product div.images .woocommerce-product-gallery__trigger {
+    right: auto;
+    left: 0.5em;
+}
+
+.rtl.woocommerce div.product div.images .flex-control-thumbs li {
+    float: right;
+}
+
+/* Mini Cart */
+.widget_shopping_cart .mini_cart_item {
+    @apply flex items-center gap-4 py-2;
+}
+
+.widget_shopping_cart .mini_cart_item img {
+    @apply w-16 h-16 object-cover rounded;
+}
+
+/* Checkout */
+#add_payment_method #payment, 
+.woocommerce-cart #payment, 
+.woocommerce-checkout #payment {
+    @apply bg-light rounded-lg;
+}
+
+/* Product Tabs */
+.woocommerce div.product .woocommerce-tabs ul.tabs {
+    @apply flex gap-2 p-0 mb-4 before:hidden;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li {
+    @apply bg-light border-0 rounded-lg m-0 p-0;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li a {
+    @apply px-6 py-2 text-dark hover:text-primary transition-colors;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active {
+    @apply bg-primary;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+    @apply text-white;
+}
+
+/* Product Gallery */
+.woocommerce div.product div.images .flex-control-thumbs {
+    @apply grid grid-cols-4 gap-2 mt-2;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li {
+    @apply float-none w-auto;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li img {
+    @apply rounded-lg opacity-70 transition-opacity;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li img.flex-active,
+.woocommerce div.product div.images .flex-control-thumbs li img:hover {
+    @apply opacity-100;
+}

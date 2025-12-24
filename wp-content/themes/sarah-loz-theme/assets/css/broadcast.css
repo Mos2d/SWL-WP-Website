@@ -1,0 +1,97 @@
+/**
+ * Broadcast specific styles
+ */
+
+/* Aspect Ratio Utility */
+.aspect-w-16,
+.aspect-w-9,
+.aspect-w-4,
+.aspect-w-3,
+.aspect-w-1 {
+    position: relative;
+}
+
+.aspect-w-16 > *,
+.aspect-w-9 > *,
+.aspect-w-4 > *,
+.aspect-w-3 > *,
+.aspect-w-1 > * {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.aspect-w-16 {
+    padding-bottom: calc(9 / 16 * 100%);
+}
+
+.aspect-w-9 {
+    padding-bottom: calc(16 / 9 * 100%);
+}
+
+.aspect-w-4 {
+    padding-bottom: calc(3 / 4 * 100%);
+}
+
+.aspect-w-3 {
+    padding-bottom: calc(4 / 3 * 100%);
+}
+
+.aspect-w-1 {
+    padding-bottom: calc(1 / 1 * 100%);
+}
+
+.aspect-h-9 {
+    padding-bottom: calc(9 / 16 * 100%);
+}
+
+/* Line Clamp */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Live Indicator Pulse */
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Chat styles */
+.chat-container {
+    min-height: 400px;
+}
+
+#chat-messages {
+    scroll-behavior: smooth;
+}
+
+/* Ensure embedded iframes are responsive */
+.w-full iframe {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Countdown timer styles */
+.countdown-timer {
+    font-variant-numeric: tabular-nums;
+} 

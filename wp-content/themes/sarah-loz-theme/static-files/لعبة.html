@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لعبة الألغاز - سارة ولوز</title>
+    <meta
+      name="description"
+      content="لعبة الألغاز - موقع سارة ولوز التعليمي للأطفال"
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind with custom colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Font - Tajawal (Arabic) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header
+      class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg"
+    >
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div
+                class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md"
+              >
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div
+            id="navMenu"
+            class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0"
+          >
+            <ul
+              class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse"
+            >
+              <li>
+                <a
+                  href="index.html#games"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الألعاب</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#activities"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الأنشطة</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#store"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >المتجر</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#videos"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الفيديوهات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#downloads"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >التحميلات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile -->
+          <div class="hidden lg:block">
+            <a
+              href="index.html#profile"
+              class="bg-light text-primary py-2 px-4 rounded-full hover:bg-white transition shadow-md"
+            >
+              <i class="fas fa-user mr-1"></i> حسابي
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Game Content -->
+    <main class="container mx-auto px-4 py-10">
+      <!-- Game Header -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-10">
+        <div class="h-64 bg-primary/20 relative">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <i class="fas fa-puzzle-piece text-8xl text-primary/50"></i>
+          </div>
+        </div>
+        <div class="p-8">
+          <div class="flex flex-wrap justify-between items-center mb-4">
+            <h1 class="text-3xl md:text-4xl font-bold text-dark">
+              لعبة الألغاز
+            </h1>
+            <div class="flex items-center mt-2 md:mt-0">
+              <span
+                class="bg-accent text-dark px-3 py-1 rounded-full text-sm ml-2"
+                >٥-٩ سنوات</span
+              >
+              <span
+                class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm"
+                >ألعاب ذكاء</span
+              >
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg mb-6">
+            ألغاز تفاعلية لتنمية مهارات التفكير والتركيز لدى الأطفال. هذه اللعبة
+            مصممة خصيصاً لمساعدة الأطفال على تطوير مهاراتهم في حل المشكلات
+            والتفكير المنطقي من خلال ألغاز مسلية وممتعة.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-8">
+            <a
+              href="#play"
+              class="bg-primary text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-primary/90 transition transform hover:-translate-y-1"
+            >
+              <i class="fas fa-gamepad ml-2"></i>
+              العب الآن
+            </a>
+            <a
+              href="#instructions"
+              class="bg-secondary text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-secondary/90 transition transform hover:-translate-y-1"
+            >
+              <i class="fas fa-info-circle ml-2"></i>
+              تعليمات اللعبة
+            </a>
+          </div>
+
+          <div class="flex items-center text-sm text-gray-500 justify-between">
+            <div class="flex items-center">
+              <span class="ml-4"
+                ><i class="fas fa-star text-accent ml-1"></i> ٤.٨ (٢٥٠
+                تقييم)</span
+              >
+              <span><i class="fas fa-users ml-1"></i> ١٢٠٠ لاعب</span>
+            </div>
+            <div class="flex items-center">
+              <span class="ml-4"
+                ><i class="far fa-clock ml-1"></i> ١٥ دقيقة للعب</span
+              >
+              <span><i class="fas fa-share-alt ml-1"></i> مشاركة</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Information -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Game Main Section -->
+        <div class="lg:col-span-2">
+          <!-- Game Preview -->
+          <div
+            class="bg-white rounded-3xl shadow-lg overflow-hidden mb-8"
+            id="play"
+          >
+            <h2 class="text-2xl font-bold p-6 bg-primary/10 text-primary">
+              <i class="fas fa-gamepad ml-2"></i>
+              استعراض اللعبة
+            </h2>
+            <div class="p-6">
+              <!-- Game iframe or embedded content would go here -->
+              <div
+                class="h-96 bg-gray-200 rounded-xl flex items-center justify-center"
+              >
+                <div class="text-center">
+                  <i class="fas fa-gamepad text-6xl text-gray-400 mb-4"></i>
+                  <p class="text-xl text-gray-500">
+                    اضغط على "العب الآن" لبدء اللعبة
+                  </p>
+                  <button
+                    class="mt-6 bg-primary text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-primary/90 transition"
+                  >
+                    العب الآن
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Game Instructions -->
+          <div
+            class="bg-white rounded-3xl shadow-lg overflow-hidden mb-8"
+            id="instructions"
+          >
+            <h2 class="text-2xl font-bold p-6 bg-secondary/10 text-secondary">
+              <i class="fas fa-info-circle ml-2"></i>
+              تعليمات اللعبة
+            </h2>
+            <div class="p-6">
+              <ol class="list-decimal list-inside space-y-4 text-gray-600">
+                <li class="p-2 rounded-lg bg-light">
+                  استخدم الفأرة أو اصبعك لتحريك قطع اللغز.
+                </li>
+                <li class="p-2 rounded-lg bg-light">
+                  قم بتجميع الصورة بالشكل الصحيح لإكمال اللغز.
+                </li>
+                <li class="p-2 rounded-lg bg-light">
+                  يمكنك اختيار مستوى الصعوبة المناسب لطفلك.
+                </li>
+                <li class="p-2 rounded-lg bg-light">
+                  اضغط على زر المساعدة إذا واجهت صعوبة.
+                </li>
+                <li class="p-2 rounded-lg bg-light">
+                  عند الانتهاء من اللغز، ستحصل على نقاط ويمكنك الانتقال للغز
+                  التالي.
+                </li>
+              </ol>
+
+              <div class="mt-6 p-4 bg-accent/10 rounded-xl">
+                <h3 class="text-xl font-bold text-dark mb-2">نصائح للعب:</h3>
+                <ul class="list-disc list-inside space-y-2 text-gray-600">
+                  <li>ابدأ بتجميع أطراف اللغز أولاً.</li>
+                  <li>ركز على الألوان والأشكال المميزة في الصورة.</li>
+                  <li>شجع طفلك على التركيز والمحاولة بدون استعجال.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Educational Benefits -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <h2 class="text-2xl font-bold p-6 bg-accent/10 text-accent">
+              <i class="fas fa-graduation-cap ml-2"></i>
+              الفوائد التعليمية
+            </h2>
+            <div class="p-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-light rounded-xl">
+                  <h3 class="font-bold text-primary text-lg mb-2">
+                    تنمية التفكير المنطقي
+                  </h3>
+                  <p class="text-gray-600">
+                    تساعد الألغاز على تطوير قدرات الطفل في التفكير المنطقي وحل
+                    المشكلات.
+                  </p>
+                </div>
+                <div class="p-4 bg-light rounded-xl">
+                  <h3 class="font-bold text-secondary text-lg mb-2">
+                    تحسين التركيز
+                  </h3>
+                  <p class="text-gray-600">
+                    تعزز اللعبة قدرة الطفل على التركيز والانتباه لفترات أطول.
+                  </p>
+                </div>
+                <div class="p-4 bg-light rounded-xl">
+                  <h3 class="font-bold text-accent text-lg mb-2">
+                    تنمية المهارات البصرية
+                  </h3>
+                  <p class="text-gray-600">
+                    تحسن قدرة الطفل على التمييز البصري وإدراك العلاقات بين
+                    الأشكال.
+                  </p>
+                </div>
+                <div class="p-4 bg-light rounded-xl">
+                  <h3 class="font-bold text-primary text-lg mb-2">
+                    تعزيز الثقة بالنفس
+                  </h3>
+                  <p class="text-gray-600">
+                    يشعر الطفل بالإنجاز عند حل اللغز مما يعزز ثقته بنفسه.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <!-- Related Games -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-8">
+            <h2 class="text-xl font-bold p-4 bg-primary/10 text-primary">
+              ألعاب مشابهة
+            </h2>
+            <div class="p-4">
+              <div class="space-y-4">
+                <!-- Related Game 1 -->
+                <div
+                  class="flex items-center p-2 rounded-xl hover:bg-light transition"
+                >
+                  <div
+                    class="w-16 h-16 bg-secondary/20 rounded-xl flex items-center justify-center ml-3"
+                  >
+                    <i class="fas fa-shapes text-secondary"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-dark">لعبة تصنيف الأشكال</h3>
+                    <p class="text-sm text-gray-500">٤-٧ سنوات</p>
+                  </div>
+                </div>
+
+                <!-- Related Game 2 -->
+                <div
+                  class="flex items-center p-2 rounded-xl hover:bg-light transition"
+                >
+                  <div
+                    class="w-16 h-16 bg-accent/20 rounded-xl flex items-center justify-center ml-3"
+                  >
+                    <i class="fas fa-sort-numeric-up text-accent"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-dark">لعبة الأرقام والعد</h3>
+                    <p class="text-sm text-gray-500">٣-٦ سنوات</p>
+                  </div>
+                </div>
+
+                <!-- Related Game 3 -->
+                <div
+                  class="flex items-center p-2 rounded-xl hover:bg-light transition"
+                >
+                  <div
+                    class="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center ml-3"
+                  >
+                    <i class="fas fa-brain text-primary"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-dark">لعبة الذاكرة</h3>
+                    <p class="text-sm text-gray-500">٥-٩ سنوات</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Achievement Badges -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-8">
+            <h2 class="text-xl font-bold p-4 bg-accent/10 text-accent">
+              شارات الإنجاز
+            </h2>
+            <div class="p-4">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="p-2 text-center">
+                  <div
+                    class="w-16 h-16 mx-auto bg-primary/20 rounded-full flex items-center justify-center mb-1"
+                  >
+                    <i class="fas fa-star text-primary"></i>
+                  </div>
+                  <p class="text-xs">المبتدئ</p>
+                </div>
+                <div class="p-2 text-center">
+                  <div
+                    class="w-16 h-16 mx-auto bg-secondary/20 rounded-full flex items-center justify-center mb-1"
+                  >
+                    <i class="fas fa-medal text-secondary"></i>
+                  </div>
+                  <p class="text-xs">المستكشف</p>
+                </div>
+                <div class="p-2 text-center">
+                  <div
+                    class="w-16 h-16 mx-auto bg-accent/20 rounded-full flex items-center justify-center mb-1"
+                  >
+                    <i class="fas fa-trophy text-accent"></i>
+                  </div>
+                  <p class="text-xs">البطل</p>
+                </div>
+                <div class="p-2 text-center">
+                  <div
+                    class="w-16 h-16 mx-auto bg-gray-200 rounded-full flex items-center justify-center mb-1"
+                  >
+                    <i class="fas fa-lock text-gray-400"></i>
+                  </div>
+                  <p class="text-xs">السريع</p>
+                </div>
+                <div class="p-2 text-center">
+                  <div
+                    class="w-16 h-16 mx-auto bg-gray-200 rounded-full flex items-center justify-center mb-1"
+                  >
+                    <i class="fas fa-lock text-gray-400"></i>
+                  </div>
+                  <p class="text-xs">المثابر</p>
+                </div>
+                <div class="p-2 text-center">
+                  <div
+                    class="w-16 h-16 mx-auto bg-gray-200 rounded-full flex items-center justify-center mb-1"
+                  >
+                    <i class="fas fa-lock text-gray-400"></i>
+                  </div>
+                  <p class="text-xs">العبقري</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parent Tips -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <h2 class="text-xl font-bold p-4 bg-secondary/10 text-secondary">
+              نصائح للوالدين
+            </h2>
+            <div class="p-4">
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <p class="text-gray-600">
+                    شجعوا أطفالكم على المحاولة بدون الكشف عن الحل مباشرة.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <p class="text-gray-600">
+                    اجعلوا وقت اللعب محدداً لتجنب إجهاد الطفل.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <p class="text-gray-600">
+                    ناقشوا الألغاز مع أطفالكم لتعزيز مهارات التفكير.
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-secondary mt-1 ml-2"></i>
+                  <p class="text-gray-600">
+                    احتفلوا بإنجازات طفلكم مهما كانت صغيرة.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews Section -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-10">
+        <h2 class="text-2xl font-bold p-6 bg-primary/10 text-primary">
+          <i class="fas fa-comments ml-2"></i>
+          آراء المستخدمين
+        </h2>
+        <div class="p-6">
+          <div class="flex flex-col md:flex-row items-start gap-6 mb-8">
+            <!-- Rating Summary -->
+            <div class="md:w-1/3 text-center p-4 bg-light rounded-xl">
+              <div class="text-5xl font-bold text-primary mb-2">٤.٨</div>
+              <div class="flex justify-center items-center text-accent mb-3">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p class="text-gray-500 mb-4">من ٢٥٠ تقييم</p>
+              <button
+                class="bg-primary text-white px-4 py-2 rounded-full text-sm hover:bg-primary/90 transition w-full"
+              >
+                <i class="fas fa-plus-circle ml-1"></i>
+                أضف تقييمك
+              </button>
+            </div>
+
+            <!-- Reviews -->
+            <div class="md:w-2/3">
+              <div class="space-y-4">
+                <!-- Review 1 -->
+                <div class="p-4 border-b border-gray-100">
+                  <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center ml-2"
+                      >
+                        <span class="text-primary font-bold">س.ع</span>
+                      </div>
+                      <div>
+                        <h4 class="font-bold">سارة العمري</h4>
+                        <div class="flex text-accent text-sm">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="text-xs text-gray-500">منذ ٣ أيام</span>
+                  </div>
+                  <p class="text-gray-600">
+                    رائعة جداً! طفلي استمتع كثيراً بحل الألغاز وأصبح أكثر
+                    تركيزاً. أنصح بها بشدة لكل الأطفال في هذا السن.
+                  </p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="p-4 border-b border-gray-100">
+                  <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center ml-2"
+                      >
+                        <span class="text-secondary font-bold">م.ح</span>
+                      </div>
+                      <div>
+                        <h4 class="font-bold">محمد الحربي</h4>
+                        <div class="flex text-accent text-sm">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="text-xs text-gray-500">منذ أسبوع</span>
+                  </div>
+                  <p class="text-gray-600">
+                    لعبة جميلة ومفيدة، لكن بعض الألغاز صعبة قليلاً على طفلي
+                    البالغ ٥ سنوات. أتمنى لو كان هناك مستويات أكثر للمبتدئين.
+                  </p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="p-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center ml-2"
+                      >
+                        <span class="text-accent font-bold">ن.س</span>
+                      </div>
+                      <div>
+                        <h4 class="font-bold">نورة السالم</h4>
+                        <div class="flex text-accent text-sm">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="text-xs text-gray-500">منذ شهر</span>
+                  </div>
+                  <p class="text-gray-600">
+                    أفضل لعبة ألغاز جربتها مع أطفالي! الرسومات جميلة والواجهة
+                    سهلة الاستخدام. أصبحت من الألعاب المفضلة لدى أطفالي.
+                  </p>
+                </div>
+              </div>
+
+              <div class="mt-4 text-center">
+                <button class="text-primary hover:underline">
+                  عرض كل التقييمات (٢٥٠)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Logo & About -->
+          <div>
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center ml-2"
+              >
+                <span class="text-xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-xl font-bold">سارة ولوز</span>
+            </div>
+            <p class="text-gray-300 mb-4">
+              موقع ترفيهي وتعليمي للأطفال من عمر ٣ إلى ٩ سنوات، يوفر تجربة
+              تعليمية ممتعة وآمنة
+            </p>
+            <div class="flex space-x-4 space-x-reverse">
+              <a href="#" class="text-white hover:text-accent transition"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-white hover:text-accent transition"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-white hover:text-accent transition"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white hover:text-accent transition"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="index.html"
+                  class="text-gray-300 hover:text-white transition"
+                  >الصفحة الرئيسية</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#games"
+                  class="text-gray-300 hover:text-white transition"
+                  >الألعاب</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#activities"
+                  class="text-gray-300 hover:text-white transition"
+                  >الأنشطة</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#store"
+                  class="text-gray-300 hover:text-white transition"
+                  >المتجر</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#videos"
+                  class="text-gray-300 hover:text-white transition"
+                  >الفيديوهات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#downloads"
+                  class="text-gray-300 hover:text-white transition"
+                  >التحميلات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h3 class="text-lg font-bold mb-4">الدعم</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >المساعدة</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >الأسئلة الشائعة</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >سياسة الخصوصية</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >شروط الاستخدام</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition"
+                  >اتصل بنا</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-lg font-bold mb-4">اتصل بنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <i class="fas fa-map-marker-alt mt-1 ml-2 text-accent"></i>
+                <span class="text-gray-300"
+                  >الرياض، المملكة العربية السعودية</span
+                >
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a
+                  href="mailto:info@sarewaloze.com"
+                  class="text-gray-300 hover:text-white transition"
+                  >info@sarewaloze.com</a
+                >
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a
+                  href="tel:+966123456789"
+                  class="text-gray-300 hover:text-white transition"
+                  >+966 123 456 789</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-10 pt-6 text-center">
+          <p class="text-gray-400">© 2025 سارة ولوز. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinks = document.querySelectorAll("#navMenu a");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth < 1024) {
+            navMenu.classList.add("hidden");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

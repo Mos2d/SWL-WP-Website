@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مغامرات سارة ولوز: الحديقة السحرية - سارة ولوز</title>
+    <meta
+      name="description"
+      content="مغامرات سارة ولوز: الحديقة السحرية - قصة مصورة للأطفال عن مغامرة سارة ولوز وتعلم أسماء النباتات والأشجار"
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind with custom colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF6B6B",
+              secondary: "#4ECDC4",
+              accent: "#FFD166",
+              light: "#F7FFF7",
+              dark: "#2A2A72",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "sans-serif"],
+            },
+            animation: {
+              "bounce-slow": "bounce 3s infinite",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Font - Tajawal (Arabic) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background-color: #f7fff7;
+        background-image: radial-gradient(#4ecdc4 2px, transparent 2px),
+          radial-gradient(#ffd166 2px, transparent 2px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
+
+      .rounded-bubble {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header/Navigation -->
+    <header
+      class="bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg"
+    >
+      <div class="container mx-auto px-4 py-3">
+        <nav class="flex flex-wrap items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+              <div
+                class="w-12 h-12 bg-light rounded-full flex items-center justify-center mr-2 shadow-md"
+              >
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <span class="text-light text-xl font-bold">سارة ولوز</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="lg:hidden">
+            <button id="menuButton" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div
+            id="navMenu"
+            class="hidden w-full lg:flex lg:w-auto lg:items-center mt-2 lg:mt-0"
+          >
+            <ul
+              class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-4 lg:space-x-reverse"
+            >
+              <li>
+                <a
+                  href="index.html#games"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الألعاب</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#activities"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الأنشطة</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#store"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >المتجر</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#videos"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >الفيديوهات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#downloads"
+                  class="text-white hover:text-light block py-2 px-3 rounded-full hover:bg-primary transition"
+                  >التحميلات</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Login/Profile -->
+          <div class="hidden lg:block">
+            <a
+              href="index.html#profile"
+              class="bg-light text-primary py-2 px-4 rounded-full hover:bg-white transition shadow-md"
+            >
+              <i class="fas fa-user mr-1"></i> حسابي
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Video Content -->
+    <main class="container mx-auto px-4 py-10">
+      <!-- Breadcrumb -->
+      <div class="text-sm text-gray-500 mb-6">
+        <a href="index.html" class="hover:text-primary transition">الرئيسية</a>
+        <span class="mx-2">/</span>
+        <a href="فيديوهات.html" class="hover:text-primary transition">الفيديوهات</a>
+        <span class="mx-2">/</span>
+        <span class="text-primary">مغامرات سارة ولوز: الحديقة السحرية</span>
+      </div>
+
+      <!-- Video Main Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Video Player and Details -->
+        <div class="lg:col-span-2">
+          <!-- Video Player -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-6">
+            <div class="h-96 bg-dark/10 relative flex items-center justify-center">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <button class="bg-primary/90 hover:bg-primary text-white w-20 h-20 rounded-full shadow-lg flex items-center justify-center transition transform hover:scale-110">
+                  <i class="fas fa-play text-3xl"></i>
+                </button>
+              </div>
+              <span class="absolute bottom-4 left-4 bg-dark/70 text-white px-2 py-1 rounded text-sm">١٥:٢٠</span>
+              <span class="absolute top-4 right-4 bg-accent text-dark px-3 py-1 rounded-full text-sm font-bold">جديد</span>
+            </div>
+          </div>
+
+          <!-- Video Info -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-8">
+            <div class="p-6">
+              <h1 class="text-3xl font-bold text-dark mb-2">
+                مغامرات سارة ولوز: الحديقة السحرية
+              </h1>
+              
+              <div class="flex flex-wrap items-center text-sm text-gray-500 mb-4">
+                <span class="ml-6"><i class="fas fa-eye ml-1"></i> ٣٢٠٠ مشاهدة</span>
+                <span class="ml-6"><i class="far fa-calendar ml-1"></i> تم النشر: ١٥ يونيو ٢٠٢٣</span>
+                <span><i class="fas fa-tag ml-1"></i> قصص مصورة</span>
+              </div>
+
+              <div class="flex items-center mb-4">
+                <div class="text-accent">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="text-gray-500 mr-2">٤.٧ (١٣٢ تقييم)</span>
+              </div>
+
+              <p class="text-gray-600 text-lg mb-6">
+                قصة مصورة عن مغامرة سارة ولوز في الحديقة السحرية وكيف تعلموا أسماء الأشجار والنباتات. تدور أحداث القصة حول رحلة الأصدقاء إلى حديقة غامضة يكتشفون فيها أنواعًا مختلفة من النباتات ويتعلمون عن فوائدها وأهميتها للبيئة.
+              </p>
+
+              <div class="flex flex-wrap gap-4">
+                <button class="bg-primary text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-primary/90 transition">
+                  <i class="fas fa-heart ml-2"></i>
+                  أعجبني
+                </button>
+                <button class="bg-secondary text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-secondary/90 transition">
+                  <i class="fas fa-share ml-2"></i>
+                  مشاركة
+                </button>
+                <button class="bg-accent text-dark px-6 py-3 rounded-full text-lg shadow-lg hover:bg-accent/90 transition">
+                  <i class="fas fa-save ml-2"></i>
+                  حفظ
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Description and Learning Materials -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-8">
+            <div class="border-b border-gray-200">
+              <div class="flex overflow-x-auto">
+                <button class="px-6 py-4 text-primary border-b-2 border-primary font-bold">تفاصيل الفيديو</button>
+                <button class="px-6 py-4 text-gray-500 hover:text-primary transition">مواد تعليمية</button>
+                <button class="px-6 py-4 text-gray-500 hover:text-primary transition">تعليقات</button>
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <h2 class="text-xl font-bold text-dark mb-4">تفاصيل الفيديو</h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="text-lg font-bold text-dark mb-2">وصف الفيديو</h3>
+                  <p class="text-gray-600 mb-4">
+                    في هذا الفيديو، تنطلق سارة ولوز في مغامرة شيقة إلى الحديقة السحرية، حيث يتعرفان على أنواع مختلفة من النباتات والأشجار ويتعلمان عن أهميتها للبيئة وفوائدها.
+                  </p>
+                  <p class="text-gray-600 mb-4">
+                    يلتقيان خلال رحلتهما بصديقهما الجديد "نبات" الذي يأخذهما في جولة ويعرفهما على أصدقائه من النباتات، ويعلمهما كيفية العناية بالنباتات وأهمية الماء والشمس لنموها.
+                  </p>
+                  <p class="text-gray-600">
+                    تتعلم سارة ولوز خلال المغامرة دروسًا مهمة عن البيئة والمحافظة عليها، وكيف يمكننا المساهمة في حماية الطبيعة من خلال زراعة النباتات والاهتمام بها.
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 class="text-lg font-bold text-dark mb-2">المهارات التعليمية</h3>
+                  <ul class="space-y-2 text-gray-600">
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle text-secondary ml-2"></i>
+                      التعرف على أنواع النباتات المختلفة
+                    </li>
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle text-secondary ml-2"></i>
+                      تعلم أسماء الأشجار الشائعة
+                    </li>
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle text-secondary ml-2"></i>
+                      فهم أهمية النباتات للبيئة
+                    </li>
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle text-secondary ml-2"></i>
+                      تعلم كيفية العناية بالنباتات
+                    </li>
+                    <li class="flex items-center">
+                      <i class="fas fa-check-circle text-secondary ml-2"></i>
+                      تنمية الوعي البيئي لدى الأطفال
+                    </li>
+                  </ul>
+                  
+                  <div class="mt-6">
+                    <h3 class="text-lg font-bold text-dark mb-2">معلومات إضافية</h3>
+                    <div class="grid grid-cols-2 gap-4 text-gray-600">
+                      <div>
+                        <p><span class="font-bold">الفئة العمرية:</span> ٥-٩ سنوات</p>
+                        <p><span class="font-bold">نوع المحتوى:</span> تعليمي ترفيهي</p>
+                      </div>
+                      <div>
+                        <p><span class="font-bold">اللغة:</span> العربية</p>
+                        <p><span class="font-bold">الجودة:</span> HD</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div>
+          <!-- Creator Info -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-6 p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center ml-4">
+                <span class="text-2xl font-bold text-primary">س&ل</span>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-dark">سارة ولوز</h3>
+                <p class="text-gray-500">قناة تعليمية للأطفال</p>
+              </div>
+            </div>
+            <p class="text-gray-600 mb-4">
+              نقدم محتوى تعليمي وترفيهي للأطفال من عمر ٣ إلى ٩ سنوات. قصص مصورة، أنشطة، ألعاب تعليمية وغيرها.
+            </p>
+            <a 
+              href="#subscribe"
+              class="w-full block bg-red-600 text-white px-4 py-2 rounded-full text-center hover:bg-red-700 transition"
+            >
+              <i class="fab fa-youtube ml-2"></i>
+              اشترك في القناة
+            </a>
+          </div>
+          
+          <!-- Suggested Videos -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden mb-6">
+            <h3 class="bg-dark/5 p-4 font-bold">فيديوهات مقترحة</h3>
+            <div class="p-4">
+              <div class="space-y-4">
+                <!-- Video Item 1 -->
+                <div class="flex">
+                  <div class="w-24 h-16 bg-primary/10 rounded flex items-center justify-center ml-3 flex-shrink-0">
+                    <i class="fas fa-play-circle text-primary/60"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-dark text-sm">تعلم الحروف العربية مع لوز</h4>
+                    <p class="text-xs text-gray-500">١٠:٣٥ • ٥٥٠٠ مشاهدة</p>
+                  </div>
+                </div>
+                
+                <!-- Video Item 2 -->
+                <div class="flex">
+                  <div class="w-24 h-16 bg-secondary/10 rounded flex items-center justify-center ml-3 flex-shrink-0">
+                    <i class="fas fa-play-circle text-secondary/60"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-dark text-sm">أغنية الأرقام مع سارة</h4>
+                    <p class="text-xs text-gray-500">٨:٤٥ • ٧٨٠٠ مشاهدة</p>
+                  </div>
+                </div>
+                
+                <!-- Video Item 3 -->
+                <div class="flex">
+                  <div class="w-24 h-16 bg-accent/10 rounded flex items-center justify-center ml-3 flex-shrink-0">
+                    <i class="fas fa-play-circle text-accent/60"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-dark text-sm">مغامرة لوز في المزرعة</h4>
+                    <p class="text-xs text-gray-500">١٤:٣٠ • ٢٥٠٠ مشاهدة</p>
+                  </div>
+                </div>
+                
+                <!-- Video Item 4 -->
+                <div class="flex">
+                  <div class="w-24 h-16 bg-dark/10 rounded flex items-center justify-center ml-3 flex-shrink-0">
+                    <i class="fas fa-play-circle text-dark/60"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-dark text-sm">تعلم الألوان مع سارة</h4>
+                    <p class="text-xs text-gray-500">٦:٤٥ • ٤٥٠٠ مشاهدة</p>
+                  </div>
+                </div>
+                
+                <!-- Video Item 5 -->
+                <div class="flex">
+                  <div class="w-24 h-16 bg-primary/10 rounded flex items-center justify-center ml-3 flex-shrink-0">
+                    <i class="fas fa-play-circle text-primary/60"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-dark text-sm">قصة الأرنب والسلحفاة</h4>
+                    <p class="text-xs text-gray-500">٩:٢٠ • ٣٣٠٠ مشاهدة</p>
+                  </div>
+                </div>
+              </div>
+              
+              <a 
+                href="فيديوهات.html"
+                class="mt-4 block text-center text-primary hover:underline"
+              >
+                عرض المزيد
+              </a>
+            </div>
+          </div>
+          
+          <!-- Related Content -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <h3 class="bg-dark/5 p-4 font-bold">محتوى ذو صلة</h3>
+            <div class="p-4">
+              <div class="space-y-4">
+                <a href="#" class="block bg-light p-3 rounded-xl hover:bg-secondary/10 transition">
+                  <div class="flex items-center">
+                    <i class="fas fa-download text-secondary text-lg ml-3"></i>
+                    <div>
+                      <h4 class="font-bold text-dark text-sm">بطاقات تعليمية للنباتات</h4>
+                      <p class="text-xs text-gray-500">تحميل • PDF • ٣.٥ MB</p>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="#" class="block bg-light p-3 rounded-xl hover:bg-primary/10 transition">
+                  <div class="flex items-center">
+                    <i class="fas fa-gamepad text-primary text-lg ml-3"></i>
+                    <div>
+                      <h4 class="font-bold text-dark text-sm">لعبة تعرف على النباتات</h4>
+                      <p class="text-xs text-gray-500">لعبة تعليمية</p>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="#" class="block bg-light p-3 rounded-xl hover:bg-accent/10 transition">
+                  <div class="flex items-center">
+                    <i class="fas fa-book text-accent text-lg ml-3"></i>
+                    <div>
+                      <h4 class="font-bold text-dark text-sm">قصة النباتات السحرية</h4>
+                      <p class="text-xs text-gray-500">قصة مصورة للأطفال</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-10">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- About Column -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">عن سارة ولوز</h3>
+            <p class="text-gray-300 mb-4">
+              موقع تعليمي وترفيهي للأطفال من عمر ٣ إلى ٩ سنوات، يهدف إلى تنمية مهارات الطفل بطريقة ممتعة وتفاعلية.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="index.html" class="text-gray-300 hover:text-white">الرئيسية</a>
+              </li>
+              <li>
+                <a href="index.html#games" class="text-gray-300 hover:text-white">الألعاب</a>
+              </li>
+              <li>
+                <a href="index.html#activities" class="text-gray-300 hover:text-white">الأنشطة</a>
+              </li>
+              <li>
+                <a href="فيديوهات.html" class="text-gray-300 hover:text-white">الفيديوهات</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Customer Service -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">خدمة المستخدمين</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">أسئلة متكررة</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">سياسة الخصوصية</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">شروط الاستخدام</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">اتصل بنا</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">تواصل معنا</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <i class="fas fa-envelope ml-2 text-accent"></i>
+                <a href="mailto:info@saralouze.com" class="text-gray-300 hover:text-white">info@saralouze.com</a>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone ml-2 text-accent"></i>
+                <a href="tel:+966123456789" class="text-gray-300 hover:text-white">+966 12 345 6789</a>
+              </li>
+            </ul>
+            <div class="mt-4">
+              <h4 class="text-lg font-bold mb-2">تابعنا على</h4>
+              <div class="flex space-x-4 space-x-reverse">
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-accent transition">
+                  <i class="fab fa-youtube text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            &copy; ٢٠٢٣ سارة ولوز - جميع الحقوق محفوظة
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("menuButton");
+      const navMenu = document.getElementById("navMenu");
+
+      menuButton.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html> 
