@@ -574,177 +574,75 @@ get_header(); ?>
                                 break;
                                 
                             case 'assessment':
-                                // 1. Load scripts
-                                wp_enqueue_script('sarah-loz-game-framework', get_template_directory_uri() . '/assets/js/games/game-framework.js', array('jquery'), '1.0.0', true);
-                                wp_enqueue_script('sarah-loz-assessment-game', get_template_directory_uri() . '/assets/js/games/assessment-game.js', array('sarah-loz-game-framework'), time(), true);
+                                // 1. Get Settings
+                                $assess_data = get_field('assessment_settings');
                                 
-                                $assessment_settings = get_field('assessment_settings');
-                                $questions = array();
-                                
-                                // 2. Debug: Show raw data at the top
-                                echo '<div style="position: absolute; top: 10px; left: 10px; z-index: 10000; background: white; padding: 10px; border: 1px solid #ccc; display: none;" id="debug-info">';
-                                echo '<h3>Debug Info (F12 to see console)</h3>';
-                                echo '<pre style="max-height: 200px; overflow: auto;">';
-                                echo 'Assessment Settings: ';
-                                print_r($assessment_settings);
-                                echo '</pre>';
-                                echo '</div>';
-                                
-                                // 3. Prepare questions
-                                if (!empty($assessment_settings) && !empty($assessment_settings['questions'])) {
-                                    foreach ($assessment_settings['questions'] as $index => $q_data) {
+                                // 2. Prepare Config
+                                $game_config = array(
+                                    'introAudio' => !empty($assess_data['intro_audio']) ? $assess_data['intro_audio'] : '',
+                                    'questions'  => array(),
+                                    'debugMode'  => true
+                                );
+
+                                // 3. Process Questions
+                                if (!empty($assess_data['questions']) && is_array($assess_data['questions'])) {
+                                    foreach ($assess_data['questions'] as $i => $q) {
                                         
-                                        // Format Answers
-                                        $formatted_answers = array();
-                                        
-                                        // Check if answers is an array before looping
-                                        if (!empty($q_data['answers']) && is_array($q_data['answers'])) {
-                                            foreach ($q_data['answers'] as $a_data) {
-                                                $formatted_answers[] = array(
-                                                    'type'      => !empty($a_data['answer_type']) ? $a_data['answer_type'] : 'text',
-                                                    'text'      => !empty($a_data['text']) ? $a_data['text'] : '',
-                                                    'image_url' => !empty($a_data['image']) ? $a_data['image'] : '',
-                                                    'correct'   => !empty($a_data['correct']) ? true : false
+                                        // Category Logic
+                                        $cat = 'general';
+                                        if (!empty($q['criteria_category'])) { $cat = $q['criteria_category']; }
+                                        elseif (!empty($q['criteria'])) { $cat = $q['criteria']; }
+                                        elseif (!empty($q['category'])) { $cat = $q['category']; }
+
+                                        // Answer Logic
+                                        $answers = array();
+                                        if(!empty($q['answers']) && is_array($q['answers'])){
+                                            foreach($q['answers'] as $a){
+                                                $is_correct_flag = false;
+                                                if (!empty($a['correct'])) { $is_correct_flag = true; } 
+                                                elseif (!empty($a['is_correct'])) { $is_correct_flag = true; }
+
+                                                $answers[] = array(
+                                                    'text'    => !empty($a['text']) ? $a['text'] : '',
+                                                    'correct' => $is_correct_flag
                                                 );
                                             }
                                         }
 
-                                        // REMOVED THE "CONTINUE" BLOCK HERE
-                                        // We now allow questions even if answers are empty, 
-                                        // so the user can see the question text and realize answers are missing.
-
-                                        // Format Question
-                                        $questions[] = array(
-                                            'text'              => !empty($q_data['text']) ? $q_data['text'] : 'سؤال بدون نص',
-                                            'image'             => !empty($q_data['image']) ? $q_data['image'] : '',
-                                            'audio_prompt'      => !empty($q_data['audio_prompt']) ? $q_data['audio_prompt'] : '',
-                                            'criteria_category' => !empty($q_data['criteria_category']) ? $q_data['criteria_category'] : 'general',
-                                            'explanation'       => !empty($q_data['explanation']) ? $q_data['explanation'] : '',
-                                            'answers'           => $formatted_answers
+                                        // Add to Config
+                                        $game_config['questions'][] = array(
+                                            'id'       => $i,
+                                            'text'     => $q['text'],
+                                            'audio'    => !empty($q['audio_prompt']) ? $q['audio_prompt'] : (!empty($q['audio']) ? $q['audio'] : ''),
+                                            'image'    => !empty($q['image']) ? $q['image'] : '',
+                                            'criteria_category' => $cat,
+                                            'answers'  => $answers
                                         );
                                     }
                                 }
-                                
-                                // 4. Show debug message if no questions
-                                if (empty($questions)) {
-                                    echo '<div class="bg-red-100 text-red-800 p-8 text-center rounded-lg m-4">';
-                                    echo '<h3 class="font-bold text-xl mb-2">❌ لا توجد أسئلة متاحة</h3>';
-                                    echo '<p>يرجى التحقق من إعدادات اللعبة في واجهة الإدارة.</p>';
-                                    if (current_user_can('manage_options')) {
-                                        echo '<button onclick="document.getElementById(\'debug-info\').style.display=\'block\'" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">عرض معلومات التصحيح</button>';
-                                    }
-                                    echo '</div>';
+
+                                // 4. Initialize Script (TARGETING THE THEME CONTAINER)
+                                // Note: We use $game_id which your theme created on line 287
+                                ?>
+                                <script src="<?php echo get_template_directory_uri(); ?>/assets/js/games/assessment-game.js?v=<?php echo time(); ?>"></script>
+                                <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Use the ID generated by the theme (e.g., "game-123")
+                                    const containerId = '<?php echo esc_js($game_id); ?>'; 
+                                    const config = <?php echo json_encode($game_config); ?>;
                                     
-                                    // Hide loader
-                                    echo "<script>document.getElementById('{$game_id}-loader').style.display = 'none';</script>";
-                                } else {
-                                    ?>
-                                    <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        console.group('🎮 Assessment Game Debug');
-                                        console.log('Game Container ID:', '<?php echo esc_attr($game_id); ?>');
-                                        console.log('Total Questions Found:', <?php echo count($questions); ?>);
-                                        console.log('Questions Data:', <?php echo json_encode($questions, JSON_UNESCAPED_UNICODE); ?>);
-                                        console.log('Game Options:', {
-                                            width: <?php echo $width; ?>,
-                                            height: <?php echo $height; ?>,
-                                            backgroundColor: '<?php echo $bg_color; ?>',
-                                            autoStart: <?php echo $auto_start ? 'true' : 'false'; ?>,
-                                            timePerQuestion: <?php echo !empty($assessment_settings['time_per_question']) ? intval($assessment_settings['time_per_question']) : 0; ?>
-                                        });
-                                        
-                                        // Create a manual start button
-                                        const gameContainer = document.getElementById('<?php echo esc_attr($game_id); ?>');
-                                        if (gameContainer) {
-                                            // Add a start button if autoStart is false
-                                            <?php if (!$auto_start): ?>
-                                            const startButton = document.createElement('button');
-                                            startButton.innerHTML = '🚀 ابدأ اللعب';
-                                            startButton.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; padding: 15px 30px; background: linear-gradient(45deg, #667eea, #764ba2); color: white; border: none; border-radius: 25px; font-size: 18px; font-weight: bold; cursor: pointer;';
-                                            startButton.onclick = function() {
-                                                startButton.style.display = 'none';
-                                                initializeGame();
-                                            };
-                                            gameContainer.appendChild(startButton);
-                                            <?php endif; ?>
+                                    console.log("🚀 Assessment Game Target:", containerId);
+
+                                    // Wait a tiny bit to ensure DOM is ready
+                                    setTimeout(() => {
+                                        if (typeof AssessmentGame !== 'undefined') {
+                                            const game = new AssessmentGame(containerId, config);
+                                            game.init();
                                         }
-                                        
-                                        <?php if ($auto_start): ?>
-                                        // Auto-start the game
-                                        setTimeout(initializeGame, 500);
-                                        <?php endif; ?>
-                                        
-                                        function initializeGame() {
-                                            try {
-                                                console.log('Initializing AssessmentGame...');
-                                                
-                                                // Initialize the game
-                                                const game = new AssessmentGame('<?php echo esc_attr($game_id); ?>', {
-                                                    width: <?php echo $width; ?>,
-                                                    height: <?php echo $height; ?>,
-                                                    backgroundColor: '<?php echo $bg_color; ?>',
-                                                    showScore: <?php echo $show_score ? 'true' : 'false'; ?>,
-                                                    showTimer: <?php echo $show_timer ? 'true' : 'false'; ?>,
-                                                    autoStart: true, // Force autoStart when manually initialized
-                                                    questions: <?php echo json_encode($questions, JSON_UNESCAPED_UNICODE); ?>,
-                                                    shuffleQuestions: <?php echo !empty($assessment_settings['shuffle_questions']) ? 'true' : 'false'; ?>,
-                                                    shuffleAnswers: false,
-                                                    timePerQuestion: <?php echo !empty($assessment_settings['time_per_question']) ? intval($assessment_settings['time_per_question']) : 0; ?>,
-                                                    showExplanations: true,
-                                                    nextQuestionDelay: 1500,
-                                                    gameId: <?php echo get_the_ID(); ?>,
-                                                    mobileResponsive: true,
-                                                    adaptiveFontSize: true
-                                                });
-                                                
-                                                console.log('AssessmentGame instance created:', game);
-                                                
-                                                // Store reference globally for debugging
-                                                window.currentGame = game;
-                                                
-                                                // Hide loader
-                                                const loader = document.getElementById('<?php echo esc_attr($game_id); ?>-loader');
-                                                if(loader) {
-                                                    loader.style.display = 'none';
-                                                    console.log('Loader hidden.');
-                                                }
-                                                
-                                                // Check if game started properly
-                                                setTimeout(() => {
-                                                    const questionContainer = gameContainer.querySelector('.assessment-question-container');
-                                                    if (!questionContainer) {
-                                                        console.warn('Question container not found after initialization!');
-                                                        showError('تعذر تحميل الأسئلة. يرجى تحديث الصفحة.');
-                                                    } else {
-                                                        console.log('Question container found:', questionContainer);
-                                                        console.log('Game state:', game.gameState);
-                                                    }
-                                                }, 1000);
-                                                
-                                            } catch (e) {
-                                                console.error("Error initializing game:", e);
-                                                showError('حدث خطأ: ' + e.message);
-                                                
-                                                // Hide loader and show error
-                                                const loader = document.getElementById('<?php echo esc_attr($game_id); ?>-loader');
-                                                if(loader) {
-                                                    loader.innerHTML = '<div style="text-align: center; padding: 20px; color: red;"><h3>❌ خطأ</h3><p>' + e.message + '</p></div>';
-                                                }
-                                            }
-                                        }
-                                        
-                                        function showError(message) {
-                                            const errorDiv = document.createElement('div');
-                                            errorDiv.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fee; border: 2px solid #f99; padding: 20px; border-radius: 10px; text-align: center; z-index: 1000;';
-                                            errorDiv.innerHTML = '<h3 style="color: #c00;">⚠️ خطأ</h3><p>' + message + '</p><button onclick="location.reload()" style="margin-top: 10px; padding: 5px 15px; background: #f99; border: none; border-radius: 5px;">إعادة تحميل</button>';
-                                            gameContainer.appendChild(errorDiv);
-                                        }
-                                        
-                                        console.groupEnd();
-                                    });
-                                    </script>
-                                    <?php
-                                }
+                                    }, 100);
+                                });
+                                </script>
+                                <?php
                                 break;
 
                             case 'sorting':

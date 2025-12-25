@@ -1,484 +1,228 @@
-/**
- * Assessment Game - DEBUG VERSION
- */
+console.log('🔌 Phase 10: Theme Integration Loaded');
 
-class AssessmentGame extends GameFramework {
-    constructor(containerId, options = {}) {
-        console.log('🎮 AssessmentGame Constructor Called');
-        console.log('Container ID:', containerId);
-        console.log('Options:', options);
+class AssessmentGame {
+    constructor(containerId, config) {
+        this.container = document.getElementById(containerId);
+        this.config = config;
+        this.currentIndex = 0;
         
-        const gameOptions = Object.assign({
-            questions: [], 
-            shuffleQuestions: false,
-            shuffleAnswers: false,
-            timePerQuestion: 0,
-            showExplanations: true,
-            nextQuestionDelay: 1500,
-            mobileResponsive: true,
-            adaptiveFontSize: true
-        }, options);
+        // Initialize Scores
+        this.scores = { total: 0, listening: 0, vocabulary: 0, grammar: 0, reading: 0, fluency: 0, general: 0 };
+        this.totals = { total: this.config.questions.length, listening: 0, vocabulary: 0, grammar: 0, reading: 0, fluency: 0, general: 0 };
 
-        // Call Parent Constructor
-        super(containerId, gameOptions);
-        
-        console.log('Parent constructor called. State:', this.state);
-
-        // Define Fonts
-        this.defaultFontSizes = {
-            question: 24, answer: 18, progress: 18, explanation: 16
-        };
-
-        // Initialize game state
-        this.gameState = {
-            questions: [],
-            currentQuestion: 0,
-            scores: {},
-            totals: {},
-            questionContainer: null,
-            answered: false,
-            defaultFontSizes: this.defaultFontSizes,
-            currentFontSizes: { ...this.defaultFontSizes }
-        };
-        
-        console.log('Game state initialized:', this.gameState);
-    }
-
-    onGameStart() {
-        console.log('🚀 AssessmentGame.onGameStart() called');
-        console.log('Container:', this.container);
-        console.log('Questions available:', this.options.questions ? this.options.questions.length : 0);
-        
-        this.clearElements();
-        this.gameState.currentQuestion = 0;
-        this.gameState.answered = false;
-        
-        // Prepare questions
-        this.prepareQuestions();
-        console.log('Questions prepared:', this.gameState.questions.length);
-        
-        // Create question container
-        this.gameState.questionContainer = this.createElement('div', {
-            classes: 'assessment-question-container',
-            styles: {
-                width: '100%',
-                height: '100%',
-                padding: this.state.isMobile ? '15px' : '20px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                overflowY: 'auto',
-                boxSizing: 'border-box',
-                backgroundColor: '#ffffff' // Add background to make it visible
-            }
+        // Count Categories
+        this.config.questions.forEach(q => {
+            const cat = (q.criteria_category || 'general').toLowerCase(); 
+            if (this.totals[cat] !== undefined) this.totals[cat]++;
+            else this.totals.general++;
         });
-        
-        console.log('Question container created:', this.gameState.questionContainer);
-        
-        // Add container to game container
-        if (this.container) {
-            this.container.appendChild(this.gameState.questionContainer);
-            console.log('Question container added to game container');
-        } else {
-            console.error('Game container not found!');
-        }
-        
-        // Display first question
-        if (this.gameState.questions.length > 0) {
-            this.displayQuestion(0);
-        } else {
-            this.showNoQuestionsMessage();
-        }
-        
-        this.updateResponsiveLayout();
     }
 
-    prepareQuestions() {
-        console.log('📝 prepareQuestions() called');
-        console.log('Options questions:', this.options.questions);
-        
-        let questions = [...this.options.questions];
-        console.log('Questions array (raw):', questions);
-        
-        if (this.options.shuffleQuestions) {
-            questions = this.shuffleArray(questions);
-        }
-        
-        this.gameState.questions = questions;
-        this.gameState.totals = {};
-        this.gameState.scores = {};
-
-        this.gameState.questions.forEach(q => {
-            const cat = q.criteria_category || 'general';
-            if (!this.gameState.totals[cat]) {
-                this.gameState.totals[cat] = 0;
-                this.gameState.scores[cat] = 0;
-            }
-            this.gameState.totals[cat]++;
-        });
-        
-        console.log('Processed questions:', this.gameState.questions);
-        console.log('Categories totals:', this.gameState.totals);
-    }
-
-    displayQuestion(index) {
-        console.log(`📄 displayQuestion(${index}) called`);
-        
-        // Check if question container exists
-        if (!this.gameState.questionContainer) {
-            console.error('Question container is null! Creating new one...');
-            this.gameState.questionContainer = this.createElement('div', {
-                classes: 'assessment-question-container',
-                styles: {
-                    width: '100%',
-                    height: '100%',
-                    padding: this.state.isMobile ? '15px' : '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    overflowY: 'auto',
-                    boxSizing: 'border-box',
-                    backgroundColor: '#ffffff'
-                }
-            });
-            
-            if (this.container) {
-                this.container.appendChild(this.gameState.questionContainer);
-            }
-        }
-
-        const question = this.gameState.questions[index];
-        console.log('Current question:', question);
-        
-        if (!question) {
-            console.log('No question found at index', index, '- completing game');
-            this.complete();
+    init() {
+        if (!this.container) {
+            console.error("❌ Game Container not found. Looking for:", this.container);
             return;
         }
-        
-        // Clear container
-        this.gameState.questionContainer.innerHTML = '';
-        this.gameState.answered = false;
-        
-        console.log('Displaying question text:', question.text);
-        
-        // Progress indicator
-        this.createElement('div', {
-            parent: this.gameState.questionContainer,
-            text: `سؤال ${index + 1} من ${this.gameState.questions.length}`,
-            styles: {
-                marginBottom: '15px',
-                fontSize: `${this.gameState.currentFontSizes.progress}px`,
-                color: '#666', textAlign: 'center', width: '100%',
-                backgroundColor: '#f0f0f0',
-                padding: '5px',
-                borderRadius: '5px'
-            }
-        });
-        
-        // Question text
-        this.createElement('div', {
-            parent: this.gameState.questionContainer,
-            html: question.text || 'سؤال بدون نص',
-            styles: {
-                fontSize: `${this.gameState.currentFontSizes.question}px`,
-                fontWeight: 'bold', marginBottom: '20px', textAlign: 'center', color: '#333', width: '100%',
-                backgroundColor: '#e8f4fd',
-                padding: '15px',
-                borderRadius: '10px'
-            }
-        });
 
-        // Image
-        if (question.image) {
-            console.log('Adding image:', question.image);
-            this.createElement('img', {
-                parent: this.gameState.questionContainer,
-                attributes: { src: question.image },
-                styles: {
-                    maxWidth: '100%', maxHeight: this.state.isMobile ? '150px' : '200px',
-                    marginBottom: '20px', borderRadius: '8px', objectFit: 'contain',
-                    border: '2px solid #ddd'
-                }
-            });
+        console.log("✅ Container Found. Clearing Theme Loader...");
+
+        // 1. CLEAR CONTAINER (This removes the theme's spinner)
+        this.container.innerHTML = '';
+        
+        // 2. Reset Styles to match theme expectations
+        this.container.style.display = 'block';
+        this.container.style.opacity = '1';
+        this.container.style.visibility = 'visible';
+        this.container.style.height = 'auto';
+        this.container.style.minHeight = '600px';
+
+        // 3. Render
+        this.renderStartScreen();
+    }
+
+    renderStartScreen() {
+        const content = document.createElement('div');
+        content.style.cssText = "display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; min-height:400px; text-align:center; padding: 20px;";
+        
+        let html = `
+            <div style="margin-bottom:30px;">
+                <h1 style="color:#2d3748; font-size: 2rem; margin-bottom: 15px;">📝 اختبار تحديد المستوى</h1>
+                <p style="color:#718096; font-size: 1.1rem;">عدد الأسئلة: <strong>${this.config.questions.length}</strong></p>
+            </div>
+        `;
+
+        if (this.config.introAudio) {
+            html += `
+                <div style="background:#f7fafc; padding:20px; border-radius:15px; margin-bottom:30px; border:1px solid #edf2f7; width:100%; max-width:500px;">
+                    <p style="color:#4a5568; margin-bottom:10px; font-weight:bold;">🔊 تعليمات الاختبار</p>
+                    <audio controls src="${this.config.introAudio}" style="width:100%;"></audio>
+                </div>
+            `;
         }
 
-        // Audio
-        if (question.audio_prompt) {
-            console.log('Adding audio:', question.audio_prompt);
-             this.createElement('audio', {
-                parent: this.gameState.questionContainer,
-                attributes: { controls: 'true', src: question.audio_prompt },
-                styles: { width: '80%', marginBottom: '20px', borderRadius: '30px' }
-            });
+        html += `
+            <button id="btn-start" style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white; border: none; padding: 15px 40px;
+                font-size: 1.2rem; border-radius: 50px; cursor: pointer;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                transition: transform 0.2s;
+            ">ابدأ الاختبار 🚀</button>
+        `;
+
+        content.innerHTML = html;
+        this.container.appendChild(content);
+        
+        document.getElementById('btn-start').onclick = () => this.renderQuestion(0);
+    }
+
+    renderQuestion(index) {
+        if (index >= this.config.questions.length) {
+            this.finishGame();
+            return;
+        }
+        this.currentIndex = index;
+        const q = this.config.questions[index];
+
+        this.container.innerHTML = ''; // Clear previous content
+
+        const content = document.createElement('div');
+        content.style.cssText = "max-width:800px; margin:0 auto; padding:20px; animation: fadeIn 0.5s;";
+        
+        // Header
+        const catSlug = q.criteria_category || 'general';
+        const catName = this.getCategoryName(catSlug);
+        
+        let html = `
+            <div style="display:flex; justify-content:space-between; align-items:center; color:#a0aec0; margin-bottom:20px; font-size:0.9rem;">
+                <span style="font-weight:bold;">السؤال ${index + 1} / ${this.config.questions.length}</span>
+                <span style="background:#edf2f7; padding:6px 15px; border-radius:20px; color:#4a5568; font-weight:bold; font-size:0.85rem;">${catName}</span>
+            </div>
+        `;
+
+        // Content
+        if(q.audio) {
+            html += `<div style="margin-bottom:20px; background:#f7fafc; padding:15px; border-radius:15px; text-align:center;">
+                        <p style="margin-bottom:10px; color:#4a5568; font-weight:bold;">🔊 استمع للنص:</p>
+                        <audio controls autoplay src="${q.audio}" style="width:100%;"></audio>
+                     </div>`;
+        }
+        if(q.image) {
+            html += `<div style="text-align:center; margin-bottom:20px;">
+                        <img src="${q.image}" style="max-height:250px; max-width:100%; border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+                     </div>`;
         }
 
-        // Answers container
-        const answersContainer = this.createElement('div', {
-            parent: this.gameState.questionContainer,
-            styles: {
-                width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '10px',
-                backgroundColor: '#f9f9f9',
-                padding: '15px',
-                borderRadius: '10px'
-            }
+        html += `<h2 style="color:#2d3748; font-size:1.5rem; margin-bottom:30px; line-height:1.5; text-align:center;">${q.text}</h2>`;
+
+        // Answers
+        html += `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:15px;">`;
+        q.answers.forEach((ans, i) => {
+            html += `
+                <button class="ans-btn" data-idx="${i}" style="
+                    padding:15px; background:#fff; border:2px solid #e2e8f0; 
+                    border-radius:15px; font-size:1.1rem; cursor:pointer; 
+                    color:#4a5568; transition:all 0.2s; font-weight:500;
+                    min-height:60px; display:flex; align-items:center; justify-content:center;
+                ">${ans.text}</button>`;
         });
-        
-        let answers = [...question.answers];
-        console.log('Question answers:', answers);
-        
-        if (this.options.shuffleAnswers) {
-            answers = this.shuffleArray(answers);
-        }
+        html += `</div>`;
 
-        if (answers.length === 0) {
-            console.error('No answers for this question!');
-            this.createElement('div', {
-                parent: answersContainer,
-                text: '⚠️ لا توجد إجابات لهذا السؤال',
-                styles: { color: 'red', textAlign: 'center', padding: '10px' }
-            });
-        } else {
-            answers.forEach((answer, i) => {
-                console.log(`Answer ${i}:`, answer);
-                
-                const btnContent = answer.type === 'image' 
-                    ? `<img src="${answer.image_url}" style="height: 50px; object-fit: contain;">` 
-                    : (answer.text || 'إجابة بدون نص');
+        content.innerHTML = html;
+        this.container.appendChild(content);
 
-                const answerButton = this.createElement('button', {
-                    parent: answersContainer,
-                    html: btnContent,
-                    classes: 'assessment-answer-btn',
-                    styles: {
-                        padding: '15px',
-                        fontSize: `${this.gameState.currentFontSizes.answer}px`,
-                        backgroundColor: '#f8f9fa',
-                        border: '2px solid #e9ecef',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s',
-                        width: '100%',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60px'
+        content.querySelectorAll('.ans-btn').forEach(btn => {
+            btn.onclick = () => this.handleAnswer(q, btn);
+        });
+    }
+
+    handleAnswer(q, btn) {
+        if(btn.disabled) return;
+        const allBtns = this.container.querySelectorAll('.ans-btn');
+        allBtns.forEach(b => b.disabled = true);
+
+        const idx = parseInt(btn.dataset.idx);
+        const isCorrect = q.answers[idx].correct;
+        const cat = (q.criteria_category || 'general').toLowerCase();
+
+        btn.style.borderColor = isCorrect ? '#48bb78' : '#f56565';
+        btn.style.backgroundColor = isCorrect ? '#f0fff4' : '#fff5f5';
+        btn.style.color = isCorrect ? '#22543d' : '#822727';
+        
+        if(!isCorrect) {
+            q.answers.forEach((a, i) => {
+                if(a.correct) {
+                    const correctBtn = this.container.querySelector(`.ans-btn[data-idx="${i}"]`);
+                    if(correctBtn) {
+                        correctBtn.style.backgroundColor = '#f0fff4';
+                        correctBtn.style.borderColor = '#48bb78';
                     }
-                });
-
-                answerButton.onclick = () => {
-                    console.log('Answer clicked:', answer.text, 'Correct:', answer.correct);
-                    if (this.gameState.answered) return;
-                    this.handleAnswer(answer.correct, answerButton, answersContainer);
-                };
-            });
-        }
-
-        // Start timer if needed
-        if (this.options.timePerQuestion > 0) {
-            setTimeout(() => {
-                this.startTimer(answersContainer);
-            }, 100);
-        }
-        
-        this.updateResponsiveLayout();
-        
-        console.log('Question display completed');
-    }
-
-    startTimer(container) {
-        console.log('⏰ startTimer() called');
-        
-        // Safety check
-        if (!this.gameState.questionContainer) {
-            console.error('Cannot start timer: questionContainer is null');
-            return;
-        }
-        
-        let timeLeft = this.options.timePerQuestion;
-        
-        const timerBar = this.createElement('div', {
-            parent: this.gameState.questionContainer,
-            styles: {
-                width: '100%', height: '6px', backgroundColor: '#eee', 
-                marginTop: '20px', borderRadius: '3px', overflow: 'hidden'
-            }
-        });
-        
-        const timerFill = this.createElement('div', {
-            parent: timerBar,
-            styles: {
-                width: '100%', height: '100%', backgroundColor: '#4caf50', transition: 'width 1s linear'
-            }
-        });
-
-        this.currentTimer = setInterval(() => {
-            if (this.state.completed || this.gameState.answered) {
-                console.log('Timer stopped - game completed or answered');
-                clearInterval(this.currentTimer);
-                return;
-            }
-            timeLeft--;
-            timerFill.style.width = `${(timeLeft / this.options.timePerQuestion) * 100}%`;
-            
-            if (timeLeft <= 0) {
-                console.log('Time expired');
-                clearInterval(this.currentTimer);
-                if (!this.gameState.answered) {
-                    this.handleTimeout(container);
-                }
-            }
-        }, 1000);
-        
-        console.log('Timer started with', timeLeft, 'seconds');
-    }
-
-    handleAnswer(isCorrect, selectedBtn, container) {
-        console.log('✅ handleAnswer() called - Correct:', isCorrect);
-        this.gameState.answered = true;
-        if(this.currentTimer) {
-            clearInterval(this.currentTimer);
-            console.log('Timer cleared');
-        }
-
-        const buttons = container.querySelectorAll('button');
-        buttons.forEach(btn => {
-            btn.style.pointerEvents = 'none';
-            if (btn === selectedBtn) {
-                btn.style.backgroundColor = isCorrect ? '#d4edda' : '#f8d7da';
-                btn.style.borderColor = isCorrect ? '#c3e6cb' : '#f5c6cb';
-            }
-        });
-
-        if (isCorrect) {
-            const currentQ = this.gameState.questions[this.gameState.currentQuestion];
-            const category = currentQ.criteria_category || 'general';
-            if (this.gameState.scores[category] !== undefined) {
-                this.gameState.scores[category]++;
-                console.log('Score updated for category', category, ':', this.gameState.scores[category]);
-            }
-        }
-        this.showExplanation();
-        setTimeout(() => {
-            this.gameState.currentQuestion++;
-            this.displayQuestion(this.gameState.currentQuestion);
-        }, this.options.nextQuestionDelay);
-    }
-
-    handleTimeout(container) {
-        console.log('⏱️ handleTimeout() called');
-        this.gameState.answered = true;
-        const buttons = container.querySelectorAll('button');
-        buttons.forEach(btn => btn.style.pointerEvents = 'none');
-
-        this.createElement('div', {
-            parent: this.gameState.questionContainer,
-            text: 'انتهى الوقت!',
-            styles: { color: 'red', marginTop: '10px', fontWeight: 'bold' }
-        });
-        this.showExplanation();
-        setTimeout(() => {
-            this.gameState.currentQuestion++;
-            this.displayQuestion(this.gameState.currentQuestion);
-        }, this.options.nextQuestionDelay);
-    }
-
-    showExplanation() {
-        const currentQuestion = this.gameState.questions[this.gameState.currentQuestion];
-        console.log('💡 showExplanation() - Question has explanation:', !!currentQuestion.explanation);
-        if (this.options.showExplanations && currentQuestion.explanation) {
-            this.createElement('div', {
-                parent: this.gameState.questionContainer,
-                html: currentQuestion.explanation,
-                styles: {
-                    marginTop: '15px', padding: '10px', backgroundColor: '#e2e3e5',
-                    borderRadius: '5px', fontSize: '14px', color: '#383d41'
                 }
             });
         }
-    }
 
-    showNoQuestionsMessage() {
-        console.log('Showing "no questions" message');
-        if (this.gameState.questionContainer) {
-            this.gameState.questionContainer.innerHTML = '';
-            this.createElement('div', {
-                parent: this.gameState.questionContainer,
-                html: '<div style="text-align: center; padding: 40px; color: #666;"><h3>⚠️ لا توجد أسئلة متاحة</h3><p>يرجى التحقق من إعدادات اللعبة.</p></div>',
-                styles: {
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }
-            });
+        if(isCorrect) {
+            this.scores.total++;
+            if(this.scores[cat] !== undefined) this.scores[cat]++;
+            else this.scores.general++;
         }
+
+        setTimeout(() => this.renderQuestion(this.currentIndex + 1), 2000);
     }
 
-    complete() {
-        console.log('Game complete! Showing results...');
-        let reportHTML = '<div style="width:100%; max-width:400px; margin:20px auto; text-align:right; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">';
-        reportHTML += '<h3 style="text-align:center; margin-bottom:15px; color: #333;">🎉 تقرير النتائج</h3>';
+    finishGame() {
+        this.container.innerHTML = '';
+        const totalPercent = Math.round((this.scores.total / this.totals.total) * 100);
         
-        let hasResults = false;
-        for (const [category, score] of Object.entries(this.gameState.scores)) {
-            const total = this.gameState.totals[category];
-            if (total > 0) {
-                hasResults = true;
-                const percent = total === 0 ? 0 : Math.round((score / total) * 100);
-                const catName = this.getCategoryName(category);
-                reportHTML += `
+        let html = `
+            <div style="padding:30px 0; text-align:center;">
+                <h1 style="color:#2d3748; margin-bottom:10px;">نتائج الاختبار</h1>
+                <div style="font-size:4rem; font-weight:800; color:#667eea; margin:20px 0;">%${totalPercent}</div>
+                <div style="background:#f7fafc; border-radius:15px; padding:25px; text-align:right; max-width:600px; margin:0 auto; border:1px solid #edf2f7;">
+                    <h3 style="border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:20px; color:#4a5568; font-weight:bold;">📊 تفاصيل المهارات:</h3>
+        `;
+
+        const categories = ['listening', 'vocabulary', 'grammar', 'reading', 'fluency', 'general'];
+        let hasDetails = false;
+
+        categories.forEach(cat => {
+            if (this.totals[cat] > 0) {
+                hasDetails = true;
+                const percent = Math.round((this.scores[cat] / this.totals[cat]) * 100);
+                const color = percent < 50 ? '#f56565' : (percent < 80 ? '#ecc94b' : '#48bb78');
+                
+                html += `
                     <div style="margin-bottom:15px;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                            <strong>${catName}</strong>
-                            <span>${score}/${total} (${percent}%)</span>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-weight:bold; color:#2d3748;">
+                            <span>${this.getCategoryName(cat)}</span>
+                            <span>${this.scores[cat]} / ${this.totals[cat]}</span>
                         </div>
-                        <div style="background:#eee; height:10px; border-radius:5px; overflow:hidden;">
-                            <div style="background:#4caf50; width:${percent}%; height:100%;"></div>
+                        <div style="background:#e2e8f0; height:10px; border-radius:5px; overflow:hidden;">
+                            <div style="width:${percent}%; background:${color}; height:100%;"></div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
+        });
+
+        if (!hasDetails) {
+            html += `<p style="text-align:center; color:#a0aec0;">⚠️ لا توجد تفاصيل (No Data)</p>`;
         }
+
+        html += `</div>
+                <button onclick="location.reload()" style="margin-top:30px; padding:12px 30px; background:#4a5568; color:white; border:none; border-radius:50px; cursor:pointer;">🔄 إعادة الاختبار</button>
+            </div>`;
         
-        if (!hasResults) {
-            reportHTML += '<p style="text-align:center; color: #666;">لم يتم تسجيل أي نتائج.</p>';
-        }
-        
-        reportHTML += '</div>';
-        
-        super.complete(0);
-        const contentBox = this.overlay.querySelector('.game-content') || this.overlay;
-        const resultsDiv = document.createElement('div');
-        resultsDiv.innerHTML = reportHTML;
-        const btn = contentBox.querySelector('button');
-        if (btn) contentBox.insertBefore(resultsDiv, btn);
-        else contentBox.appendChild(resultsDiv);
+        this.container.innerHTML = html;
     }
 
     getCategoryName(slug) {
-        const names = {
-            'listening': 'الاستماع', 'vocabulary': 'المفردات', 'grammar': 'القواعد', 'reading': 'القراءة', 'general': 'عام'
-        };
-        return names[slug] || slug;
-    }
-
-    updateResponsiveLayout() {
-        if (!this.gameState) return;
-        const width = window.innerWidth;
-        this.state.isMobile = width < 768;
-        let scale = 1;
-        if (width < 480) scale = 0.8;
-        const defaults = this.gameState.defaultFontSizes || { question: 24, answer: 18, progress: 18, explanation: 16 };
-        this.gameState.currentFontSizes = {
-            question: Math.max(16, defaults.question * scale),
-            answer: Math.max(14, defaults.answer * scale),
-            progress: Math.max(12, defaults.progress * scale),
-            explanation: Math.max(12, defaults.explanation * scale)
-        };
-    }
-
-    shuffleArray(array) {
-        return array.sort(() => Math.random() - 0.5);
+        if (!slug) return 'عام';
+        const s = slug.toString().toLowerCase().trim();
+        const names = { 'listening': '👂 الاستماع', 'vocabulary': '📖 المفردات', 'grammar': '✍️ القواعد', 'reading': '📚 القراءة', 'fluency': '🗣️ الطلاقة', 'general': 'عام' };
+        return names[s] || names[slug] || s;
     }
 }
+
+const style = document.createElement('style');
+style.innerHTML = `@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }`;
+document.head.appendChild(style);

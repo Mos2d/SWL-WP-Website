@@ -22,6 +22,7 @@ wp-includes/
 wp-config.php
 
 # Ignore Uploads (Too big for Git)
+wp-content/plugins/all-in-one-wp-migration/storage/
 wp-content/uploads/
 wp-content/cache/
 wp-content/backups/

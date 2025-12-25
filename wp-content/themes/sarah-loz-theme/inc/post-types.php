@@ -1215,7 +1215,7 @@ function sarah_loz_register_acf_fields() {
             // Assessment Game Settings (NEW)
             array(
                 'key' => 'field_assessment_settings',
-                'label' => 'Assessment Settings',
+                'label' => 'Assessment Exam Settings',
                 'name' => 'assessment_settings',
                 'type' => 'group',
                 'conditional_logic' => array(
@@ -1234,35 +1234,29 @@ function sarah_loz_register_acf_fields() {
                 ),
                 'layout' => 'block',
                 'sub_fields' => array(
-                    // Game Options
+                    // 1. Global Exam Settings
                     array(
-                        'key' => 'field_assessment_time',
-                        'label' => 'Time Per Question (seconds)',
-                        'name' => 'time_per_question',
-                        'type' => 'number',
-                        'default_value' => 0,
-                        'instructions' => 'Set to 0 for no time limit',
-                    ),
-                    array(
-                        'key' => 'field_assessment_shuffle',
-                        'label' => 'Shuffle Questions',
-                        'name' => 'shuffle_questions',
-                        'type' => 'true_false',
-                        'ui' => 1,
-                        'default_value' => 0,
+                        'key' => 'field_assess_intro_audio',
+                        'label' => 'Exam Instructions Audio',
+                        'name' => 'intro_audio',
+                        'type' => 'file',
+                        'return_format' => 'url',
+                        'mime_types' => 'mp3,wav,m4a',
+                        'instructions' => 'Upload the general instructions audio (e.g., "Listen and Answer")',
                     ),
                     
-                    // The Questions Repeater
+                    // 2. The Questions Loop
                     array(
-                        'key' => 'field_assessment_questions',
-                        'label' => 'Questions',
+                        'key' => 'field_assess_questions',
+                        'label' => 'Exam Questions',
                         'name' => 'questions',
                         'type' => 'repeater',
                         'layout' => 'block',
                         'button_label' => 'Add Question',
                         'sub_fields' => array(
+                            // Question Content
                             array(
-                                'key' => 'field_assessment_q_text',
+                                'key' => 'field_q_text',
                                 'label' => 'Question Text',
                                 'name' => 'text',
                                 'type' => 'textarea',
@@ -1270,102 +1264,58 @@ function sarah_loz_register_acf_fields() {
                                 'required' => 1,
                             ),
                             array(
-                                'key' => 'field_assessment_q_audio',
-                                'label' => 'Audio Prompt',
-                                'name' => 'audio_prompt',
+                                'key' => 'field_q_audio',
+                                'label' => 'Question Audio (Listening Task)',
+                                'name' => 'audio',
                                 'type' => 'file',
                                 'return_format' => 'url',
-                                'library' => 'all',
-                                'mime_types' => 'mp3,wav,ogg',
-                                'instructions' => 'Upload audio for listening questions',
+                                'mime_types' => 'mp3,wav,m4a',
+                                'instructions' => 'Upload the story or sentence for this question (e.g., The "My Family" text).',
                             ),
                             array(
-                                'key' => 'field_assessment_q_image',
+                                'key' => 'field_q_image',
                                 'label' => 'Question Image',
                                 'name' => 'image',
                                 'type' => 'image',
                                 'return_format' => 'url',
-                                'preview_size' => 'thumbnail',
-                            ),
-                            array(
-                                'key' => 'field_assessment_q_category',
-                                'label' => 'Criteria Category',
-                                'name' => 'criteria_category',
-                                'type' => 'select',
-                                'choices' => array(
-                                    'general' => 'General (عام)',
-                                    'listening' => 'Listening (الاستماع)',
-                                    'vocabulary' => 'Vocabulary (المفردات)',
-                                    'grammar' => 'Grammar (القواعد)',
-                                    'reading' => 'Reading (القراءة)',
-                                ),
-                                'default_value' => 'general',
-                            ),
-                            array(
-                                'key' => 'field_assessment_q_explanation',
-                                'label' => 'Explanation',
-                                'name' => 'explanation',
-                                'type' => 'textarea',
-                                'rows' => 2,
-                                'instructions' => 'Shown after answering (optional)',
+                                'preview_size' => 'medium',
+                                'instructions' => 'For "Describe the picture" tasks.',
                             ),
                             
-                            // Answers Repeater
+                            // Scoring Criteria (Based on your Rubric)
                             array(
-                                'key' => 'field_assessment_answers',
+                                'key' => 'field_q_criteria',
+                                'label' => 'Scoring Criteria',
+                                'name' => 'criteria',
+                                'type' => 'select',
+                                'choices' => array(
+                                    'listening' => 'Listening Comprehension (الاستماع)',
+                                    'vocabulary' => 'Vocabulary (المفردات)',
+                                    'grammar' => 'Grammar/Accuracy (الدقة اللغوية)',
+                                    'fluency' => 'Fluency (الطلاقة)',
+                                ),
+                                'default_value' => 'listening',
+                            ),
+
+                            // Answers
+                            array(
+                                'key' => 'field_q_answers',
                                 'label' => 'Answers',
                                 'name' => 'answers',
                                 'type' => 'repeater',
                                 'layout' => 'table',
-                                'button_label' => 'Add Answer',
-                                'min' => 2,
+                                'min' => 1, 
                                 'sub_fields' => array(
                                     array(
-                                        'key' => 'field_assessment_a_type',
-                                        'label' => 'Type',
-                                        'name' => 'answer_type',
-                                        'type' => 'select',
-                                        'choices' => array(
-                                            'text' => 'Text',
-                                            'image' => 'Image',
-                                        ),
-                                        'default_value' => 'text',
-                                    ),
-                                    array(
-                                        'key' => 'field_assessment_a_text',
-                                        'label' => 'Text',
+                                        'key' => 'field_a_text',
+                                        'label' => 'Answer Text',
                                         'name' => 'text',
                                         'type' => 'text',
-                                        'conditional_logic' => array(
-                                            array(
-                                                array(
-                                                    'field' => 'field_assessment_a_type',
-                                                    'operator' => '==',
-                                                    'value' => 'text',
-                                                ),
-                                            ),
-                                        ),
                                     ),
                                     array(
-                                        'key' => 'field_assessment_a_image',
-                                        'label' => 'Image',
-                                        'name' => 'image',
-                                        'type' => 'image',
-                                        'return_format' => 'url',
-                                        'conditional_logic' => array(
-                                            array(
-                                                array(
-                                                    'field' => 'field_assessment_a_type',
-                                                    'operator' => '==',
-                                                    'value' => 'image',
-                                                ),
-                                            ),
-                                        ),
-                                    ),
-                                    array(
-                                        'key' => 'field_assessment_a_correct',
+                                        'key' => 'field_a_is_correct',
                                         'label' => 'Correct?',
-                                        'name' => 'correct',
+                                        'name' => 'is_correct',
                                         'type' => 'true_false',
                                         'ui' => 1,
                                     ),
