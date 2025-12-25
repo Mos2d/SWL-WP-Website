@@ -160,6 +160,15 @@ $child_age = get_user_meta($current_user->ID, 'child_age', true);
                     <p class="text-gray-600">فيديو</p>
                 </div>
             </div>
+
+            <!-- Exam Results -->
+
+            <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+                <a href="<?php echo home_url('/exam-results'); ?>" class="inline-flex items-center justify-center bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transition-colors shadow-md text-lg font-bold">
+                    <i class="fas fa-chart-bar ml-2"></i>
+                    عرض سجل نتائج الاختبارات (My Exams)
+                </a>
+            </div>
         </div>
     </div>
 </div>
