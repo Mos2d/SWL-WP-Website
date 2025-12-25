@@ -223,6 +223,7 @@ function sarah_loz_register_acf_fields() {
                     'matching' => 'Matching Game',
                     'word_search' => 'Word Search Game',
                     'audio_matching' => 'Audio Matching Game',
+                    'assessment' => 'Assessment Game',
                 ),
                 'conditional_logic' => array(
                     array(
@@ -1203,6 +1204,170 @@ function sarah_loz_register_acf_fields() {
                                         'wrapper' => array(
                                             'width' => '25',
                                         ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+
+            // Assessment Game Settings (NEW)
+            array(
+                'key' => 'field_assessment_settings',
+                'label' => 'Assessment Settings',
+                'name' => 'assessment_settings',
+                'type' => 'group',
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_game_type',
+                            'operator' => '==',
+                            'value' => 'interactive',
+                        ),
+                        array(
+                            'field' => 'field_interactive_game_type',
+                            'operator' => '==',
+                            'value' => 'assessment',
+                        ),
+                    ),
+                ),
+                'layout' => 'block',
+                'sub_fields' => array(
+                    // Game Options
+                    array(
+                        'key' => 'field_assessment_time',
+                        'label' => 'Time Per Question (seconds)',
+                        'name' => 'time_per_question',
+                        'type' => 'number',
+                        'default_value' => 0,
+                        'instructions' => 'Set to 0 for no time limit',
+                    ),
+                    array(
+                        'key' => 'field_assessment_shuffle',
+                        'label' => 'Shuffle Questions',
+                        'name' => 'shuffle_questions',
+                        'type' => 'true_false',
+                        'ui' => 1,
+                        'default_value' => 0,
+                    ),
+                    
+                    // The Questions Repeater
+                    array(
+                        'key' => 'field_assessment_questions',
+                        'label' => 'Questions',
+                        'name' => 'questions',
+                        'type' => 'repeater',
+                        'layout' => 'block',
+                        'button_label' => 'Add Question',
+                        'sub_fields' => array(
+                            array(
+                                'key' => 'field_assessment_q_text',
+                                'label' => 'Question Text',
+                                'name' => 'text',
+                                'type' => 'textarea',
+                                'rows' => 2,
+                                'required' => 1,
+                            ),
+                            array(
+                                'key' => 'field_assessment_q_audio',
+                                'label' => 'Audio Prompt',
+                                'name' => 'audio_prompt',
+                                'type' => 'file',
+                                'return_format' => 'url',
+                                'library' => 'all',
+                                'mime_types' => 'mp3,wav,ogg',
+                                'instructions' => 'Upload audio for listening questions',
+                            ),
+                            array(
+                                'key' => 'field_assessment_q_image',
+                                'label' => 'Question Image',
+                                'name' => 'image',
+                                'type' => 'image',
+                                'return_format' => 'url',
+                                'preview_size' => 'thumbnail',
+                            ),
+                            array(
+                                'key' => 'field_assessment_q_category',
+                                'label' => 'Criteria Category',
+                                'name' => 'criteria_category',
+                                'type' => 'select',
+                                'choices' => array(
+                                    'general' => 'General (عام)',
+                                    'listening' => 'Listening (الاستماع)',
+                                    'vocabulary' => 'Vocabulary (المفردات)',
+                                    'grammar' => 'Grammar (القواعد)',
+                                    'reading' => 'Reading (القراءة)',
+                                ),
+                                'default_value' => 'general',
+                            ),
+                            array(
+                                'key' => 'field_assessment_q_explanation',
+                                'label' => 'Explanation',
+                                'name' => 'explanation',
+                                'type' => 'textarea',
+                                'rows' => 2,
+                                'instructions' => 'Shown after answering (optional)',
+                            ),
+                            
+                            // Answers Repeater
+                            array(
+                                'key' => 'field_assessment_answers',
+                                'label' => 'Answers',
+                                'name' => 'answers',
+                                'type' => 'repeater',
+                                'layout' => 'table',
+                                'button_label' => 'Add Answer',
+                                'min' => 2,
+                                'sub_fields' => array(
+                                    array(
+                                        'key' => 'field_assessment_a_type',
+                                        'label' => 'Type',
+                                        'name' => 'answer_type',
+                                        'type' => 'select',
+                                        'choices' => array(
+                                            'text' => 'Text',
+                                            'image' => 'Image',
+                                        ),
+                                        'default_value' => 'text',
+                                    ),
+                                    array(
+                                        'key' => 'field_assessment_a_text',
+                                        'label' => 'Text',
+                                        'name' => 'text',
+                                        'type' => 'text',
+                                        'conditional_logic' => array(
+                                            array(
+                                                array(
+                                                    'field' => 'field_assessment_a_type',
+                                                    'operator' => '==',
+                                                    'value' => 'text',
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    array(
+                                        'key' => 'field_assessment_a_image',
+                                        'label' => 'Image',
+                                        'name' => 'image',
+                                        'type' => 'image',
+                                        'return_format' => 'url',
+                                        'conditional_logic' => array(
+                                            array(
+                                                array(
+                                                    'field' => 'field_assessment_a_type',
+                                                    'operator' => '==',
+                                                    'value' => 'image',
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    array(
+                                        'key' => 'field_assessment_a_correct',
+                                        'label' => 'Correct?',
+                                        'name' => 'correct',
+                                        'type' => 'true_false',
+                                        'ui' => 1,
                                     ),
                                 ),
                             ),
