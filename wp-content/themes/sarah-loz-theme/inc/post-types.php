@@ -1273,6 +1273,15 @@ function sarah_loz_register_acf_fields() {
                                 'instructions' => 'Upload the story or sentence for this question (e.g., The "My Family" text).',
                             ),
                             array(
+                                'key' => 'field_q_click_audio',
+                                'label' => 'Question Click Audio',
+                                'name' => 'click_audio', // Key to access in JS: q.click_audio
+                                'type' => 'file',
+                                'return_format' => 'url',
+                                'mime_types' => 'mp3,wav,m4a',
+                                'instructions' => 'Audio to play when the student clicks the question text or image.',
+                            ),
+                            array(
                                 'key' => 'field_q_image',
                                 'label' => 'Question Image',
                                 'name' => 'image',
@@ -1311,6 +1320,24 @@ function sarah_loz_register_acf_fields() {
                                         'label' => 'Answer Text',
                                         'name' => 'text',
                                         'type' => 'text',
+                                    ),
+                                    array(
+                                        'key' => 'field_a_image',
+                                        'label' => 'Answer Image',
+                                        'name' => 'image',
+                                        'type' => 'image',
+                                        'return_format' => 'url',
+                                        'preview_size' => 'thumbnail',
+                                        'instructions' => 'Optional: Add an image for this answer',
+                                    ),
+                                    array(
+                                        'key' => 'field_a_audio',
+                                        'label' => 'Answer Audio',
+                                        'name' => 'audio', // Key to access in JS: ans.audio
+                                        'type' => 'file',
+                                        'return_format' => 'url',
+                                        'mime_types' => 'mp3,wav,m4a',
+                                        'instructions' => 'Audio to play when this answer is selected.',
                                     ),
                                     array(
                                         'key' => 'field_a_is_correct',

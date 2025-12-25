@@ -1,4 +1,4 @@
-console.log('🔌 Phase 13: Robust Scoring Fix Loaded');
+console.log('🔌 Phase 15: Space-Between, Images & Fast Transitions');
 
 class AssessmentGame {
     constructor(containerId, config) {
@@ -11,25 +11,18 @@ class AssessmentGame {
         this.scores = { total: 0 };
         this.totals = { total: this.config.questions.length };
         
-        // 2. Scan questions to build the "Totals" (Denominators)
+        // 2. Scan questions to build the "Totals"
         this.config.questions.forEach((q, index) => {
             const cat = this.normalizeCategory(q.criteria_category);
             
-            // Initialize this category if new
             if (this.totals[cat] === undefined) {
                 this.totals[cat] = 0;
                 this.scores[cat] = 0;
             }
             this.totals[cat]++;
-            
-            // Debug Log to prove we see the categories
-            console.log(`Question ${index + 1}: Category detected as "[${cat}]"`);
         });
-
-        console.log("📊 Scoreboard Ready:", this.totals);
     }
 
-    // Helper to ensure category names are ALWAYS the same
     normalizeCategory(raw) {
         if (!raw) return 'general';
         return raw.toString().toLowerCase().trim();
@@ -41,7 +34,9 @@ class AssessmentGame {
         // Reset Container
         this.container.innerHTML = '';
         this.container.style.display = 'block';
-        this.container.style.minHeight = '600px';
+        // Ensure container has height for vertical distribution
+        this.container.style.minHeight = '650px'; 
+        this.container.style.height = '100%'; 
 
         // Remove old loaders
         const oldLoader = document.getElementById('game-loader');
@@ -53,7 +48,8 @@ class AssessmentGame {
 
     renderStartScreen() {
         const content = document.createElement('div');
-        content.style.cssText = "display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; min-height:400px; text-align:center; padding: 20px;";
+        // Center content vertically and horizontally
+        content.style.cssText = "display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; height:100%; text-align:center; padding: 20px;";
         
         let html = `
             <div style="margin-bottom:30px;">
@@ -85,7 +81,6 @@ class AssessmentGame {
         this.container.appendChild(content);
         
         document.getElementById('btn-start').onclick = () => {
-            // Reset scores cleanly
             this.scores = { total: 0 };
             for(let key in this.totals) {
                 if(key !== 'total') this.scores[key] = 0;
@@ -103,67 +98,126 @@ class AssessmentGame {
         this.currentIndex = index;
         const q = this.config.questions[index];
 
+        // --- DEBUGGING: Check what data we actually have ---
+        console.log(`Question ${index + 1} Data:`, q);
+        console.log("Click Audio URL:", q.click_audio);
+        // --------------------------------------------------
+
         this.container.innerHTML = ''; 
 
         const content = document.createElement('div');
-        content.style.cssText = "max-width:800px; margin:0 auto; padding:20px; animation: fadeIn 0.5s;";
+        content.style.cssText = "display:flex; flex-direction:column; justify-content:space-between; min-height:600px; height:100%; max-width:900px; margin:0 auto; padding:20px 0; animation: fadeIn 0.3s;";
         
-        // Recalculate category safely
         const catSlug = this.normalizeCategory(q.criteria_category);
         const catName = this.getCategoryName(catSlug);
         
+        // --- TOP: Header ---
         let html = `
-            <div style="display:flex; justify-content:space-between; align-items:center; color:#a0aec0; margin-bottom:20px; font-size:0.9rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; color:#a0aec0; margin-bottom:10px; font-size:0.9rem;">
                 <span style="font-weight:bold;">السؤال ${index + 1} / ${this.config.questions.length}</span>
                 <span style="background:#edf2f7; padding:6px 15px; border-radius:20px; color:#4a5568; font-weight:bold; font-size:0.85rem;">${catName}</span>
             </div>
         `;
 
+        // --- MIDDLE: Content ---
+        html += `<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin: 10px 0;">`;
+        
+        // 1. Standard Audio Player
         if(q.audio) {
-            html += `<div style="margin-bottom:20px; background:#f7fafc; padding:15px; border-radius:15px; text-align:center;">
+            html += `<div style="margin-bottom:20px; background:#f7fafc; padding:15px; border-radius:15px; width:100%; max-width:400px;">
                         <p style="margin-bottom:10px; color:#4a5568; font-weight:bold;">🔊 استمع للنص:</p>
                         <audio controls autoplay src="${q.audio}" style="width:100%;"></audio>
                      </div>`;
         }
+        
+        // 2. Question Image (ID added for safe binding)
         if(q.image) {
-            html += `<div style="text-align:center; margin-bottom:20px;">
-                        <img src="${q.image}" style="max-height:250px; max-width:100%; border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+            const cursorStyle = q.click_audio ? 'cursor:pointer; transform:scale(1); transition:transform 0.2s;' : '';
+            html += `<div style="margin-bottom:20px; width:100%; text-align:center;">
+                        <img id="q-interaction-img" 
+                             src="${q.image}" 
+                             onmouseover="this.style.transform='scale(1.02)'" 
+                             onmouseout="this.style.transform='scale(1)'"
+                             style="max-height:280px; max-width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); display:inline-block; ${cursorStyle}">
                      </div>`;
         }
 
-        html += `<h2 style="color:#2d3748; font-size:1.5rem; margin-bottom:30px; line-height:1.5; text-align:center;">${q.text}</h2>`;
+        // 3. Question Text (ID added for safe binding)
+        const textCursor = q.click_audio ? 'cursor:pointer; color:#2b6cb0; transition:color 0.2s;' : 'color:#2d3748;';
+        html += `<h2 id="q-interaction-text" 
+                     style="${textCursor} font-size:1.8rem; line-height:1.4; margin-top:10px;">
+                     ${q.text} ${q.click_audio ? '🔊' : ''}
+                 </h2>`;
+                 
+        html += `</div>`; // End Middle
 
-        html += `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:15px;">`;
+        // --- BOTTOM: Answers ---
+        html += `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:15px; width:100%;">`;
         q.answers.forEach((ans, i) => {
-            html += `
-                <button class="ans-btn" data-idx="${i}" style="
-                    padding:15px; background:#fff; border:2px solid #e2e8f0; 
-                    border-radius:15px; font-size:1.1rem; cursor:pointer; 
-                    color:#4a5568; transition:all 0.2s; font-weight:500;
-                    min-height:60px; display:flex; align-items:center; justify-content:center;
-                ">${ans.text}</button>`;
+            let innerContent = '';
+            let btnStyle = "padding:15px; background:#fff; border:2px solid #e2e8f0; border-radius:15px; font-size:1.1rem; cursor:pointer; color:#4a5568; transition:all 0.2s; font-weight:500; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;";
+            
+            if(ans.image && ans.image.length > 5) {
+                innerContent += `<img src="${ans.image}" style="height:120px; width:auto; object-fit:contain; margin-bottom:10px; border-radius:8px;">`;
+                btnStyle += " min-height:160px;"; 
+            } else {
+                btnStyle += " min-height:80px;"; 
+            }
+            if(ans.text) innerContent += `<span>${ans.text}</span>`;
+            
+            html += `<button class="ans-btn" data-idx="${i}" style="${btnStyle}">${innerContent}</button>`;
         });
         html += `</div>`;
 
         content.innerHTML = html;
         this.container.appendChild(content);
 
+        // --- SAFE EVENT LISTENERS (The Fix) ---
+        
+        // 1. Play Question Audio Helper
+        const playQAudio = () => {
+            if (q.click_audio) {
+                console.log("Playing Click Audio:", q.click_audio);
+                new Audio(q.click_audio).play().catch(e => console.error("Audio Error:", e));
+            } else {
+                console.log("No click_audio URL found for this question.");
+            }
+        };
+
+        // 2. Bind to Image
+        const imgEl = document.getElementById('q-interaction-img');
+        if(imgEl && q.click_audio) {
+            imgEl.addEventListener('click', playQAudio);
+        }
+
+        // 3. Bind to Text
+        const textEl = document.getElementById('q-interaction-text');
+        if(textEl && q.click_audio) {
+            textEl.addEventListener('click', playQAudio);
+        }
+
+        // 4. Bind to Answers
         content.querySelectorAll('.ans-btn').forEach(btn => {
-            btn.onclick = () => this.handleAnswer(q, btn);
+            btn.onclick = () => {
+                const ans = q.answers[btn.dataset.idx];
+                // Play Answer Audio
+                if(ans.audio) {
+                    console.log("Playing Answer Audio:", ans.audio);
+                    new Audio(ans.audio).play().catch(e => console.error("Answer Audio Error:", e));
+                }
+                this.handleAnswer(q, btn);
+            };
         });
     }
 
     handleAnswer(q, btn) {
         if(btn.disabled) return;
         
-        // Lock UI
         const allBtns = this.container.querySelectorAll('.ans-btn');
         allBtns.forEach(b => b.disabled = true);
 
         const idx = parseInt(btn.dataset.idx);
         const isCorrect = q.answers[idx].correct;
-        
-        // THE FIX: Re-calculate category right here to be 100% sure
         const cat = this.normalizeCategory(q.criteria_category);
 
         btn.style.borderColor = isCorrect ? '#48bb78' : '#f56565';
@@ -182,27 +236,22 @@ class AssessmentGame {
             });
         }
 
-        // SCORING LOGIC
         if(isCorrect) {
-            console.log(`✅ Correct! Adding point to: [${cat}]`);
             this.scores.total++;
-            
             if(this.scores[cat] !== undefined) {
                 this.scores[cat]++;
             } else {
-                console.warn(`⚠️ Warning: Category [${cat}] not found in scoreboard! Adding to 'general'.`);
                 if(this.scores.general === undefined) this.scores.general = 0;
                 this.scores.general++;
             }
         }
 
-        setTimeout(() => this.renderQuestion(this.currentIndex + 1), 2000);
+        // FIX 3: Super Fast Transition (500ms)
+        setTimeout(() => this.renderQuestion(this.currentIndex + 1), 500);
     }
 
     finishGame() {
         this.container.innerHTML = '';
-        
-        // Save
         this.saveProgress();
 
         const totalPercent = Math.round((this.scores.total / this.totals.total) * 100);
@@ -217,8 +266,6 @@ class AssessmentGame {
                     <h3 style="border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:20px; color:#4a5568; font-weight:bold;">📊 تفاصيل المهارات:</h3>
         `;
 
-        // Generate Report
-        // Iterate through TOTALS to find which categories exist
         let hasDetails = false;
         
         for (const [cat, totalCount] of Object.entries(this.totals)) {
@@ -247,16 +294,13 @@ class AssessmentGame {
         }
 
         html += `</div>
-            
             <div style="margin-top:30px; display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
-                
                 <button onclick="location.reload()" style="
                     padding:12px 30px; background:#4a5568; color:white; border:none; 
                     border-radius:50px; cursor:pointer; font-size:1.1rem; display:flex; align-items:center;
                 ">
                     🔄 إعادة الاختبار
                 </button>
-
                 <button onclick="window.location.href='/exam-results'" style="
                     padding:12px 30px; background:#667eea; color:white; border:none; 
                     border-radius:50px; cursor:pointer; font-size:1.1rem; display:flex; align-items:center;
@@ -264,7 +308,6 @@ class AssessmentGame {
                 ">
                     📊 الذهاب للنتائج
                 </button>
-
             </div>
         </div>`;
         
@@ -278,7 +321,6 @@ class AssessmentGame {
         const totalPercent = Math.round((this.scores.total / this.totals.total) * 100);
         const timeSpent = Math.floor((Date.now() - this.startTime) / 1000);
 
-        // Prepare breakdown
         const breakdown = {};
         for (const [key, val] of Object.entries(this.totals)) {
             if (val > 0 && key !== 'total') {

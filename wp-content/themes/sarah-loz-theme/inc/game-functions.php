@@ -248,7 +248,62 @@ function sarah_loz_get_game_settings_for_js($game_id) {
                 $settings['minMobileWidth'] = (int)($memory_settings['memory_game_responsive']['min_mobile_width'] ?? 320);
             }
         }
-        
+        if ($interactive_type === 'assessment') {
+            $assess_settings = get_field('assessment_settings', $game_id);
+            
+            // Pass the Intro Audio
+            $settings['introAudio'] = $assess_settings['intro_audio'] ?? '';
+            
+            // Process Questions loop
+            $questions = array();
+            if (!empty($assess_settings['questions'])) {
+                foreach ($assess_settings['questions'] as $q) {
+                    
+                    // --- ROBUST AUDIO FIX: Handle ID, Array, or String ---
+                    $click_audio_url = $q['click_audio'];
+                    if (is_array($click_audio_url)) {
+                        $click_audio_url = $click_audio_url['url']; // It was an array
+                    } elseif (is_numeric($click_audio_url)) {
+                        $click_audio_url = wp_get_attachment_url($click_audio_url); // It was an ID
+                    }
+                    // -----------------------------------------------------
+
+                    $processed_q = array(
+                        'text' => $q['text'],
+                        'audio' => $q['audio'],
+                        'image' => $q['image'],
+                        
+                        'click_audio' => $click_audio_url, // Use the cleaned URL
+                        
+                        'criteria_category' => $q['criteria'],
+                        'answers' => array()
+                    );
+                    
+                    if (!empty($q['answers'])) {
+                        foreach ($q['answers'] as $a) {
+                            
+                            // --- ROBUST AUDIO FIX FOR ANSWERS TOO ---
+                            $ans_audio_url = $a['audio'];
+                            if (is_array($ans_audio_url)) {
+                                $ans_audio_url = $ans_audio_url['url'];
+                            } elseif (is_numeric($ans_audio_url)) {
+                                $ans_audio_url = wp_get_attachment_url($ans_audio_url);
+                            }
+                            // ----------------------------------------
+
+                            $processed_q['answers'][] = array(
+                                'text' => $a['text'],
+                                'correct' => $a['is_correct'],
+                                'image' => $a['image'],
+                                'audio' => $ans_audio_url, // Use the cleaned URL
+                            );
+                        }
+                    }
+                    $questions[] = $processed_q;
+                }
+            }
+            $settings['questions'] = $questions;
+        }
         // Add other game types as needed
     }
     

@@ -588,33 +588,74 @@ get_header(); ?>
                                 if (!empty($assess_data['questions']) && is_array($assess_data['questions'])) {
                                     foreach ($assess_data['questions'] as $i => $q) {
                                         
-                                        // Category Logic
+                                        // A. Category Logic
                                         $cat = 'general';
                                         if (!empty($q['criteria_category'])) { $cat = $q['criteria_category']; }
                                         elseif (!empty($q['criteria'])) { $cat = $q['criteria']; }
                                         elseif (!empty($q['category'])) { $cat = $q['category']; }
 
-                                        // Answer Logic
+                                        // B. Process Answers (WITH SMART IMAGE DETECTION)
                                         $answers = array();
                                         if(!empty($q['answers']) && is_array($q['answers'])){
                                             foreach($q['answers'] as $a){
+                                                
+                                                // 1. Detect Correct Answer
                                                 $is_correct_flag = false;
                                                 if (!empty($a['correct'])) { $is_correct_flag = true; } 
                                                 elseif (!empty($a['is_correct'])) { $is_correct_flag = true; }
 
+                                                // 2. Detect Image URL
+                                                $ans_img_url = '';
+                                                if (!empty($a['image'])) {
+                                                    if (is_array($a['image']) && isset($a['image']['url'])) {
+                                                        $ans_img_url = $a['image']['url'];
+                                                    } elseif (is_numeric($a['image'])) {
+                                                        $ans_img_url = wp_get_attachment_url($a['image']);
+                                                    } elseif (is_string($a['image'])) {
+                                                        $ans_img_url = $a['image'];
+                                                    }
+                                                }
+
+                                                // 3. Detect Audio URL (for answers)
+                                                $ans_audio_url = '';
+                                                if (!empty($a['audio'])) {
+                                                    if (is_array($a['audio']) && isset($a['audio']['url'])) {
+                                                        $ans_audio_url = $a['audio']['url'];
+                                                    } elseif (is_numeric($a['audio'])) {
+                                                        $ans_audio_url = wp_get_attachment_url($a['audio']);
+                                                    } elseif (is_string($a['audio'])) {
+                                                        $ans_audio_url = $a['audio'];
+                                                    }
+                                                }
+
                                                 $answers[] = array(
                                                     'text'    => !empty($a['text']) ? $a['text'] : '',
+                                                    'image'   => $ans_img_url,
+                                                    'audio'   => $ans_audio_url, 
                                                     'correct' => $is_correct_flag
                                                 );
                                             }
                                         }
 
-                                        // Add to Config
+                                        // --- NEW: Process Question Click Audio ---
+                                        $click_audio_url = '';
+                                        if (!empty($q['click_audio'])) {
+                                            if (is_array($q['click_audio']) && isset($q['click_audio']['url'])) {
+                                                $click_audio_url = $q['click_audio']['url']; 
+                                            } elseif (is_numeric($q['click_audio'])) {
+                                                $click_audio_url = wp_get_attachment_url($q['click_audio']); 
+                                            } elseif (is_string($q['click_audio'])) {
+                                                $click_audio_url = $q['click_audio'];
+                                            }
+                                        }
+
+                                        // C. Add to Config
                                         $game_config['questions'][] = array(
                                             'id'       => $i,
                                             'text'     => $q['text'],
                                             'audio'    => !empty($q['audio_prompt']) ? $q['audio_prompt'] : (!empty($q['audio']) ? $q['audio'] : ''),
                                             'image'    => !empty($q['image']) ? $q['image'] : '',
+                                            'click_audio' => $click_audio_url, // <--- THIS WAS MISSING
                                             'criteria_category' => $cat,
                                             'answers'  => $answers
                                         );
