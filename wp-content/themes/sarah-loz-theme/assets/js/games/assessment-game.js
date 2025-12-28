@@ -1,4 +1,4 @@
-console.log('🔌 Phase 15: Space-Between, Images & Fast Transitions');
+console.log('🔌 Phase 19: Content Slides (No-Answer Logic)');
 
 class AssessmentGame {
     constructor(containerId, config) {
@@ -9,7 +9,7 @@ class AssessmentGame {
         
         // 1. Initialize Scoreboard
         this.scores = { total: 0 };
-        this.totals = { total: this.config.questions.length };
+        this.totals = { total: 0 };
         
         // 2. Scan questions to build the "Totals"
         this.config.questions.forEach((q, index) => {
@@ -20,6 +20,11 @@ class AssessmentGame {
                 this.scores[cat] = 0;
             }
             this.totals[cat]++;
+            
+            // Only exclude 'none' from the total count
+            if (cat !== 'none') {
+                this.totals.total++;
+            }
         });
     }
 
@@ -34,7 +39,6 @@ class AssessmentGame {
         // Reset Container
         this.container.innerHTML = '';
         this.container.style.display = 'block';
-        // Ensure container has height for vertical distribution
         this.container.style.minHeight = '650px'; 
         this.container.style.height = '100%'; 
 
@@ -48,13 +52,14 @@ class AssessmentGame {
 
     renderStartScreen() {
         const content = document.createElement('div');
-        // Center content vertically and horizontally
         content.style.cssText = "display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:500px; height:100%; text-align:center; padding: 20px;";
         
+        const totalQs = this.totals.total || this.config.questions.length;
+
         let html = `
             <div style="margin-bottom:30px;">
                 <h1 style="color:#2d3748; font-size: 2rem; margin-bottom: 15px;">📝 اختبار تحديد المستوى</h1>
-                <p style="color:#718096; font-size: 1.1rem;">عدد الأسئلة: <strong>${this.config.questions.length}</strong></p>
+                <p style="color:#718096; font-size: 1.1rem;">عدد الأسئلة: <strong>${totalQs}</strong></p>
             </div>
         `;
 
@@ -96,12 +101,12 @@ class AssessmentGame {
             return;
         }
         this.currentIndex = index;
-        const q = this.config.questions[index];
+        
+        // Reset Selection State
+        this.selectedAnswerIndex = null;
+        this.selectedAnswerBtn = null;
 
-        // --- DEBUGGING: Check what data we actually have ---
-        console.log(`Question ${index + 1} Data:`, q);
-        console.log("Click Audio URL:", q.click_audio);
-        // --------------------------------------------------
+        const q = this.config.questions[index];
 
         this.container.innerHTML = ''; 
 
@@ -110,19 +115,24 @@ class AssessmentGame {
         
         const catSlug = this.normalizeCategory(q.criteria_category);
         const catName = this.getCategoryName(catSlug);
+        const displayCat = (catSlug === 'none') ? '' : catName;
         
+        // CHECK: Is this a content-only slide?
+        const isContentSlide = (catSlug === 'none');
+
         // --- TOP: Header ---
+        // If it's a content slide, we might want to hide the "Question X/Y" or keep it. 
+        // For now, keeping it consistent but cleaner.
         let html = `
             <div style="display:flex; justify-content:space-between; align-items:center; color:#a0aec0; margin-bottom:10px; font-size:0.9rem;">
-                <span style="font-weight:bold;">السؤال ${index + 1} / ${this.config.questions.length}</span>
-                <span style="background:#edf2f7; padding:6px 15px; border-radius:20px; color:#4a5568; font-weight:bold; font-size:0.85rem;">${catName}</span>
+                <span style="font-weight:bold;">${isContentSlide ? '📄 معلومة' : `السؤال ${index + 1}`}</span>
+                ${displayCat ? `<span style="background:#edf2f7; padding:6px 15px; border-radius:20px; color:#4a5568; font-weight:bold; font-size:0.85rem;">${displayCat}</span>` : ''}
             </div>
         `;
 
         // --- MIDDLE: Content ---
         html += `<div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin: 10px 0;">`;
         
-        // 1. Standard Audio Player
         if(q.audio) {
             html += `<div style="margin-bottom:20px; background:#f7fafc; padding:15px; border-radius:15px; width:100%; max-width:400px;">
                         <p style="margin-bottom:10px; color:#4a5568; font-weight:bold;">🔊 استمع للنص:</p>
@@ -130,7 +140,6 @@ class AssessmentGame {
                      </div>`;
         }
         
-        // 2. Question Image (ID added for safe binding)
         if(q.image) {
             const cursorStyle = q.click_audio ? 'cursor:pointer; transform:scale(1); transition:transform 0.2s;' : '';
             html += `<div style="margin-bottom:20px; width:100%; text-align:center;">
@@ -138,80 +147,128 @@ class AssessmentGame {
                              src="${q.image}" 
                              onmouseover="this.style.transform='scale(1.02)'" 
                              onmouseout="this.style.transform='scale(1)'"
-                             style="max-height:280px; max-width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); display:inline-block; ${cursorStyle}">
+                             style="max-height:350px; max-width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); display:inline-block; ${cursorStyle}">
                      </div>`;
         }
 
-        // 3. Question Text (ID added for safe binding)
         const textCursor = q.click_audio ? 'cursor:pointer; color:#2b6cb0; transition:color 0.2s;' : 'color:#2d3748;';
         html += `<h2 id="q-interaction-text" 
                      style="${textCursor} font-size:1.8rem; line-height:1.4; margin-top:10px;">
                      ${q.text} ${q.click_audio ? '🔊' : ''}
                  </h2>`;
                  
-        html += `</div>`; // End Middle
+        html += `</div>`; 
 
-        // --- BOTTOM: Answers ---
-        html += `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:15px; width:100%;">`;
-        q.answers.forEach((ans, i) => {
-            let innerContent = '';
-            let btnStyle = "padding:15px; background:#fff; border:2px solid #e2e8f0; border-radius:15px; font-size:1.1rem; cursor:pointer; color:#4a5568; transition:all 0.2s; font-weight:500; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;";
-            
-            if(ans.image && ans.image.length > 5) {
-                innerContent += `<img src="${ans.image}" style="height:120px; width:auto; object-fit:contain; margin-bottom:10px; border-radius:8px;">`;
-                btnStyle += " min-height:160px;"; 
-            } else {
-                btnStyle += " min-height:80px;"; 
-            }
-            if(ans.text) innerContent += `<span>${ans.text}</span>`;
-            
-            html += `<button class="ans-btn" data-idx="${i}" style="${btnStyle}">${innerContent}</button>`;
-        });
-        html += `</div>`;
+        // --- BOTTOM: Answers (Only if NOT content slide or if answers exist) ---
+        if (!isContentSlide && q.answers && q.answers.length > 0) {
+            html += `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:15px; width:100%;">`;
+            q.answers.forEach((ans, i) => {
+                let innerContent = '';
+                // Default Style
+                let btnStyle = "padding:15px; background:#fff; border:2px solid #e2e8f0; border-radius:15px; font-size:1.1rem; cursor:pointer; color:#4a5568; transition:all 0.2s; font-weight:500; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;";
+                
+                if(ans.image && ans.image.length > 5) {
+                    innerContent += `<img src="${ans.image}" style="height:120px; width:auto; object-fit:contain; margin-bottom:10px; border-radius:8px;">`;
+                    btnStyle += " min-height:160px;"; 
+                } else {
+                    btnStyle += " min-height:80px;"; 
+                }
+                if(ans.text) innerContent += `<span>${ans.text}</span>`;
+                
+                html += `<button class="ans-btn" data-idx="${i}" style="${btnStyle}">${innerContent}</button>`;
+            });
+            html += `</div>`;
+        }
+
+        // --- FOOTER: Action Button (Dynamic) ---
+        const btnText = isContentSlide ? 'استمرار ⬅️' : 'تأكيد الإجابة <span style="font-size:1.2rem;">✅</span>';
+        const btnState = isContentSlide ? '' : 'disabled';
+        const btnCursor = isContentSlide ? 'cursor:pointer' : 'cursor:not-allowed';
+        const btnBg = isContentSlide ? 'background: linear-gradient(135deg, #48bb78 0%, #38a169 100%)' : 'background: #cbd5e0';
+        const btnShadow = isContentSlide ? 'box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4)' : '';
+
+        html += `
+            <div style="display:flex; justify-content:flex-start; margin-top:30px; width:100%; border-top:1px solid #edf2f7; padding-top:20px;">
+                <button id="btn-next-confirm" ${btnState} style="
+                    ${btnBg}; color: white; border: none; padding: 12px 40px;
+                    font-size: 1.1rem; border-radius: 50px; ${btnCursor};
+                    transition: all 0.3s; display: flex; align-items: center; gap: 10px; font-weight: bold;
+                    ${btnShadow};
+                ">
+                    ${btnText}
+                </button>
+            </div>
+        `;
 
         content.innerHTML = html;
         this.container.appendChild(content);
 
-        // --- SAFE EVENT LISTENERS (The Fix) ---
-        
-        // 1. Play Question Audio Helper
+        // --- EVENT LISTENERS ---
         const playQAudio = () => {
             if (q.click_audio) {
-                console.log("Playing Click Audio:", q.click_audio);
                 new Audio(q.click_audio).play().catch(e => console.error("Audio Error:", e));
-            } else {
-                console.log("No click_audio URL found for this question.");
             }
         };
 
-        // 2. Bind to Image
         const imgEl = document.getElementById('q-interaction-img');
-        if(imgEl && q.click_audio) {
-            imgEl.addEventListener('click', playQAudio);
-        }
+        if(imgEl && q.click_audio) imgEl.addEventListener('click', playQAudio);
 
-        // 3. Bind to Text
         const textEl = document.getElementById('q-interaction-text');
-        if(textEl && q.click_audio) {
-            textEl.addEventListener('click', playQAudio);
-        }
+        if(textEl && q.click_audio) textEl.addEventListener('click', playQAudio);
 
-        // 4. Bind to Answers
+        // 1. Answer Selection Handler (Only if buttons exist)
         content.querySelectorAll('.ans-btn').forEach(btn => {
             btn.onclick = () => {
                 const ans = q.answers[btn.dataset.idx];
-                // Play Answer Audio
                 if(ans.audio) {
-                    console.log("Playing Answer Audio:", ans.audio);
                     new Audio(ans.audio).play().catch(e => console.error("Answer Audio Error:", e));
                 }
-                this.handleAnswer(q, btn);
+                this.selectAnswer(btn);
             };
         });
+
+        // 2. Confirm/Next Button Handler
+        const confirmBtn = document.getElementById('btn-next-confirm');
+        confirmBtn.onclick = () => {
+            if (isContentSlide) {
+                // Logic for Content Slide: Just go next instantly
+                this.renderQuestion(this.currentIndex + 1);
+            } else {
+                // Logic for Question Slide: Validate Answer
+                if(this.selectedAnswerBtn) {
+                    this.handleAnswerSubmission(q, this.selectedAnswerBtn);
+                }
+            }
+        };
     }
 
-    handleAnswer(q, btn) {
-        if(btn.disabled) return;
+    selectAnswer(btn) {
+        this.container.querySelectorAll('.ans-btn').forEach(b => {
+            b.style.borderColor = '#e2e8f0';
+            b.style.backgroundColor = '#fff';
+            b.style.transform = 'scale(1)';
+            b.style.boxShadow = 'none';
+        });
+
+        btn.style.borderColor = '#667eea';
+        btn.style.backgroundColor = '#ebf4ff'; 
+        btn.style.transform = 'scale(1.02)';
+        btn.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.2)';
+
+        this.selectedAnswerBtn = btn;
+        const confirmBtn = document.getElementById('btn-next-confirm');
+        if(confirmBtn) {
+            confirmBtn.disabled = false;
+            confirmBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            confirmBtn.style.cursor = 'pointer';
+            confirmBtn.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.4)';
+        }
+    }
+
+    handleAnswerSubmission(q, btn) {
+        const confirmBtn = document.getElementById('btn-next-confirm');
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = 'جاري التحقق...';
         
         const allBtns = this.container.querySelectorAll('.ans-btn');
         allBtns.forEach(b => b.disabled = true);
@@ -237,7 +294,9 @@ class AssessmentGame {
         }
 
         if(isCorrect) {
-            this.scores.total++;
+            if (cat !== 'none') {
+                this.scores.total++;
+            }
             if(this.scores[cat] !== undefined) {
                 this.scores[cat]++;
             } else {
@@ -246,15 +305,15 @@ class AssessmentGame {
             }
         }
 
-        // FIX 3: Super Fast Transition (500ms)
-        setTimeout(() => this.renderQuestion(this.currentIndex + 1), 500);
+        setTimeout(() => this.renderQuestion(this.currentIndex + 1), 1000);
     }
 
     finishGame() {
         this.container.innerHTML = '';
         this.saveProgress();
 
-        const totalPercent = Math.round((this.scores.total / this.totals.total) * 100);
+        const totalPossible = this.totals.total || 1;
+        const totalPercent = Math.round((this.scores.total / totalPossible) * 100);
         
         let html = `
             <div style="padding:30px 0; text-align:center;">
@@ -263,13 +322,13 @@ class AssessmentGame {
                 <p id="save-status" style="color:#718096; font-size:0.9rem; margin-bottom:20px;">جاري حفظ النتيجة...</p>
                 
                 <div style="background:#f7fafc; border-radius:15px; padding:25px; text-align:right; max-width:600px; margin:0 auto; border:1px solid #edf2f7;">
-                    <h3 style="border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:20px; color:#4a5568; font-weight:bold;">📊 تفاصيل المهارات:</h3>
+                    <h3 style="border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:20px; color:#4a5568; font-weight:bold;">📊 المهارات الفرعية:</h3>
         `;
 
         let hasDetails = false;
         
         for (const [cat, totalCount] of Object.entries(this.totals)) {
-            if (cat === 'total' || totalCount === 0) continue;
+            if (cat === 'total' || cat === 'none' || totalCount === 0) continue;
             
             hasDetails = true;
             const score = this.scores[cat] || 0;
@@ -318,12 +377,13 @@ class AssessmentGame {
     saveProgress() {
         if (typeof sarahLozGame === 'undefined') return;
 
-        const totalPercent = Math.round((this.scores.total / this.totals.total) * 100);
+        const totalPossible = this.totals.total || 1;
+        const totalPercent = Math.round((this.scores.total / totalPossible) * 100);
         const timeSpent = Math.floor((Date.now() - this.startTime) / 1000);
 
         const breakdown = {};
         for (const [key, val] of Object.entries(this.totals)) {
-            if (val > 0 && key !== 'total') {
+            if (val > 0 && key !== 'total' && key !== 'none') {
                 breakdown[key] = {
                     score: this.scores[key] || 0,
                     total: val,
@@ -364,8 +424,19 @@ class AssessmentGame {
     getCategoryName(slug) {
         if (!slug) return 'عام';
         const s = slug.toString().toLowerCase().trim();
-        const names = { 'listening': '👂 الاستماع', 'vocabulary': '📖 المفردات', 'grammar': '✍️ القواعد', 'reading': '📚 القراءة', 'fluency': '🗣️ الطلاقة', 'general': 'عام' };
-        return names[s] || names[slug] || s;
+        
+        const names = { 
+            'general_meaning': 'يحدد المعنى العام حتى لو لم يفهم جميع التفاصيل.',
+            'specific_info': 'يستخلص معلومات محددة من نص مسموع',
+            'true_false': 'يميز المعلومة الصحيحة من المعلومة الخاطئة في نص مسموع',
+            'common_phrases': 'يميز العبارات الشائعة والمحفوظة التي تظهر في مواقف التواصل الأساسية',
+            'vocab_meaning': 'يربط المفردات المسموعة بمدلولها',
+            'sequence_events': 'يتتبع تسلسل أحداث بسيطة في قصة أو حوار قصير مسموع.',
+            'form_opinion': 'يكون رأيا فيما يسمع',
+            'none': 'غير محتسب',
+        };
+        
+        return names[s] || s;
     }
 }
 const style = document.createElement('style');

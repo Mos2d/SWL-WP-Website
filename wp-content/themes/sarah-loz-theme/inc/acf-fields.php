@@ -896,3 +896,42 @@ function sarah_loz_register_broadcast_fields() {
     ));
 }
 add_action('acf/init', 'sarah_loz_register_broadcast_fields', 20); 
+
+/**
+ * FORCE UPDATE: Assessment Game Criteria List
+ * This updates the dropdown options in the Admin Panel to match the new requirements.
+ */
+function sarah_loz_update_assessment_criteria( $field ) {
+    $field['choices'] = array(
+        'general_meaning' => 'يحدد المعنى العام حتى لو لم يفهم جميع التفاصيل.',
+        'specific_info'   => 'يستخلص معلومات محددة من نص مسموع',
+        'true_false'      => 'يميز المعلومة الصحيحة من المعلومة الخاطئة في نص مسموع',
+        'common_phrases'  => 'يميز العبارات الشائعة والمحفوظة التي تظهر في مواقف التواصل الأساسية',
+        'vocab_meaning'   => 'يربط المفردات المسموعة بمدلولها',
+        'sequence_events' => 'يتتبع تسلسل أحداث بسيطة في قصة أو حوار قصير مسموع.',
+        'form_opinion'    => 'يكون رأيا فيما يسمع',
+        'none'            => 'غير محتسب (لا يدخل في النتيجة)'
+    );
+    return $field;
+}
+
+// Target the specific field name "criteria_category"
+add_filter('acf/load_field/name=criteria_category', 'sarah_loz_update_assessment_criteria');
+
+// Also target "criteria" just in case the field name varies in some versions
+add_filter('acf/load_field/name=criteria', 'sarah_loz_update_assessment_criteria');
+
+
+/**
+ * FORCE UPDATE: Allow Empty Answers
+ * This disables the 'Required' validation for the answers field
+ * so you can create "Info Slides" with 0 answers.
+ */
+function sarah_loz_disable_answers_requirement( $field ) {
+    $field['required'] = 0; // Turn off "Required"
+    $field['min'] = 0;      // Set minimum rows to 0
+    return $field;
+}
+
+// Target the "answers" field
+add_filter('acf/load_field/name=answers', 'sarah_loz_disable_answers_requirement');
