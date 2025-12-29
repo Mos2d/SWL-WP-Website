@@ -903,12 +903,12 @@ add_action('acf/init', 'sarah_loz_register_broadcast_fields', 20);
  */
 function sarah_loz_update_assessment_criteria( $field ) {
     $field['choices'] = array(
-        'general_meaning' => 'يحدد المعنى العام حتى لو لم يفهم جميع التفاصيل.',
+        'general_meaning' => 'يحدد المعنى العام حتى لو لم يفهم جميع التفاصيل',
         'specific_info'   => 'يستخلص معلومات محددة من نص مسموع',
         'true_false'      => 'يميز المعلومة الصحيحة من المعلومة الخاطئة في نص مسموع',
         'common_phrases'  => 'يميز العبارات الشائعة والمحفوظة التي تظهر في مواقف التواصل الأساسية',
         'vocab_meaning'   => 'يربط المفردات المسموعة بمدلولها',
-        'sequence_events' => 'يتتبع تسلسل أحداث بسيطة في قصة أو حوار قصير مسموع.',
+        'sequence_events' => 'يتتبع تسلسل أحداث بسيطة في قصة أو حوار قصير مسموع',
         'form_opinion'    => 'يكون رأيا فيما يسمع',
         'none'            => 'غير محتسب (لا يدخل في النتيجة)'
     );

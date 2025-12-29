@@ -105,8 +105,24 @@ class AssessmentGame {
         // Reset Selection State
         this.selectedAnswerIndex = null;
         this.selectedAnswerBtn = null;
+        // Reset Rearrange State
+        this.rearrangeState = null; 
 
         const q = this.config.questions[index];
+        
+        // ✅ FIX: Define qType here so it can be used later
+        const qType = q.type || 'multiple_choice'; 
+
+        // ✅ FIX: Initialize Rearrange Logic if needed
+        if (qType === 'rearrange') {
+            const items = q.answers.map((a, i) => ({ ...a, origIndex: i }));
+            // Shuffle
+            for (let i = items.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [items[i], items[j]] = [items[j], items[i]];
+            }
+            this.rearrangeState = { pool: items, chain: [] };
+        }
 
         this.container.innerHTML = ''; 
 
@@ -121,8 +137,6 @@ class AssessmentGame {
         const isContentSlide = (catSlug === 'none');
 
         // --- TOP: Header ---
-        // If it's a content slide, we might want to hide the "Question X/Y" or keep it. 
-        // For now, keeping it consistent but cleaner.
         let html = `
             <div style="display:flex; justify-content:space-between; align-items:center; color:#a0aec0; margin-bottom:10px; font-size:0.9rem;">
                 <span style="font-weight:bold;">${isContentSlide ? '📄 معلومة' : `السؤال ${index + 1}`}</span>
@@ -159,25 +173,45 @@ class AssessmentGame {
                  
         html += `</div>`; 
 
-        // --- BOTTOM: Answers (Only if NOT content slide or if answers exist) ---
-        if (!isContentSlide && q.answers && q.answers.length > 0) {
-            html += `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:15px; width:100%;">`;
-            q.answers.forEach((ans, i) => {
-                let innerContent = '';
-                // Default Style
-                let btnStyle = "padding:15px; background:#fff; border:2px solid #e2e8f0; border-radius:15px; font-size:1.1rem; cursor:pointer; color:#4a5568; transition:all 0.2s; font-weight:500; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;";
+        content.innerHTML = html;
+
+        // --- INTERACTION AREA ---
+        if (!isContentSlide) {
+            if (qType === 'rearrange') {
+                // CALL NEW HELPER METHOD
+                this.renderRearrangeArea(content);
+            } else if (q.answers && q.answers.length > 0) {
+                // STANDARD MULTIPLE CHOICE LOGIC
+                const choicesContainer = document.createElement('div');
+                choicesContainer.style.cssText = "display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:15px; width:100%;";
                 
-                if(ans.image && ans.image.length > 5) {
-                    innerContent += `<img src="${ans.image}" style="height:120px; width:auto; object-fit:contain; margin-bottom:10px; border-radius:8px;">`;
-                    btnStyle += " min-height:160px;"; 
-                } else {
-                    btnStyle += " min-height:80px;"; 
-                }
-                if(ans.text) innerContent += `<span>${ans.text}</span>`;
-                
-                html += `<button class="ans-btn" data-idx="${i}" style="${btnStyle}">${innerContent}</button>`;
-            });
-            html += `</div>`;
+                q.answers.forEach((ans, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'ans-btn';
+                    btn.dataset.idx = i;
+                    
+                    let innerContent = '';
+                    let btnStyle = "padding:15px; background:#fff; border:2px solid #e2e8f0; border-radius:15px; font-size:1.1rem; cursor:pointer; color:#4a5568; transition:all 0.2s; font-weight:500; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;";
+                    
+                    if(ans.image && ans.image.length > 5) {
+                        innerContent += `<img src="${ans.image}" style="height:120px; width:auto; object-fit:contain; margin-bottom:10px; border-radius:8px;">`;
+                        btnStyle += " min-height:160px;"; 
+                    } else {
+                        btnStyle += " min-height:80px;"; 
+                    }
+                    if(ans.text) innerContent += `<span>${ans.text}</span>`;
+                    
+                    btn.innerHTML = innerContent;
+                    btn.style.cssText = btnStyle;
+                    
+                    btn.onclick = () => {
+                        if(ans.audio) new Audio(ans.audio).play().catch(()=>{});
+                        this.selectAnswer(btn);
+                    };
+                    choicesContainer.appendChild(btn);
+                });
+                content.appendChild(choicesContainer);
+            }
         }
 
         // --- FOOTER: Action Button (Dynamic) ---
@@ -187,20 +221,21 @@ class AssessmentGame {
         const btnBg = isContentSlide ? 'background: linear-gradient(135deg, #48bb78 0%, #38a169 100%)' : 'background: #cbd5e0';
         const btnShadow = isContentSlide ? 'box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4)' : '';
 
-        html += `
-            <div style="display:flex; justify-content:flex-start; margin-top:30px; width:100%; border-top:1px solid #edf2f7; padding-top:20px;">
-                <button id="btn-next-confirm" ${btnState} style="
-                    ${btnBg}; color: white; border: none; padding: 12px 40px;
-                    font-size: 1.1rem; border-radius: 50px; ${btnCursor};
-                    transition: all 0.3s; display: flex; align-items: center; gap: 10px; font-weight: bold;
-                    ${btnShadow};
-                ">
-                    ${btnText}
-                </button>
-            </div>
+        const footerDiv = document.createElement('div');
+        footerDiv.style.cssText = "display:flex; justify-content:flex-start; margin-top:30px; width:100%; border-top:1px solid #edf2f7; padding-top:20px;";
+        
+        footerDiv.innerHTML = `
+            <button id="btn-next-confirm" ${btnState} style="
+                ${btnBg}; color: white; border: none; padding: 12px 40px;
+                font-size: 1.1rem; border-radius: 50px; ${btnCursor};
+                transition: all 0.3s; display: flex; align-items: center; gap: 10px; font-weight: bold;
+                ${btnShadow};
+            ">
+                ${btnText}
+            </button>
         `;
 
-        content.innerHTML = html;
+        content.appendChild(footerDiv);
         this.container.appendChild(content);
 
         // --- EVENT LISTENERS ---
@@ -216,30 +251,37 @@ class AssessmentGame {
         const textEl = document.getElementById('q-interaction-text');
         if(textEl && q.click_audio) textEl.addEventListener('click', playQAudio);
 
-        // 1. Answer Selection Handler (Only if buttons exist)
-        content.querySelectorAll('.ans-btn').forEach(btn => {
-            btn.onclick = () => {
-                const ans = q.answers[btn.dataset.idx];
-                if(ans.audio) {
-                    new Audio(ans.audio).play().catch(e => console.error("Answer Audio Error:", e));
-                }
-                this.selectAnswer(btn);
-            };
-        });
+        // 1. Answer Selection Handler (Only if buttons exist - Fixed for Rearrange safety)
+        if (qType !== 'rearrange') {
+            content.querySelectorAll('.ans-btn').forEach(btn => {
+                btn.onclick = () => {
+                    const ans = q.answers[btn.dataset.idx];
+                    if(ans.audio) {
+                        new Audio(ans.audio).play().catch(e => console.error("Answer Audio Error:", e));
+                    }
+                    this.selectAnswer(btn);
+                };
+            });
+        }
 
         // 2. Confirm/Next Button Handler
         const confirmBtn = document.getElementById('btn-next-confirm');
         confirmBtn.onclick = () => {
             if (isContentSlide) {
-                // Logic for Content Slide: Just go next instantly
                 this.renderQuestion(this.currentIndex + 1);
             } else {
-                // Logic for Question Slide: Validate Answer
-                if(this.selectedAnswerBtn) {
-                    this.handleAnswerSubmission(q, this.selectedAnswerBtn);
+                if(qType === 'rearrange') {
+                     this.handleAnswerSubmission(q);
+                } else if(this.selectedAnswerBtn) {
+                     this.handleAnswerSubmission(q, this.selectedAnswerBtn);
                 }
             }
         };
+        
+        // 3. Initialize Rearrange DOM if needed
+        if (qType === 'rearrange' && !isContentSlide) {
+            this.refreshRearrangeDOM();
+        }
     }
 
     selectAnswer(btn) {
@@ -269,19 +311,48 @@ class AssessmentGame {
         const confirmBtn = document.getElementById('btn-next-confirm');
         confirmBtn.disabled = true;
         confirmBtn.innerHTML = 'جاري التحقق...';
+
+        // --- 1. HANDLE REARRANGE LOGIC ---
+        if (q.type === 'rearrange') {
+            // Check if the user's chain order matches the original index order (0, 1, 2...)
+            // We assume the original 'q.answers' array was in the correct order.
+            const isCorrect = this.rearrangeState.chain.every((item, index) => item.origIndex === index);
+            
+            // Visual Feedback for the Chain Container
+            const chainZone = document.getElementById('rearrange-chain');
+            if (chainZone) {
+                chainZone.style.border = isCorrect ? '2px solid #48bb78' : '2px solid #f56565';
+                chainZone.style.backgroundColor = isCorrect ? '#f0fff4' : '#fff5f5';
+            }
+
+            // Update Score
+            this.processScore(q, isCorrect);
+
+            // Move to next question after delay
+            setTimeout(() => this.renderQuestion(this.currentIndex + 1), 1500);
+            return; 
+        }
+
+        // --- 2. HANDLE MULTIPLE CHOICE LOGIC ---
+        // (Only runs if not rearrange)
         
+        // Disable all option buttons
         const allBtns = this.container.querySelectorAll('.ans-btn');
         allBtns.forEach(b => b.disabled = true);
 
+        // Safety check: if no button was passed (shouldn't happen for multiple choice), stop here
+        if (!btn) return;
+
         const idx = parseInt(btn.dataset.idx);
         const isCorrect = q.answers[idx].correct;
-        const cat = this.normalizeCategory(q.criteria_category);
-
+        
+        // Visual Feedback for Buttons
         btn.style.borderColor = isCorrect ? '#48bb78' : '#f56565';
         btn.style.backgroundColor = isCorrect ? '#f0fff4' : '#fff5f5';
         btn.style.color = isCorrect ? '#22543d' : '#822727';
         
         if(!isCorrect) {
+            // Highlight the correct one if user was wrong
             q.answers.forEach((a, i) => {
                 if(a.correct) {
                     const correctBtn = this.container.querySelector(`.ans-btn[data-idx="${i}"]`);
@@ -293,10 +364,21 @@ class AssessmentGame {
             });
         }
 
+        // Update Score
+        this.processScore(q, isCorrect);
+
+        setTimeout(() => this.renderQuestion(this.currentIndex + 1), 1000);
+    }
+
+    // Helper to avoid duplicating scoring logic
+    processScore(q, isCorrect) {
         if(isCorrect) {
+            const cat = this.normalizeCategory(q.criteria_category);
+            
             if (cat !== 'none') {
                 this.scores.total++;
             }
+            
             if(this.scores[cat] !== undefined) {
                 this.scores[cat]++;
             } else {
@@ -304,8 +386,6 @@ class AssessmentGame {
                 this.scores.general++;
             }
         }
-
-        setTimeout(() => this.renderQuestion(this.currentIndex + 1), 1000);
     }
 
     finishGame() {
@@ -426,17 +506,125 @@ class AssessmentGame {
         const s = slug.toString().toLowerCase().trim();
         
         const names = { 
-            'general_meaning': 'يحدد المعنى العام حتى لو لم يفهم جميع التفاصيل.',
+            'general_meaning': 'يحدد المعنى العام حتى لو لم يفهم جميع التفاصيل',
             'specific_info': 'يستخلص معلومات محددة من نص مسموع',
             'true_false': 'يميز المعلومة الصحيحة من المعلومة الخاطئة في نص مسموع',
             'common_phrases': 'يميز العبارات الشائعة والمحفوظة التي تظهر في مواقف التواصل الأساسية',
             'vocab_meaning': 'يربط المفردات المسموعة بمدلولها',
-            'sequence_events': 'يتتبع تسلسل أحداث بسيطة في قصة أو حوار قصير مسموع.',
+            'sequence_events': 'يتتبع تسلسل أحداث بسيطة في قصة أو حوار قصير مسموع',
             'form_opinion': 'يكون رأيا فيما يسمع',
             'none': 'غير محتسب',
         };
         
         return names[s] || s;
+    }
+    renderRearrangeArea(contentElement) {
+        const areaContainer = document.createElement('div');
+        areaContainer.style.width = '100%';
+        areaContainer.style.margin = '10px 0';
+        
+        // 1. Lower Level (User's Chain)
+        const lowerLabel = document.createElement('div');
+        lowerLabel.innerText = 'ترتيبك (اضغط للإلغاء):';
+        lowerLabel.style.cssText = 'color:#718096; font-size:0.9rem; margin-bottom:5px; text-align:right; width:100%; font-weight:bold;';
+        areaContainer.appendChild(lowerLabel);
+
+        const lowerZone = document.createElement('div');
+        lowerZone.id = 'rearrange-chain';
+        lowerZone.style.cssText = `
+            display:flex; flex-wrap:wrap; gap:10px; min-height:90px; width:100%;
+            background:#f7fafc; border:2px dashed #cbd5e0; border-radius:12px;
+            padding:15px; align-items:center; justify-content:flex-start; direction: rtl;
+        `;
+        areaContainer.appendChild(lowerZone);
+
+        // 2. Upper Level (Options Pool)
+        const upperLabel = document.createElement('div');
+        upperLabel.innerText = 'الخيارات (اضغط للاختيار):';
+        upperLabel.style.cssText = 'color:#718096; font-size:0.9rem; margin:25px 0 5px 0; text-align:right; width:100%; font-weight:bold;';
+        areaContainer.appendChild(upperLabel);
+
+        const upperZone = document.createElement('div');
+        upperZone.id = 'rearrange-pool';
+        upperZone.style.cssText = `display:flex; flex-wrap:wrap; gap:10px; width:100%; justify-content:center; padding:10px 0; direction: rtl;`;
+        areaContainer.appendChild(upperZone);
+
+        contentElement.appendChild(areaContainer);
+    }
+
+    createRearrangeBtn(item, source, index) {
+        const btn = document.createElement('button');
+        let label = item.text || '';
+        
+        if(item.image) {
+             label = `<img src="${item.image}" style="height:50px; vertical-align:middle; border-radius:4px; margin-left:8px;"> ` + label;
+        }
+
+        btn.innerHTML = label;
+        btn.style.cssText = `
+            padding: 8px 20px; background: white; border: 2px solid #e2e8f0;
+            border-radius: 10px; font-size: 1rem; cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05); color: #2d3748;
+            transition: all 0.2s; display:flex; align-items:center; font-weight:600;
+        `;
+        
+        if (source === 'chain') {
+             btn.style.background = '#ebf8ff';
+             btn.style.borderColor = '#4299e1';
+             btn.style.color = '#2b6cb0';
+        }
+
+        btn.onclick = () => {
+             if(item.audio) new Audio(item.audio).play().catch(()=>{});
+             this.handleRearrangeMove(source, index);
+        };
+        return btn;
+    }
+
+    handleRearrangeMove(source, index) {
+        if(document.getElementById('btn-next-confirm').innerText.includes('تحقق')) return;
+
+        if (source === 'pool') {
+            const item = this.rearrangeState.pool.splice(index, 1)[0];
+            this.rearrangeState.chain.push(item);
+        } else {
+            const item = this.rearrangeState.chain.splice(index, 1)[0];
+            this.rearrangeState.pool.push(item);
+        }
+        this.refreshRearrangeDOM();
+    }
+
+    refreshRearrangeDOM() {
+        const lowerZone = document.getElementById('rearrange-chain');
+        const upperZone = document.getElementById('rearrange-pool');
+        const confirmBtn = document.getElementById('btn-next-confirm');
+        
+        if(!lowerZone || !upperZone) return; 
+
+        lowerZone.innerHTML = '';
+        this.rearrangeState.chain.forEach((item, idx) => {
+            lowerZone.appendChild(this.createRearrangeBtn(item, 'chain', idx));
+        });
+
+        upperZone.innerHTML = '';
+        this.rearrangeState.pool.forEach((item, idx) => {
+            upperZone.appendChild(this.createRearrangeBtn(item, 'pool', idx));
+        });
+
+        // Only enable 'Confirm' if all items are used
+        const isComplete = (this.rearrangeState.pool.length === 0);
+        
+        if(confirmBtn) {
+             if (isComplete) {
+                 confirmBtn.disabled = false;
+                 confirmBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                 confirmBtn.style.cursor = 'pointer';
+             } else {
+                 confirmBtn.disabled = true;
+                 confirmBtn.style.background = '#cbd5e0';
+                 confirmBtn.style.cursor = 'not-allowed';
+             }
+        }
     }
 }
 const style = document.createElement('style');

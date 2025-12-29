@@ -250,59 +250,72 @@ function sarah_loz_get_game_settings_for_js($game_id) {
         }
         if ($interactive_type === 'assessment') {
             $assess_settings = get_field('assessment_settings', $game_id);
-            
-            // Pass the Intro Audio
             $settings['introAudio'] = $assess_settings['intro_audio'] ?? '';
             
-            // Process Questions loop
-            $questions = array();
+            $questions_list = array();
+
+            // 1. Process "Old" Questions (Now strictly Multiple Choice)
+            // We treat everything in 'questions' as multiple_choice
             if (!empty($assess_settings['questions'])) {
                 foreach ($assess_settings['questions'] as $q) {
+                    $click_audio_url = is_array($q['click_audio']) ? $q['click_audio']['url'] : (is_numeric($q['click_audio']) ? wp_get_attachment_url($q['click_audio']) : $q['click_audio']);
                     
-                    // --- ROBUST AUDIO FIX: Handle ID, Array, or String ---
-                    $click_audio_url = $q['click_audio'];
-                    if (is_array($click_audio_url)) {
-                        $click_audio_url = $click_audio_url['url']; // It was an array
-                    } elseif (is_numeric($click_audio_url)) {
-                        $click_audio_url = wp_get_attachment_url($click_audio_url); // It was an ID
-                    }
-                    // -----------------------------------------------------
-
                     $processed_q = array(
+                        'type' => 'multiple_choice', // FORCED TYPE
                         'text' => $q['text'],
                         'audio' => $q['audio'],
                         'image' => $q['image'],
-                        
-                        'click_audio' => $click_audio_url, // Use the cleaned URL
-                        
+                        'click_audio' => $click_audio_url,
                         'criteria_category' => $q['criteria'],
                         'answers' => array()
                     );
                     
                     if (!empty($q['answers'])) {
                         foreach ($q['answers'] as $a) {
-                            
-                            // --- ROBUST AUDIO FIX FOR ANSWERS TOO ---
-                            $ans_audio_url = $a['audio'];
-                            if (is_array($ans_audio_url)) {
-                                $ans_audio_url = $ans_audio_url['url'];
-                            } elseif (is_numeric($ans_audio_url)) {
-                                $ans_audio_url = wp_get_attachment_url($ans_audio_url);
-                            }
-                            // ----------------------------------------
-
+                            $ans_audio_url = is_array($a['audio']) ? $a['audio']['url'] : (is_numeric($a['audio']) ? wp_get_attachment_url($a['audio']) : $a['audio']);
                             $processed_q['answers'][] = array(
                                 'text' => $a['text'],
                                 'correct' => $a['is_correct'],
                                 'image' => $a['image'],
-                                'audio' => $ans_audio_url, // Use the cleaned URL
+                                'audio' => $ans_audio_url,
                             );
                         }
                     }
-                    $questions[] = $processed_q;
+                    $questions_list[] = $processed_q;
                 }
             }
-            $settings['questions'] = $questions;
+
+            // 2. Process NEW Rearrange Questions
+            // We treat everything here as rearrange
+            if (!empty($assess_settings['rearrange_questions'])) {
+                foreach ($assess_settings['rearrange_questions'] as $q) {
+                    $click_audio_url = isset($q['click_audio']) ? (is_array($q['click_audio']) ? $q['click_audio']['url'] : $q['click_audio']) : '';
+
+                    $processed_q = array(
+                        'type' => 'rearrange', // FORCED TYPE
+                        'text' => $q['text'],
+                        'audio' => $q['audio'],
+                        'image' => $q['image'],
+                        'click_audio' => $click_audio_url,
+                        'criteria_category' => $q['criteria'],
+                        'answers' => array()
+                    );
+                    
+                    if (!empty($q['answers'])) {
+                        foreach ($q['answers'] as $a) {
+                            $ans_audio_url = is_array($a['audio']) ? $a['audio']['url'] : (is_numeric($a['audio']) ? wp_get_attachment_url($a['audio']) : $a['audio']);
+                            $processed_q['answers'][] = array(
+                                'text' => $a['text'],
+                                'image' => $a['image'],
+                                'audio' => $ans_audio_url,
+                            );
+                        }
+                    }
+                    $questions_list[] = $processed_q;
+                }
+            }
+
+            $settings['questions'] = $questions_list;
         }
         // Add other game types as needed
     }

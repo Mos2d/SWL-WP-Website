@@ -1242,21 +1242,20 @@ function sarah_loz_register_acf_fields() {
                         'type' => 'file',
                         'return_format' => 'url',
                         'mime_types' => 'mp3,wav,m4a',
-                        'instructions' => 'Upload the general instructions audio (e.g., "Listen and Answer")',
                     ),
                     
-                    // 2. The Questions Loop
+                    // 2. MULTIPLE CHOICE QUESTIONS (Original Keys Restored)
                     array(
-                        'key' => 'field_assess_questions',
-                        'label' => 'Exam Questions',
-                        'name' => 'questions',
+                        'key' => 'field_assess_questions', // MUST match original key
+                        'label' => 'Multiple Choice Questions',
+                        'name' => 'questions', 
                         'type' => 'repeater',
                         'layout' => 'block',
-                        'button_label' => 'Add Question',
+                        'min' => 0,
+                        'button_label' => 'Add Multiple Choice Question',
                         'sub_fields' => array(
-                            // Question Content
                             array(
-                                'key' => 'field_q_text',
+                                'key' => 'field_q_text', // Original Key
                                 'label' => 'Question Text',
                                 'name' => 'text',
                                 'type' => 'textarea',
@@ -1264,36 +1263,31 @@ function sarah_loz_register_acf_fields() {
                                 'required' => 1,
                             ),
                             array(
-                                'key' => 'field_q_audio',
-                                'label' => 'Question Audio (Listening Task)',
+                                'key' => 'field_q_audio', // Original Key
+                                'label' => 'Question Audio',
                                 'name' => 'audio',
                                 'type' => 'file',
                                 'return_format' => 'url',
                                 'mime_types' => 'mp3,wav,m4a',
-                                'instructions' => 'Upload the story or sentence for this question (e.g., The "My Family" text).',
                             ),
                             array(
-                                'key' => 'field_q_click_audio',
-                                'label' => 'Question Click Audio',
-                                'name' => 'click_audio', // Key to access in JS: q.click_audio
-                                'type' => 'file',
-                                'return_format' => 'url',
-                                'mime_types' => 'mp3,wav,m4a',
-                                'instructions' => 'Audio to play when the student clicks the question text or image.',
-                            ),
-                            array(
-                                'key' => 'field_q_image',
+                                'key' => 'field_q_image', // Original Key
                                 'label' => 'Question Image',
                                 'name' => 'image',
                                 'type' => 'image',
                                 'return_format' => 'url',
                                 'preview_size' => 'medium',
-                                'instructions' => 'For "Describe the picture" tasks.',
                             ),
-                            
-                            // Scoring Criteria (Based on your Rubric)
                             array(
-                                'key' => 'field_q_criteria',
+                                'key' => 'field_q_click_audio', // Original Key
+                                'label' => 'Click Audio',
+                                'name' => 'click_audio',
+                                'type' => 'file',
+                                'return_format' => 'url',
+                                'mime_types' => 'mp3,wav,m4a',
+                            ),
+                            array(
+                                'key' => 'field_q_criteria', // Original Key
                                 'label' => 'Scoring Criteria',
                                 'name' => 'criteria',
                                 'type' => 'select',
@@ -1305,47 +1299,90 @@ function sarah_loz_register_acf_fields() {
                                 ),
                                 'default_value' => 'listening',
                             ),
-
-                            // Answers
                             array(
-                                'key' => 'field_q_answers',
+                                'key' => 'field_q_answers', // Original Key
                                 'label' => 'Answers',
                                 'name' => 'answers',
                                 'type' => 'repeater',
                                 'layout' => 'table',
                                 'min' => 1, 
                                 'sub_fields' => array(
-                                    array(
-                                        'key' => 'field_a_text',
-                                        'label' => 'Answer Text',
-                                        'name' => 'text',
-                                        'type' => 'text',
-                                    ),
-                                    array(
-                                        'key' => 'field_a_image',
-                                        'label' => 'Answer Image',
-                                        'name' => 'image',
-                                        'type' => 'image',
-                                        'return_format' => 'url',
-                                        'preview_size' => 'thumbnail',
-                                        'instructions' => 'Optional: Add an image for this answer',
-                                    ),
-                                    array(
-                                        'key' => 'field_a_audio',
-                                        'label' => 'Answer Audio',
-                                        'name' => 'audio', // Key to access in JS: ans.audio
-                                        'type' => 'file',
-                                        'return_format' => 'url',
-                                        'mime_types' => 'mp3,wav,m4a',
-                                        'instructions' => 'Audio to play when this answer is selected.',
-                                    ),
-                                    array(
-                                        'key' => 'field_a_is_correct',
-                                        'label' => 'Correct?',
-                                        'name' => 'is_correct',
-                                        'type' => 'true_false',
-                                        'ui' => 1,
-                                    ),
+                                    array('key' => 'field_a_text', 'label' => 'Text', 'name' => 'text', 'type' => 'text'),
+                                    array('key' => 'field_a_image', 'label' => 'Image', 'name' => 'image', 'type' => 'image', 'return_format' => 'url'),
+                                    array('key' => 'field_a_audio', 'label' => 'Audio', 'name' => 'audio', 'type' => 'file', 'return_format' => 'url'),
+                                    array('key' => 'field_a_is_correct', 'label' => 'Correct?', 'name' => 'is_correct', 'type' => 'true_false', 'ui' => 1),
+                                ),
+                            ),
+                        ),
+                    ),
+
+                    // 3. REARRANGEMENT QUESTIONS (New Section)
+                    array(
+                        'key' => 'field_assess_rearrange_questions',
+                        'label' => 'Rearrangement Questions',
+                        'name' => 'rearrange_questions', 
+                        'type' => 'repeater',
+                        'layout' => 'block',
+                        'min' => 0,
+                        'button_label' => 'Add Rearrangement Question',
+                        'instructions' => 'Add items in the CORRECT ORDER (1-2-3). The game will shuffle them automatically.',
+                        'sub_fields' => array(
+                            array(
+                                'key' => 'field_re_text',
+                                'label' => 'Question Text',
+                                'name' => 'text',
+                                'type' => 'textarea',
+                                'rows' => 2,
+                                'required' => 1,
+                            ),
+                            array(
+                                'key' => 'field_re_audio',
+                                'label' => 'Question Audio',
+                                'name' => 'audio',
+                                'type' => 'file',
+                                'return_format' => 'url',
+                                'mime_types' => 'mp3,wav,m4a',
+                            ),
+                            array(
+                                'key' => 'field_re_image',
+                                'label' => 'Question Image',
+                                'name' => 'image',
+                                'type' => 'image',
+                                'return_format' => 'url',
+                                'preview_size' => 'medium',
+                            ),
+                            array(
+                                'key' => 'field_re_click_audio',
+                                'label' => 'Click Audio',
+                                'name' => 'click_audio',
+                                'type' => 'file',
+                                'return_format' => 'url',
+                                'mime_types' => 'mp3,wav,m4a',
+                            ),
+                            array(
+                                'key' => 'field_re_criteria',
+                                'label' => 'Scoring Criteria',
+                                'name' => 'criteria',
+                                'type' => 'select',
+                                'choices' => array(
+                                    'sequence_events' => 'Sequence Events (تسلسل الأحداث)',
+                                    'listening' => 'Listening Comprehension (الاستماع)',
+                                    'vocabulary' => 'Vocabulary (المفردات)',
+                                ),
+                                'default_value' => 'sequence_events',
+                            ),
+                            array(
+                                'key' => 'field_re_items',
+                                'label' => 'Items to Rearrange',
+                                'name' => 'answers', // Keeping name 'answers' for JS compatibility
+                                'type' => 'repeater',
+                                'layout' => 'table',
+                                'min' => 2,
+                                'button_label' => 'Add Item',
+                                'sub_fields' => array(
+                                    array('key' => 'field_re_item_text', 'label' => 'Text', 'name' => 'text', 'type' => 'text'),
+                                    array('key' => 'field_re_item_image', 'label' => 'Image', 'name' => 'image', 'type' => 'image', 'return_format' => 'url'),
+                                    array('key' => 'field_re_item_audio', 'label' => 'Audio', 'name' => 'audio', 'type' => 'file', 'return_format' => 'url'),
                                 ),
                             ),
                         ),

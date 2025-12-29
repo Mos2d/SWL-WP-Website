@@ -662,6 +662,79 @@ get_header(); ?>
                                     }
                                 }
 
+                                // 3.5. Process Rearrange Questions (ADD THIS BLOCK)
+                                if (!empty($assess_data['rearrange_questions']) && is_array($assess_data['rearrange_questions'])) {
+                                    foreach ($assess_data['rearrange_questions'] as $i => $q) {
+                                        
+                                        // A. Category Logic
+                                        $cat = 'general';
+                                        if (!empty($q['criteria_category'])) { $cat = $q['criteria_category']; }
+                                        elseif (!empty($q['criteria'])) { $cat = $q['criteria']; }
+
+                                        // B. Process Answers
+                                        $answers = array();
+                                        if(!empty($q['answers']) && is_array($q['answers'])){
+                                            foreach($q['answers'] as $a){
+                                                // Detect Image URL
+                                                $ans_img_url = '';
+                                                if (!empty($a['image'])) {
+                                                    if (is_array($a['image']) && isset($a['image']['url'])) {
+                                                        $ans_img_url = $a['image']['url'];
+                                                    } elseif (is_numeric($a['image'])) {
+                                                        $ans_img_url = wp_get_attachment_url($a['image']);
+                                                    } elseif (is_string($a['image'])) {
+                                                        $ans_img_url = $a['image'];
+                                                    }
+                                                }
+                                                
+                                                // Detect Audio URL
+                                                $ans_audio_url = '';
+                                                if (!empty($a['audio'])) {
+                                                    if (is_array($a['audio']) && isset($a['audio']['url'])) {
+                                                        $ans_audio_url = $a['audio']['url'];
+                                                    } elseif (is_numeric($a['audio'])) {
+                                                        $ans_audio_url = wp_get_attachment_url($a['audio']);
+                                                    } elseif (is_string($a['audio'])) {
+                                                        $ans_audio_url = $a['audio'];
+                                                    }
+                                                }
+
+                                                $answers[] = array(
+                                                    'text'    => !empty($a['text']) ? $a['text'] : '',
+                                                    'image'   => $ans_img_url,
+                                                    'audio'   => $ans_audio_url,
+                                                    // Rearrange items don't usually have individual 'correct' flags in this context 
+                                                    // as the order determines correctness, but we keep structure
+                                                );
+                                            }
+                                        }
+
+                                        // C. Process Question Click Audio
+                                        $click_audio_url = '';
+                                        if (!empty($q['click_audio'])) {
+                                            if (is_array($q['click_audio']) && isset($q['click_audio']['url'])) {
+                                                $click_audio_url = $q['click_audio']['url']; 
+                                            } elseif (is_numeric($q['click_audio'])) {
+                                                $click_audio_url = wp_get_attachment_url($q['click_audio']); 
+                                            } elseif (is_string($q['click_audio'])) {
+                                                $click_audio_url = $q['click_audio'];
+                                            }
+                                        }
+
+                                        // D. Add to Config with TYPE = 'rearrange'
+                                        $game_config['questions'][] = array(
+                                            'id'       => 'r-' . $i,
+                                            'type'     => 'rearrange', // <--- IMPORTANT: Tells JS to use Rearrange logic
+                                            'text'     => $q['text'],
+                                            'audio'    => !empty($q['audio']) ? $q['audio'] : '',
+                                            'image'    => !empty($q['image']) ? $q['image'] : '',
+                                            'click_audio' => $click_audio_url,
+                                            'criteria_category' => $cat,
+                                            'answers'  => $answers
+                                        );
+                                    }
+                                }
+
                                 // 4. Initialize Script (TARGETING THE THEME CONTAINER)
                                 // Note: We use $game_id which your theme created on line 287
                                 ?>
