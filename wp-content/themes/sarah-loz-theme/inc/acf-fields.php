@@ -950,14 +950,12 @@ function sarah_loz_register_vocabulary_fields() {
         'fields' => array(
             // FRONT IMAGE
             array(
-                'key' => 'field_vocab_front_image',
-                'label' => 'Front Image (Word/Text)',
-                'name' => 'vocab_front_image',
-                'type' => 'image',
-                'instructions' => 'Upload an image of the word text (e.g. calligraphy). If empty, the Title will be used.',
-                'return_format' => 'url',
-                'preview_size' => 'medium',
-                'library' => 'all',
+                'key' => 'field_vocab_front_text',
+                'label' => 'Front Text (The Word)',
+                'name' => 'vocab_front_text',
+                'type' => 'text',
+                'instructions' => 'Type the word here (e.g. أسَدٌ). This will be shown on the front with a cartoon font. If empty, the Title will be used.',
+                'required' => 0, 
             ),
             // BACK IMAGE
             array(

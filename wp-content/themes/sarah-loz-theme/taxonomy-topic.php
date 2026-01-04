@@ -7,7 +7,6 @@
 get_header(); 
 
 // 1. Get Setup Variables
-// ---------------------
 $selected_age_group = function_exists('sarah_loz_get_selected_age_group') ? sarah_loz_get_selected_age_group() : null;
 $current_age_data = function_exists('sarah_loz_get_current_age_group_data') ? sarah_loz_get_current_age_group_data() : null;
 
@@ -82,56 +81,43 @@ $topic_description = get_term_meta($current_topic->term_id, 'topic_description',
             ));
             
             if ($vocab_items) : ?>
-                <div class="flashcard-container-wrapper">
-                    <button id="prev-card" class="nav-btn right"><i class="dashicons dashicons-arrow-right-alt2"></i></button>
-                    
-                    <div class="flashcard-scene">
-                        <?php foreach($vocab_items as $index => $item): 
-                            // GET NEW FIELDS
-                            $audio_url = get_field('vocab_audio', $item->ID);
-                            $front_image = get_field('vocab_front_image', $item->ID);
-                            $back_image = get_field('vocab_back_image', $item->ID);
-                            $phonetic = get_field('vocab_phonetic', $item->ID);
-                        ?>
-                        <div class="flashcard <?php echo $index === 0 ? 'active' : ''; ?>" 
-                             data-index="<?php echo $index; ?>" 
-                             data-audio="<?php echo esc_url($audio_url); ?>">
-                            
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front">
-                                    <div class="audio-icon"><i class="dashicons dashicons-controls-volumeon"></i></div>
-                                    
-                                    <?php if($front_image): ?>
-                                        <div class="front-image-wrapper" style="max-width:80%; height:150px; margin: 10px auto;">
-                                            <img src="<?php echo esc_url($front_image); ?>" alt="Word Text" style="width:100%; height:100%; object-fit:contain;">
-                                        </div>
-                                    <?php else: ?>
-                                        <h2 class="word-title"><?php echo esc_html($item->post_title); ?></h2>
-                                    <?php endif; ?>
+                
+                <div class="vocab-controls" style="text-align: left; margin-bottom: 20px; padding: 0 10px;">
+                    <button id="reset-cards" class="action-btn">
+                        <i class="dashicons dashicons-image-rotate"></i> <?php _e('إعادة قلب البطاقات', 'sarah-loz'); ?>
+                    </button>
+                </div>
 
+                <div class="vocabulary-grid">
+                    <?php foreach($vocab_items as $item): 
+                        $audio_url = get_field('vocab_audio', $item->ID);
+                        $back_image = get_field('vocab_back_image', $item->ID);   
+                        $phonetic = get_field('vocab_phonetic', $item->ID);
+                        $front_text = get_field('vocab_front_text', $item->ID);
+                        $display_text = $front_text ? $front_text : $item->post_title;
+                    ?>
+                    
+                    <div class="vocab-card-wrapper">
+                        <div class="flashcard" data-audio="<?php echo esc_url($audio_url); ?>">
+                            <div class="flashcard-inner">
+                                
+                                <div class="flashcard-front">
+                                    <h2 class="cartoon-word"><?php echo esc_html($display_text); ?></h2>
                                     <?php if($phonetic): ?><p class="phonetic"><?php echo esc_html($phonetic); ?></p><?php endif; ?>
-                                    <span class="tap-hint"><?php _e('اضغط للاستماع', 'sarah-loz'); ?></span>
                                 </div>
                                 
                                 <div class="flashcard-back">
                                     <?php if($back_image): ?>
                                         <img src="<?php echo esc_url($back_image); ?>" alt="<?php echo esc_attr($item->post_title); ?>">
                                     <?php endif; ?>
-                                    <div class="word-label"><?php echo esc_html($item->post_title); ?></div>
                                 </div>
                             </div>
                         </div>
-                        <?php endforeach; ?>
                     </div>
-
-                    <button id="next-card" class="nav-btn left"><i class="dashicons dashicons-arrow-left-alt2"></i></button>
+                    <?php endforeach; ?>
                 </div>
                 
                 <audio id="vocab-player" style="display:none;"></audio>
-                
-                <div class="card-counter">
-                    <span id="current-card-num">1</span> / <?php echo count($vocab_items); ?>
-                </div>
 
             <?php else: ?>
                 <div class="no-content-message" style="text-align: center; padding: 40px; color: #666;">
@@ -142,12 +128,10 @@ $topic_description = get_term_meta($current_topic->term_id, 'topic_description',
 
         <div id="content-grid" class="content-grid">
             <?php
-            // Fetch all other content types
             $content_items = get_topic_content_with_age_filtering($current_topic->term_id, $selected_age_group);
             
             if (!empty($content_items)) : 
                 foreach ($content_items as $item) : 
-                    // Skip vocabulary in the main grid (shown above)
                     if($item->post_type === 'vocabulary') continue;
                     
                     $item_type = $item->post_type;
@@ -211,11 +195,8 @@ $topic_description = get_term_meta($current_topic->term_id, 'topic_description',
 
 <?php
 /**
- * 6. Helper Functions
- * -------------------
+ * Helper Functions
  */
-
-// Function to fetch content with age filtering
 function get_topic_content_with_age_filtering($topic_id, $selected_age_group) {
     $args = array(
         'post_type' => array('game', 'activity', 'video', 'theater', 'practice', 'broadcast', 'product', 'vocabulary'),
@@ -229,12 +210,9 @@ function get_topic_content_with_age_filtering($topic_id, $selected_age_group) {
             ),
         ),
     );
-    
-    // Apply age filter if selected
     if ($selected_age_group && function_exists('sarah_loz_get_age_filter_meta_query')) {
         $args['meta_query'] = sarah_loz_get_age_filter_meta_query($selected_age_group);
     } elseif ($selected_age_group) {
-        // Fallback simplified meta query
         $args['meta_query'] = array(
             'relation' => 'OR',
             array('key' => 'age_range', 'value' => 'all', 'compare' => '='),
@@ -242,67 +220,77 @@ function get_topic_content_with_age_filtering($topic_id, $selected_age_group) {
             array('key' => 'age_range', 'compare' => 'NOT EXISTS')
         );
     }
-    
     return get_posts($args);
 }
 
-// Function to get Arabic labels
 function get_post_type_label_arabic($post_type) {
     $labels = array(
-        'video' => 'فيديو',
-        'activity' => 'نشاط',
-        'game' => 'لعبة',
-        'theater' => 'مسرحية',
-        'practice' => 'تدريب',
-        'broadcast' => 'بث مباشر',
-        'product' => 'منتج',
-        'vocabulary' => 'مفردات'
+        'video' => 'فيديو', 'activity' => 'نشاط', 'game' => 'لعبة',
+        'theater' => 'مسرحية', 'practice' => 'تدريب', 'broadcast' => 'بث مباشر',
+        'product' => 'منتج', 'vocabulary' => 'مفردات'
     );
     return isset($labels[$post_type]) ? $labels[$post_type] : ucfirst($post_type);
 }
 ?>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
 /* Basic Page Layout */
 .topic-archive-page { padding: 40px 0; background: #f8f9fa; min-height: 80vh; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; }
-@media (max-width: 768px) { .content-grid { grid-template-columns: 1fr; } .topic-info-row { flex-direction: column; text-align: center; } }
 
 /* Tabs */
 .filter-tab { padding: 12px 24px; background: #fff; color: #333; border: 1px solid #eee; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
 .filter-tab:hover { background: #f0f0f0; }
 .filter-tab.active { background: #007cba; color: white; border-color: #007cba; }
 
-/* Flashcard Wrapper */
-.flashcard-container-wrapper {
-    display: flex;
+/* Action Button */
+.action-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-flex;
     align-items: center;
+    gap: 8px;
+}
+.action-btn:hover { background: #5a6268; transform: translateY(-1px); }
+
+/* --- GRID LAYOUT FOR FLASHCARDS --- */
+.vocabulary-grid {
+    display: grid;
+    /* Responsive grid: min 300px per card, fits as many as possible */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
     justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    padding: 20px 0;
 }
 
-/* 3D Scene */
-.flashcard-scene {
-    width: 320px;
-    height: 420px;
+/* Individual Card Container */
+.vocab-card-wrapper {
+    width: 100%;
+    /* Max width to maintain card shape, but responsive */
+    max-width: 320px; 
+    height: 420px;    
     perspective: 1000px;
-    position: relative;
+    margin: 0 auto;   /* Center in the grid cell */
 }
 
 /* The Card */
 .flashcard {
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
     cursor: pointer;
+    display: block; /* Always visible in grid */
 }
-.flashcard.active { display: block; }
 
 .flashcard-inner {
     position: relative;
@@ -311,7 +299,7 @@ function get_post_type_label_arabic($post_type) {
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     border-radius: 20px;
 }
 
@@ -334,34 +322,59 @@ function get_post_type_label_arabic($post_type) {
     justify-content: center;
     background: white;
     overflow: hidden;
+    padding: 20px;
 }
 
 /* Front Design */
 .flashcard-front {
     border: 3px solid #007cba;
     color: #333;
+    justify-content: center;
 }
+.cartoon-word {
+    /* Use Lalezar for thick cartoon look */
+    font-family: 'Lalezar', cursive !important;
+    font-size: 6.5rem;
+    font-weight: 400 !important;
+    color: #007cba;
+    margin: 0;
+    line-height: 1.1;
+}
+
 .word-title {
     font-size: 2.8rem;
     color: #007cba;
     margin: 15px 0;
     font-weight: bold;
 }
+.front-image-wrapper {
+    width: 100%;
+    height: 160px; /* Limit height for text image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.front-image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
 .phonetic {
     font-size: 1.2rem;
     color: #888;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-family: monospace;
 }
 .audio-icon {
-    font-size: 48px;
+    font-size: 40px;
     color: #eee;
     margin-bottom: 10px;
 }
 .tap-hint {
     font-size: 0.9rem;
     color: #aaa;
-    margin-top: 30px;
+    margin-top: auto; /* Push to bottom */
 }
 
 /* Back Design */
@@ -369,11 +382,14 @@ function get_post_type_label_arabic($post_type) {
     transform: rotateY(180deg);
     border: 3px solid #007cba;
     padding: 0;
+    justify-content: flex-start; 
+    background: white;
 }
 .flashcard-back img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain; 
+    object-position: top center;
 }
 .word-label {
     position: absolute;
@@ -388,24 +404,13 @@ function get_post_type_label_arabic($post_type) {
     border-top: 1px solid #eee;
 }
 
-/* Buttons */
-.nav-btn {
-    background: white;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    cursor: pointer;
-    font-size: 24px;
-    color: #555;
-    transition: 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Mobile Fixes */
+@media (max-width: 768px) {
+    .content-grid { grid-template-columns: 1fr; }
+    .vocabulary-grid { grid-template-columns: 1fr; } 
+    .topic-info-row { flex-direction: column; text-align: center; }
+    .cartoon-word { font-size: 4rem; }
 }
-.nav-btn:hover { background: #007cba; color: white; transform: scale(1.1); }
-.card-counter { text-align: center; font-size: 1.2rem; color: #777; font-weight: bold; }
 </style>
 
 <script>
@@ -429,7 +434,7 @@ jQuery(document).ready(function($) {
                 $('#content-grid').fadeIn(200);
             });
             
-            // Filter grid items
+            // Filter standard grid items
             if(type === 'all') {
                 $('.content-item').fadeIn();
             } else {
@@ -439,47 +444,15 @@ jQuery(document).ready(function($) {
         }
     });
 
-    // 2. FLASHCARDS INTERACTION
-    var cards = $('.flashcard');
-    var currentIndex = 0;
+    // 2. FLASHCARDS INTERACTION (Grid Mode)
     var audioPlayer = document.getElementById('vocab-player');
-    var navButtons = $('.nav-btn'); // Select both buttons
 
-    // CHECK: Disable buttons if only 1 card exists
-    if (cards.length <= 1) {
-        navButtons.prop('disabled', true)
-                  .css({'opacity': '0.3', 'cursor': 'default', 'pointer-events': 'none'});
-    }
-
-    function showCard(index) {
-        cards.removeClass('active flipped').hide();
-        cards.eq(index).fadeIn().addClass('active');
-        $('#current-card-num').text(index + 1);
-    }
-
-    // Navigation
-    $('#next-card').click(function() {
-        if (cards.length <= 1) return; // Extra safety check
-
-        if (currentIndex < cards.length - 1) currentIndex++;
-        else currentIndex = 0;
-        showCard(currentIndex);
-    });
-
-    $('#prev-card').click(function() {
-        if (cards.length <= 1) return; // Extra safety check
-
-        if (currentIndex > 0) currentIndex--;
-        else currentIndex = cards.length - 1;
-        showCard(currentIndex);
-    });
-
-    // Card Click (Flip & Audio)
+    // Simple Click Event for ANY card in the grid
     $('.flashcard').click(function() {
         var card = $(this);
         var audioSrc = card.data('audio');
         
-        // Flip
+        // Flip this specific card
         card.toggleClass('flipped');
         
         // Play Audio
@@ -492,6 +465,18 @@ jQuery(document).ready(function($) {
             if (playPromise !== undefined) {
                 playPromise.catch(error => { console.log("Audio play prevented"); });
             }
+        }
+    });
+
+    // 3. RESET BUTTON LOGIC (New)
+    $('#reset-cards').click(function() {
+        // Remove flipped class from all cards
+        $('.flashcard').removeClass('flipped');
+        
+        // Stop any playing audio
+        if(audioPlayer) {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
         }
     });
 });
