@@ -141,7 +141,7 @@ function sarah_loz_register_taxonomies() {
     }
 
     // Topics Taxonomy - Main subject classification for all content types
-    register_taxonomy('topic', array('game', 'activity', 'video', 'theater', 'practice', 'broadcast', 'product'), array(
+    register_taxonomy('topic', array('game', 'activity', 'video', 'theater', 'practice', 'broadcast', 'product', 'vocabulary'), array(
         'labels' => array(
             'name' => __('الموضوعات', 'sarah-loz'),
             'singular_name' => __('الموضوع', 'sarah-loz'),

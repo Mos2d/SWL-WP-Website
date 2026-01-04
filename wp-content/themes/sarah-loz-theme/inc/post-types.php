@@ -14,12 +14,10 @@ function sarah_loz_register_post_types() {
             'name' => __('Games', 'sarah-loz'),
             'singular_name' => __('Game', 'sarah-loz'),
             'menu_name' => __('Games', 'sarah-loz'),
-            'name_admin_bar' => __('Game', 'sarah-loz'),
+            'all_items' => __('All Games', 'sarah-loz'),
             'add_new' => __('Add New', 'sarah-loz'),
             'add_new_item' => __('Add New Game', 'sarah-loz'),
             'edit_item' => __('Edit Game', 'sarah-loz'),
-            'view_item' => __('View Game', 'sarah-loz'),
-            'all_items' => __('All Games', 'sarah-loz'),
         ),
         'public' => true,
         'has_archive' => true,
@@ -36,12 +34,10 @@ function sarah_loz_register_post_types() {
             'name' => __('Activities', 'sarah-loz'),
             'singular_name' => __('Activity', 'sarah-loz'),
             'menu_name' => __('Activities', 'sarah-loz'),
-            'name_admin_bar' => __('Activity', 'sarah-loz'),
+            'all_items' => __('All Activities', 'sarah-loz'),
             'add_new' => __('Add New', 'sarah-loz'),
             'add_new_item' => __('Add New Activity', 'sarah-loz'),
             'edit_item' => __('Edit Activity', 'sarah-loz'),
-            'view_item' => __('View Activity', 'sarah-loz'),
-            'all_items' => __('All Activities', 'sarah-loz'),
         ),
         'public' => true,
         'has_archive' => true,
@@ -58,34 +54,30 @@ function sarah_loz_register_post_types() {
             'name' => __('Videos', 'sarah-loz'),
             'singular_name' => __('Video', 'sarah-loz'),
             'menu_name' => __('Videos', 'sarah-loz'),
-            'name_admin_bar' => __('Video', 'sarah-loz'),
+            'all_items' => __('All Videos', 'sarah-loz'),
             'add_new' => __('Add New', 'sarah-loz'),
             'add_new_item' => __('Add New Video', 'sarah-loz'),
             'edit_item' => __('Edit Video', 'sarah-loz'),
-            'view_item' => __('View Video', 'sarah-loz'),
-            'all_items' => __('All Videos', 'sarah-loz'),
         ),
         'public' => true,
         'has_archive' => true,
         'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'comments'),
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
         'menu_icon' => 'dashicons-video-alt3',
         'rewrite' => array('slug' => 'videos'),
         'taxonomies' => array('topic'),
     ));
 
-    // Practices Post Type (تدريبات)
+    // Practices Post Type
     register_post_type('practice', array(
         'labels' => array(
             'name' => __('Practices', 'sarah-loz'),
             'singular_name' => __('Practice', 'sarah-loz'),
             'menu_name' => __('تدريبات', 'sarah-loz'),
-            'name_admin_bar' => __('Practice', 'sarah-loz'),
+            'all_items' => __('All Practices', 'sarah-loz'),
             'add_new' => __('Add New', 'sarah-loz'),
             'add_new_item' => __('Add New Practice', 'sarah-loz'),
             'edit_item' => __('Edit Practice', 'sarah-loz'),
-            'view_item' => __('View Practice', 'sarah-loz'),
-            'all_items' => __('All Practices', 'sarah-loz'),
         ),
         'public' => true,
         'has_archive' => true,
@@ -96,23 +88,21 @@ function sarah_loz_register_post_types() {
         'taxonomies' => array('topic'),
     ));
 
-    // Theater Post Type (المسرحيات)
+    // Theater Post Type
     register_post_type('theater', array(
         'labels' => array(
-            'name' => __('المسرحيات', 'sarah-loz'),
-            'singular_name' => __('مسرحية', 'sarah-loz'),
+            'name' => __('Theaters', 'sarah-loz'),
+            'singular_name' => __('Theater', 'sarah-loz'),
             'menu_name' => __('المسرحيات', 'sarah-loz'),
-            'name_admin_bar' => __('مسرحية', 'sarah-loz'),
-            'add_new' => __('إضافة جديدة', 'sarah-loz'),
-            'add_new_item' => __('إضافة مسرحية جديدة', 'sarah-loz'),
-            'edit_item' => __('تعديل المسرحية', 'sarah-loz'),
-            'view_item' => __('عرض المسرحية', 'sarah-loz'),
-            'all_items' => __('جميع المسرحيات', 'sarah-loz'),
+            'all_items' => __('All Theaters', 'sarah-loz'),
+            'add_new' => __('Add New', 'sarah-loz'),
+            'add_new_item' => __('Add New Theater', 'sarah-loz'),
+            'edit_item' => __('Edit Theater', 'sarah-loz'),
         ),
         'public' => true,
         'has_archive' => true,
         'show_in_rest' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'comments'),
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
         'menu_icon' => 'dashicons-admin-site-alt3',
         'rewrite' => array('slug' => 'theaters'),
         'taxonomies' => array('topic'),
@@ -124,12 +114,10 @@ function sarah_loz_register_post_types() {
             'name' => __('Broadcasts', 'sarah-loz'),
             'singular_name' => __('Broadcast', 'sarah-loz'),
             'menu_name' => __('Broadcasts', 'sarah-loz'),
-            'name_admin_bar' => __('Broadcast', 'sarah-loz'),
+            'all_items' => __('All Broadcasts', 'sarah-loz'),
             'add_new' => __('Add New', 'sarah-loz'),
             'add_new_item' => __('Add New Broadcast', 'sarah-loz'),
             'edit_item' => __('Edit Broadcast', 'sarah-loz'),
-            'view_item' => __('View Broadcast', 'sarah-loz'),
-            'all_items' => __('All Broadcasts', 'sarah-loz'),
         ),
         'public' => true,
         'has_archive' => true,
@@ -138,6 +126,26 @@ function sarah_loz_register_post_types() {
         'menu_icon' => 'dashicons-megaphone',
         'rewrite' => array('slug' => 'broadcasts'),
         'taxonomies' => array('topic'),
+    ));
+
+    // VOCABULARY POST TYPE (New)
+    register_post_type('vocabulary', array(
+        'labels' => array(
+            'name' => __('Vocabulary', 'sarah-loz'),
+            'singular_name' => __('Word', 'sarah-loz'),
+            'menu_name' => __('المفردات', 'sarah-loz'),
+            'all_items' => __('All Words', 'sarah-loz'),
+            'add_new' => __('Add New', 'sarah-loz'),
+            'add_new_item' => __('Add New Word', 'sarah-loz'),
+            'edit_item' => __('Edit Word', 'sarah-loz'),
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'show_in_rest' => true,
+        'supports' => array('title'), // We removed 'thumbnail' since we use custom fields now
+        'menu_icon' => 'dashicons-translation',
+        'rewrite' => array('slug' => 'vocabulary'),
+        'taxonomies' => array('topic'), // Explicitly connected to Topic
     ));
 }
 add_action('init', 'sarah_loz_register_post_types');

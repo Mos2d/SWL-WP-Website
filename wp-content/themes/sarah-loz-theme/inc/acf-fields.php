@@ -61,6 +61,7 @@ class Sarah_Loz_ACF_Fields {
         add_action('init', array($this, 'register_game_fields'), 15);
         add_action('init', array($this, 'register_theater_fields'), 15);
         add_action('init', array($this, 'register_common_age_fields'), 15);
+        add_action('init', array($this, 'register_vocabulary_fields'), 15);
         
         // Add filter to load age group choices dynamically
         add_filter('acf/load_field/name=age_range', array($this, 'load_age_group_choices'));
@@ -708,6 +709,45 @@ class Sarah_Loz_ACF_Fields {
     }
 
     /**
+     * Register Vocabulary Fields
+     */
+    public function register_vocabulary_fields() {
+        if (!function_exists('acf_add_local_field_group')) return;
+
+        acf_add_local_field_group(array(
+            'key' => 'group_vocabulary_fields',
+            'title' => 'Word Details',
+            'fields' => array(
+                array(
+                    'key' => 'field_vocab_audio',
+                    'label' => 'Pronunciation Audio',
+                    'name' => 'vocab_audio',
+                    'type' => 'file',
+                    'instructions' => 'Upload the audio pronunciation for this word',
+                    'return_format' => 'url',
+                    'mime_types' => 'mp3,wav,ogg,m4a',
+                ),
+                array(
+                    'key' => 'field_vocab_phonetic',
+                    'label' => 'Phonetic/Subtitle (Optional)',
+                    'name' => 'vocab_phonetic',
+                    'type' => 'text',
+                    'instructions' => 'e.g. /kat/',
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => 'vocabulary',
+                    ),
+                ),
+            ),
+        ));
+    }
+
+    /**
      * Load age group choices dynamically for ACF fields
      */
     public function load_age_group_choices($field) {
@@ -896,6 +936,76 @@ function sarah_loz_register_broadcast_fields() {
     ));
 }
 add_action('acf/init', 'sarah_loz_register_broadcast_fields', 20); 
+/**
+ * Register Vocabulary Fields
+ */
+function sarah_loz_register_vocabulary_fields() {
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    acf_add_local_field_group(array(
+        'key' => 'group_vocabulary_fields',
+        'title' => 'Word Flashcard Details',
+        'fields' => array(
+            // FRONT IMAGE
+            array(
+                'key' => 'field_vocab_front_image',
+                'label' => 'Front Image (Word/Text)',
+                'name' => 'vocab_front_image',
+                'type' => 'image',
+                'instructions' => 'Upload an image of the word text (e.g. calligraphy). If empty, the Title will be used.',
+                'return_format' => 'url',
+                'preview_size' => 'medium',
+                'library' => 'all',
+            ),
+            // BACK IMAGE
+            array(
+                'key' => 'field_vocab_back_image',
+                'label' => 'Back Image (Meaning/Object)',
+                'name' => 'vocab_back_image',
+                'type' => 'image',
+                'instructions' => 'Upload the image representing the word (e.g. picture of a Lion).',
+                'return_format' => 'url',
+                'preview_size' => 'medium',
+                'library' => 'all',
+                'required' => 1,
+            ),
+            // AUDIO
+            array(
+                'key' => 'field_vocab_audio',
+                'label' => 'Pronunciation Audio',
+                'name' => 'vocab_audio',
+                'type' => 'file',
+                'instructions' => 'Upload the pronunciation audio file.',
+                'return_format' => 'url',
+                'library' => 'all',
+                'mime_types' => 'mp3,wav,ogg,m4a',
+                'required' => 1,
+            ),
+            // OPTIONAL PHONETIC/TEXT
+            array(
+                'key' => 'field_vocab_phonetic',
+                'label' => 'Phonetic/Subtitle (Optional)',
+                'name' => 'vocab_phonetic',
+                'type' => 'text',
+                'instructions' => 'e.g. /kat/ or extra text to show on front.',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'vocabulary',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+    ));
+}
+add_action('acf/init', 'sarah_loz_register_vocabulary_fields', 20);
 
 /**
  * FORCE UPDATE: Assessment Game Criteria List

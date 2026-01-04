@@ -20,7 +20,7 @@ $current_age_data = function_exists('sarah_loz_get_current_age_group_data') ? sa
                 <div class="age-indicator" style="margin-top: 15px; padding: 10px 20px; background: #e3f2fd; border-radius: 25px; display: inline-block;">
                     <span style="color: #1976d2; font-weight: 500;">
                         <i class="fas fa-child" style="margin-right: 8px;"></i>
-                        <?php echo esc_html($current_age_data['name']); ?> - <?php echo esc_html($selected_age_group); ?> سنوات
+                        <?php echo esc_html($current_age_data['label']); ?> - <?php echo esc_html($selected_age_group); ?> سنوات
                     </span>
                 </div>
             <?php endif; ?>
