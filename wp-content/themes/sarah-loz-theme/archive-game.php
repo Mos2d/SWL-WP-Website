@@ -101,7 +101,7 @@ get_header(); ?>
                 <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow transform hover:-translate-y-2 duration-300 border-2 border-primary/20">
                     <?php if (has_post_thumbnail()) : ?>
                         <div class="aspect-w-16 aspect-h-9 relative overflow-hidden">
-                            <?php the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover']); ?>
+                            <?php the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover']); ?>
                             <div class="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent"></div>
                             <?php if ($current_age_data) : ?>
                                 <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold">

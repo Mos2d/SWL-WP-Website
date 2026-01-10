@@ -955,7 +955,7 @@ function sarah_loz_register_vocabulary_fields() {
                 'name' => 'vocab_front_text',
                 'type' => 'text',
                 'instructions' => 'Type the word here (e.g. أسَدٌ). This will be shown on the front with a cartoon font. If empty, the Title will be used.',
-                'required' => 0, 
+                'required' => 1, 
             ),
             // BACK IMAGE
             array(
@@ -967,7 +967,7 @@ function sarah_loz_register_vocabulary_fields() {
                 'return_format' => 'url',
                 'preview_size' => 'medium',
                 'library' => 'all',
-                'required' => 1,
+                'required' => 0,
             ),
             // AUDIO
             array(
