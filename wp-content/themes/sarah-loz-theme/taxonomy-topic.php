@@ -95,6 +95,22 @@ $topic_description = get_term_meta($current_topic->term_id, 'topic_description',
                         $phonetic = get_field('vocab_phonetic', $item->ID);
                         $front_text = get_field('vocab_front_text', $item->ID);
                         $display_text = $front_text ? $front_text : $item->post_title;
+                        // --- LOGIC TO COLOR FIRST LETTER (Ignoring Al-) ---
+                        $display_text = trim($display_text);
+                        $final_html = '';
+                        
+                        if (mb_substr($display_text, 0, 2, 'UTF-8') === 'ال') {
+                            $part_al   = mb_substr($display_text, 0, 2, 'UTF-8');
+                            $part_char = mb_substr($display_text, 2, 1, 'UTF-8');
+                            $part_rest = mb_substr($display_text, 3, null, 'UTF-8');
+                            
+                            $final_html = esc_html($part_al) . '<span class="vocab-highlight">' . esc_html($part_char) . '</span>' . esc_html($part_rest);
+                        } else {
+                            $part_char = mb_substr($display_text, 0, 1, 'UTF-8');
+                            $part_rest = mb_substr($display_text, 1, null, 'UTF-8');
+                            
+                            $final_html = '<span class="vocab-highlight">' . esc_html($part_char) . '</span>' . esc_html($part_rest);
+                        }
                     ?>
                     
                     <div class="vocab-card-wrapper">
@@ -102,7 +118,7 @@ $topic_description = get_term_meta($current_topic->term_id, 'topic_description',
                             <div class="flashcard-inner">
                                 
                                 <div class="flashcard-front">
-                                    <h2 class="cartoon-word"><?php echo esc_html($display_text); ?></h2>
+                                    <h2 class="cartoon-word"><?php echo $final_html; ?></h2>
                                     <?php if($phonetic): ?><p class="phonetic"><?php echo esc_html($phonetic); ?></p><?php endif; ?>
                                 </div>
                                 
@@ -247,7 +263,7 @@ function get_post_type_label_arabic($post_type) {
 
 /* Action Button */
 .action-btn {
-    background: #6c757d;
+    background: #007cba;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -266,7 +282,7 @@ function get_post_type_label_arabic($post_type) {
     display: grid;
     /* Responsive grid: min 300px per card, fits as many as possible */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 60px;
     justify-content: center;
     padding: 20px 0;
 }
@@ -275,7 +291,7 @@ function get_post_type_label_arabic($post_type) {
 .vocab-card-wrapper {
     width: 100%;
     /* Max width to maintain card shape, but responsive */
-    max-width: 320px; 
+    max-width: 340px; 
     height: 420px;    
     perspective: 1000px;
     margin: 0 auto;   /* Center in the grid cell */
@@ -334,13 +350,15 @@ function get_post_type_label_arabic($post_type) {
 .cartoon-word {
     /* Use Lalezar for thick cartoon look */
     font-family: 'Lalezar', cursive !important;
-    font-size: 6.5rem;
+    font-size: 6rem;
     font-weight: 400 !important;
     color: #007cba;
     margin: 0;
     line-height: 1.1;
 }
-
+h2.cartoon-word .vocab-highlight {
+    color: #e74c3c !important; /* Nice Red */
+}
 .word-title {
     font-size: 2.8rem;
     color: #007cba;

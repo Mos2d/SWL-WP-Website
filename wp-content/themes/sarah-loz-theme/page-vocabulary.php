@@ -104,12 +104,28 @@ sort($letters);
                     $phonetic = get_field('vocab_phonetic', $item->ID);
                     $front_text = get_field('vocab_front_text', $item->ID);
                     $display_text = $front_text ? $front_text : $item->post_title;
+                    // --- LOGIC TO COLOR FIRST LETTER (Ignoring Al-) ---
+                    $display_text = trim($display_text);
+                    $final_html = '';
+                    
+                    if (mb_substr($display_text, 0, 2, 'UTF-8') === 'ال') {
+                        $part_al   = mb_substr($display_text, 0, 2, 'UTF-8');
+                        $part_char = mb_substr($display_text, 2, 1, 'UTF-8');
+                        $part_rest = mb_substr($display_text, 3, null, 'UTF-8');
+                        
+                        $final_html = esc_html($part_al) . '<span class="vocab-highlight">' . esc_html($part_char) . '</span>' . esc_html($part_rest);
+                    } else {
+                        $part_char = mb_substr($display_text, 0, 1, 'UTF-8');
+                        $part_rest = mb_substr($display_text, 1, null, 'UTF-8');
+                        
+                        $final_html = '<span class="vocab-highlight">' . esc_html($part_char) . '</span>' . esc_html($part_rest);
+                    }
             ?>
                     <div class="vocab-card-wrapper" data-letter="<?php echo esc_attr($letter); ?>">
                         <div class="flashcard" data-audio="<?php echo esc_url($audio_url); ?>">
                             <div class="flashcard-inner">
                                 <div class="flashcard-front">
-                                    <h2 class="cartoon-word"><?php echo esc_html($display_text); ?></h2>
+                                    <h2 class="cartoon-word"><?php echo $final_html; ?></h2>
                                     <?php if($phonetic): ?><p class="phonetic"><?php echo esc_html($phonetic); ?></p><?php endif; ?>
                                 </div>
                                 <div class="flashcard-back">
@@ -168,11 +184,12 @@ sort($letters);
 /* --- TABS DESIGN (Folder Style) --- */
 .tabs-container-wrapper {
     background: #fff;
-    padding: 15px 20px;
+    padding: 15px 20px 1px 20px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     margin-bottom: 30px;
     overflow-x: auto; /* Scrollable on mobile */
+    overflow-y: hidden;
 }
 
 .alphabet-tabs {
@@ -229,7 +246,7 @@ sort($letters);
     margin-bottom: 20px;
 }
 .action-btn {
-    background: #6c757d;
+    background: #007cba;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -246,16 +263,16 @@ sort($letters);
 /* Grid & Cards (Reused from Topic Page) */
 .vocabulary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 60px;
     justify-content: center;
     padding-bottom: 60px;
 }
 
 .vocab-card-wrapper {
     width: 100%;
-    max-width: 320px;
-    height: 380px; /* Slightly smaller than topic page for density */
+    max-width: 340px;
+    height: 420px; 
     perspective: 1000px;
     margin: 0 auto;
 }
@@ -268,10 +285,9 @@ sort($letters);
     transform-style: preserve-3d;
     transition: transform 0.6s;
     cursor: pointer;
+    display: block; /* Always visible in grid */
 }
-.flashcard.flipped .flashcard-inner {
-    transform: rotateY(180deg);
-}
+
 .flashcard-inner {
     position: relative;
     width: 100%;
@@ -279,8 +295,11 @@ sort($letters);
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     border-radius: 20px;
+}
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
 }
 .flashcard-front, .flashcard-back {
     position: absolute;
@@ -298,36 +317,69 @@ sort($letters);
     padding: 15px;
     overflow: hidden;
 }
+/* Front Design */
 .flashcard-front {
-    background: white;
+    border: 3px solid #007cba;
+    color: #333;
+    justify-content: center;
 }
 .cartoon-word {
+    /* Use Lalezar for thick cartoon look */
     font-family: 'Lalezar', cursive !important;
-    font-size: 6.5rem;
+    font-size: 6rem;
     font-weight: 400 !important;
     color: #007cba;
     margin: 0;
-    line-height: 1;
+    line-height: 1.1;
+}
+h2.cartoon-word .vocab-highlight {
+    color: #e74c3c !important; /* Nice Red */
 }
 .phonetic {
     font-size: 1.2rem;
-    color: #999;
-    margin-top: 10px;
+    color: #888;
+    margin-bottom: 10px;
 }
 .flashcard-back {
     transform: rotateY(180deg);
+    border: 3px solid #007cba;
     padding: 0;
+    justify-content: flex-start; 
+    background: white;
 }
 .flashcard-back img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 17px; /* Match container - border */
+    height: auto;
+    object-fit: contain; 
+    object-position: top center;
+}
+.word-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.9);
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    border-top: 1px solid #eee;
 }
 
 /* Animation: Hidden State */
 .vocab-card-wrapper.hidden {
     display: none;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 480px) {
+    .vocabulary-grid {
+        grid-template-columns: 1fr;
+    }
+    .vocab-card-wrapper {
+        height: 320px;
+    }
+    .cartoon-word { font-size: 4rem; }
 }
 </style>
 
