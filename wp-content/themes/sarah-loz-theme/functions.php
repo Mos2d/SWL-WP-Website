@@ -40,7 +40,7 @@ add_action('after_setup_theme', 'sarah_loz_setup');
 // Enqueue scripts and styles
 function sarah_loz_scripts() {
     // Enqueue Tailwind CSS - using a more reliable CDN
-    wp_enqueue_style('tailwindcss', 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css', array(), '2.2.19');
+    wp_enqueue_script('tailwindcss-cdn', 'https://cdn.tailwindcss.com', array(), '3.4.0', false);
     
     // Enqueue Google Fonts with display=swap for better performance
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Harmattan:wght@300;400;500;700&display=swap', array(), null);
@@ -195,14 +195,14 @@ function sarah_loz_tailwind_config() {
         tailwind.config = {
             theme: {
                 colors: {
-                    primary: "#22c55e",
-                    secondary: "#1ddede",
-                    accent: "#f8c709",
-                    highlight: "#aff124",
-                    light: "#f9f9f6",
-                    bright: "#f9f31e",
-                    soft: "#ff66cc",
-                    dark: "#231f20",
+                    primary: "#3B82F6",   // Bright Blue
+                    secondary: "#EC4899", // Hot Pink
+                    accent: "#F59E0B",    // Golden Yellow
+                    highlight: "#10B981", // Emerald Green
+                    light: "#F3F4F6",     // Cool Light Gray
+                    bright: "#FDE047",    // Bright Lemon
+                    soft: "#F472B6",      // Soft Pink
+                    dark: "#1F2937",      // Dark Gray
                     white: "#ffffff",
                 },
                 extend: {
@@ -220,10 +220,10 @@ function sarah_loz_tailwind_config() {
                         },
                     },
                     backgroundImage: {
-                        'gradient-primary': 'linear-gradient(135deg, #ec0a74, #ff66cc)',
-                        'gradient-secondary': 'linear-gradient(135deg, #1ddede, #aff124)',
-                        'gradient-accent': 'linear-gradient(135deg, #f8c709, #f9f31e)',
-                        'gradient-dark': 'linear-gradient(135deg, #231f20, #444444)',
+                        'gradient-primary': 'linear-gradient(135deg, #3B82F6, #EC4899)',
+                        'gradient-secondary': 'linear-gradient(135deg, #EC4899, #F59E0B)',
+                        'gradient-accent': 'linear-gradient(135deg, #F59E0B, #FDE047)',
+                        'gradient-dark': 'linear-gradient(135deg, #1F2937, #4B5563)',
                     },
                 },
             },
@@ -270,42 +270,39 @@ function sarah_loz_tailwind_config() {
         }
         
         :root {
-            --color-primary: #22c55e;
-            --color-primary-light: #ff66cc;
-            --color-secondary: #1ddede;
-            --color-secondary-light: #aff124;
-            --color-accent: #f8c709;
-            --color-accent-light: #f9f31e;
-            --color-highlight: #aff124;
-            --color-light: #f9f9f6;
-            --color-bright: #f9f31e;
-            --color-soft: #ff66cc;
-            --color-dark: #231f20;
+            --color-primary: #3B82F6;
+            --color-secondary: #EC4899;
+            --color-accent: #F59E0B;
+            --color-highlight: #10B981;
+            --color-light: #F3F4F6;
+            --color-bright: #FDE047;
+            --color-soft: #F472B6;
+            --color-dark: #1F2937;
             --color-white: #ffffff;
         }
         
         /* Direct color class definitions in case Tailwind doesn't apply them properly */
-        .text-primary { color: #22c55e !important; }
-        .text-secondary { color: #1ddede !important; }
-        .text-accent { color: #f8c709 !important; }
-        .text-highlight { color: #aff124 !important; }
-        .text-light { color: #f9f9f6 !important; }
+        .text-primary { color: #3B82F6 !important; }
+        .text-secondary { color: #EC4899 !important; }
+        .text-accent { color: #F59E0B !important; }
+        .text-highlight { color: #10B981 !important; }
+        .text-light { color: #F3F4F6 !important; }
         .text-bright { color: #f9f31e !important; }
         .text-soft { color: #ff66cc !important; }
         .text-dark { color: #231f20 !important; }
         .text-white { color: #ffffff !important; }
         
-        .bg-primary { background-color: #22c55e !important; }
-        .bg-secondary { background-color: #1ddede !important; }
-        .bg-accent { background-color: #f8c709 !important; }
-        .bg-highlight { background-color: #aff124 !important; }
-        .bg-light { background-color: #f9f9f6 !important; }
+        .bg-primary { background-color: #3B82F6 !important; }
+        .bg-secondary { background-color: #EC4899 !important; }
+        .bg-accent { background-color: #F59E0B !important; }
+        .bg-highlight { background-color: #10B981 !important; }
+        .bg-light { background-color: #F3F4F6 !important; }
         .bg-bright { background-color: #f9f31e !important; }
         .bg-soft { background-color: #ff66cc !important; }
         .bg-dark { background-color: #231f20 !important; }
         .bg-white { background-color: #ffffff !important; }
         
-        .border-primary { border-color: #22c55e !important; }
+        .border-primary { border-color: #007cba !important; }
         .border-secondary { border-color: #1ddede !important; }
         .border-accent { border-color: #f8c709 !important; }
         .border-highlight { border-color: #aff124 !important; }
@@ -316,41 +313,33 @@ function sarah_loz_tailwind_config() {
         .border-white { border-color: #ffffff !important; }
         
         /* Adding opacity variants manually */
-        .bg-primary\/10 { background-color: rgba(34, 197, 94, 0.1) !important; }
-        .bg-secondary\/10 { background-color: rgba(29, 222, 222, 0.1) !important; }
-        .bg-accent\/10 { background-color: rgba(248, 199, 9, 0.1) !important; }
-        .bg-primary\/20 { background-color: rgba(34, 197, 94, 0.2) !important; }
-        .bg-secondary\/20 { background-color: rgba(29, 222, 222, 0.2) !important; }
-        .bg-accent\/20 { background-color: rgba(248, 199, 9, 0.2) !important; }
+        .bg-primary\/10 { background-color: rgba(59, 130, 246, 0.1) !important; }
+        .bg-secondary\/10 { background-color: rgba(236, 72, 153, 0.1) !important; }
+        .bg-accent\/10 { background-color: rgba(245, 158, 11, 0.1) !important; }
+        .bg-primary\/20 { background-color: rgba(59, 130, 246, 0.2) !important; }
+        .bg-secondary\/20 { background-color: rgba(236, 72, 153, 0.2) !important; }
+        .bg-accent\/20 { background-color: rgba(245, 158, 11, 0.2) !important; }
         
-        .hover\:bg-primary:hover { background-color: #22c55e !important; }
-        .hover\:bg-secondary:hover { background-color: #1ddede !important; }
-        .hover\:bg-accent:hover { background-color: #f8c709 !important; }
-        .hover\:bg-highlight:hover { background-color: #aff124 !important; }
-        .hover\:bg-primary\/90:hover { background-color: rgba(34, 197, 94, 0.9) !important; }
-        .hover\:bg-secondary\/90:hover { background-color: rgba(29, 222, 222, 0.9) !important; }
-        .hover\:bg-accent\/90:hover { background-color: rgba(248, 199, 9, 0.9) !important; }
-        .hover\:bg-primary\/20:hover { background-color: rgba(34, 197, 94, 0.2) !important; }
-        .hover\:bg-secondary\/20:hover { background-color: rgba(29, 222, 222, 0.2) !important; }
-        .hover\:bg-accent\/20:hover { background-color: rgba(248, 199, 9, 0.2) !important; }
-        
-        .hover\:text-primary:hover { color: #22c55e !important; }
+        .hover\:bg-primary:hover { background-color: #3B82F6 !important; }
+        .hover\:bg-secondary:hover { background-color: #EC4899 !important; }
+        .hover\:bg-accent:hover { background-color: #F59E0B !important; }
+        .hover\:bg-highlight:hover { background-color: #10B981 !important; }
+        .hover\:bg-primary\/90:hover { background-color: rgba(59, 130, 246, 0.9) !important; }
+        .hover\:bg-secondary\/90:hover { background-color: rgba(236, 72, 153, 0.9) !important; }
+        .hover\:bg-accent\/90:hover { background-color: rgba(245, 158, 11, 0.9) !important; }
+        .hover\:bg-primary\/20:hover { background-color: rgba(59, 130, 246, 0.2) !important; }
+        .hover\:bg-secondary\/20:hover { background-color: rgba(236, 72, 153, 0.2) !important; }
+        .hover\:bg-accent\/20:hover { background-color: rgba(245, 158, 11, 0.2) !important; }
+
+        .hover\:text-primary:hover { color: #007cba !important; }
         .hover\:text-secondary:hover { color: #1ddede !important; }
         .hover\:text-accent:hover { color: #f8c709 !important; }
         .hover\:text-white:hover { color: #ffffff !important; }
         
         /* Gradient definitions */
-        .bg-gradient-primary {
-            background-image: linear-gradient(135deg, #22c55e, #ff66cc) !important;
-        }
-        
-        .bg-gradient-secondary {
-            background-image: linear-gradient(135deg, #1ddede, #aff124) !important;
-        }
-        
-        .bg-gradient-accent {
-            background-image: linear-gradient(135deg, #f8c709, #f9f31e) !important;
-        }
+        .bg-gradient-primary { background-image: linear-gradient(135deg, #3B82F6, #EC4899) !important; }
+        .bg-gradient-secondary { background-image: linear-gradient(135deg, #EC4899, #F59E0B) !important; }
+        .bg-gradient-accent { background-image: linear-gradient(135deg, #F59E0B, #FDE047) !important; }
         
         .bg-gradient-dark {
             background-image: linear-gradient(135deg, #231f20, #444444) !important;
@@ -377,7 +366,7 @@ function sarah_loz_tailwind_config() {
     </style>
     <?php
 }
-add_action('wp_head', 'sarah_loz_tailwind_config', 1);
+add_action('wp_footer', 'sarah_loz_tailwind_config', 1);
 
 /**
  * Handle user profile updates

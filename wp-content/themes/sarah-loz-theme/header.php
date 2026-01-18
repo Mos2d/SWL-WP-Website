@@ -85,11 +85,29 @@
         body {
             font-family: "Harmattan", sans-serif;
             background-color: #f9f9f6;
+            /* Create a stacking context so the ::before element stays behind text */
+            position: relative;
+            z-index: 0;
+        }
+
+        /* Create the dots on a separate layer */
+        /* body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            
             background-image: radial-gradient(#1ddede 2px, transparent 2px),
-                radial-gradient(#f8c709 2px, transparent 2px);
+                            radial-gradient(#f8c709 2px, transparent 2px);
             background-size: 40px 40px;
             background-position: 0 0, 20px 20px;
-        }
+            
+            filter: blur(4px);
+        } */
+
         .rounded-bubble {
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
         }
@@ -107,6 +125,23 @@
         /* Header background styles */
         header.site-header {
             background:  #ec0a74;
+        }
+
+        /* Smart Navbar Styles */
+        header.site-header {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        /* Class added by JS to hide the navbar */
+        header.site-header.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Fix overlap with WordPress Admin Bar on Desktop */
+        @media (min-width: 783px) {
+            body.admin-bar header.site-header {
+                top: 32px !important;
+            }
         }
     </style>
     
@@ -166,7 +201,7 @@
 <?php wp_body_open(); ?>
 
 <!-- Header/Navigation -->
-<header class="site-header bg-gradient-to-l from-primary to-accent sticky top-0 z-50 shadow-lg">
+<header class="site-header fixed top-0 w-full z-50 shadow-lg" style="background: #007cba !important;">
     <div class="container mx-auto px-4 py-3">
         <nav class="flex flex-wrap items-center justify-between">
             <!-- Logo -->
@@ -259,6 +294,30 @@
                 navMenu.classList.toggle("hidden");
             });
         }
+
+        let lastScrollTop = 0;
+        const header = document.querySelector('.site-header');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Prevent hiding when at the very top or bouncing (negative scroll on iOS)
+            if (scrollTop <= 0) {
+                header.classList.remove('nav-hidden');
+                lastScrollTop = 0;
+                return;
+            }
+
+            // Logic: If scrolling down AND passed the header height -> Hide
+            //        If scrolling up -> Show
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('nav-hidden');
+            } else {
+                header.classList.remove('nav-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        }, { passive: true });
     });
     
     // Logo click handler - similar to age group indicator functionality

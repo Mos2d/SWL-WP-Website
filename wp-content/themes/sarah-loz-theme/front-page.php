@@ -147,7 +147,7 @@ get_header(); ?>
 </style>
 
 <!-- Hero Section -->
-<section class="relative overflow-hidden py-10 md:py-20 bg-gradient-to-b from-accent/30 to-light">
+<section class="h-screen flex flex-col justify-center relative overflow-hidden py-10 md:py-20 bg-gradient-to-b from-light/30 to-light">
     <!-- Playful floating elements -->
     <div class="absolute top-10 left-5 w-16 h-16 animate-bounce">
     </div>
@@ -201,12 +201,12 @@ get_header(); ?>
             <div class="md:w-1/2 relative">
                 <div class="w-72 h-72 md:w-96 md:h-96 mx-auto relative">
                     <!-- Hero image bubbles with improved animations -->
-                    <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-primary/30 rounded-bubble floating animate-pulse"></div>
-                    <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-secondary/40 rounded-bubble right-4 top-4 floating animate-pulse" style="animation-delay: 0.5s"></div>
+                    <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-primary rounded-bubble floating animate-pulse"></div>
+                    <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-secondary rounded-bubble right-4 top-4 floating animate-pulse" style="animation-delay: 0.5s"></div>
                     
                     <!-- Main logo with animation -->
                     <div class="absolute inset-0 flex items-center justify-center text-6xl font-bold text-white animate__animated animate__zoomIn">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/SWL.png" alt="سارة ولوز" class="w-250 h-250 md:w-350 md:h-350 object-contain">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/SWL-Logo.png" alt="سارة ولوز" class="w-250 h-250 md:w-350 md:h-350 object-contain">
                     </div>
                     
                     <!-- Additional visual effects -->
@@ -223,8 +223,8 @@ get_header(); ?>
 </section>
 
 <!-- Features Section -->
-<section class="py-12 md:py-16 bg-gradient-to-br from-light to-white">
-    <div class="container mx-auto px-4">
+<section class="h-screen flex flex-col py-12 md:py-16 bg-gradient-to-b from-light to-primary/10">
+    <div class="container mx-auto px-4 h-full flex flex-col">
         <h2 class="text-3xl md:text-4xl font-bold text-center text-dark mb-6 animate__animated animate__bounceIn">
             <?php if ($selected_age_group && $current_age_data) : ?>
                 عالم خاص بـ<?php echo $current_age_data['label']; ?> 
@@ -241,9 +241,9 @@ get_header(); ?>
             <?php endif; ?>
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 my-auto">
             <!-- Feature 1 - Games -->
-            <div class="bg-gradient-to-br from-white to-primary/10 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp">
+            <div class="bg-gradient-to-br from-primary/10 to-primary/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp">
                 <div class="w-28 h-28 mx-auto mb-6 group-hover:scale-110 transition-transform">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/1.png" alt="ألعاب ممتعة" class="w-full h-full object-contain animate-bounce-slow">
                 </div>
@@ -257,7 +257,7 @@ get_header(); ?>
             </div>
 
             <!-- Feature 2 - Activities -->
-            <div class="bg-gradient-to-br from-white to-secondary/10 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="bg-gradient-to-br from-secondary/10 to-secondary/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-1s">
                 <div class="w-28 h-28 mx-auto mb-6 group-hover:scale-110 transition-transform">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/2.png" alt="أنشطة رائعة" class="w-full h-full object-contain animate-pulse">
                 </div>
@@ -271,7 +271,7 @@ get_header(); ?>
             </div>
 
             <!-- Feature 3 - Shop -->
-            <div class="bg-gradient-to-br from-white to-accent/10 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="bg-gradient-to-br from-accent/10 to-accent/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-2s">
                 <div class="w-28 h-28 mx-auto mb-6 group-hover:scale-110 transition-transform">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/3.png" alt="متجر الهدايا" class="w-full h-full object-contain animate-bounce-slow">
                 </div>
@@ -291,7 +291,7 @@ get_header(); ?>
             </div>
 
             <!-- Feature 4 - Videos -->
-            <div class="bg-gradient-to-br from-white to-primary/10 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-3s">
+            <div class="bg-gradient-to-br from-highlight/10 to-highlight/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-3s">
                 <div class="w-28 h-28 mx-auto mb-6 group-hover:scale-110 transition-transform">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/4.png" alt="فيديوهات شيقة" class="w-full h-full object-contain animate-pulse">
                 </div>
@@ -308,8 +308,8 @@ get_header(); ?>
 </section>
 
 <!-- Fun Games Grid -->
-<section id="games" class="py-16 bg-white">
-    <div class="container mx-auto px-4">
+<section id="games" class="h-screen flex flex-col py-16 bg-gradient-to-b from-primary/10 to-light">
+    <div class="container mx-auto px-4 h-full flex flex-col">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-gamepad text-primary ml-2"></i>
@@ -322,7 +322,7 @@ get_header(); ?>
             <a href="<?php echo get_post_type_archive_link('game'); ?>" class="mt-4 md:mt-0 bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">عرض كل الألعاب</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
             <?php
             // Get games with age filtering
             $games_args = array(
@@ -413,8 +413,8 @@ get_header(); ?>
 </section>
 
 <!-- Activities Section -->
-<section id="activities" class="py-16 bg-white">
-    <div class="container mx-auto px-4">
+<section id="activities" class="h-screen flex flex-col py-16 bg-gradient-to-b from-light to-light/30">
+    <div class="container mx-auto px-4 h-full flex flex-col">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-paint-brush text-secondary ml-2"></i>
@@ -427,7 +427,7 @@ get_header(); ?>
             <a href="<?php echo get_post_type_archive_link('activity'); ?>" class="mt-4 md:mt-0 bg-secondary text-white px-4 py-2 rounded-full hover:bg-secondary/90 transition">عرض كل الأنشطة</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
             <?php
             // Get activities with age filtering
             $activities_args = array(
@@ -502,8 +502,8 @@ get_header(); ?>
 </section>
 
 <!-- Products Section -->
-<section id="products" class="py-16 bg-gradient-to-b from-light to-white">
-    <div class="container mx-auto px-4">
+<section id="products" class="h-screen flex flex-col py-16 bg-gradient-to-b from-light/30 to-light">
+    <div class="container mx-auto px-4 h-full flex flex-col">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-shopping-bag text-accent ml-2"></i>
@@ -514,7 +514,7 @@ get_header(); ?>
             <?php endif; ?>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
             <?php 
             if (function_exists('wc_get_products')) {
                 $products = wc_get_products(array(
@@ -589,8 +589,8 @@ get_header(); ?>
 </section>
 
 <!-- Featured Theaters Section -->
-<section id="theaters" class="py-16 bg-white">
-    <div class="container mx-auto px-4">
+<section id="theaters" class="h-screen flex flex-col py-16 bg-gradient-to-b from-light to-primary/10">
+    <div class="container mx-auto px-4 h-full flex flex-col">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-theater-masks text-dark ml-2"></i>
@@ -603,7 +603,7 @@ get_header(); ?>
             <a href="<?php echo get_post_type_archive_link('theater'); ?>" class="mt-4 md:mt-0 bg-dark text-white px-4 py-2 rounded-full hover:bg-dark/90 transition">عرض كل المسرحيات</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
             <?php
             // Get theaters with age filtering
             $theaters_args = array(
@@ -688,8 +688,8 @@ get_header(); ?>
 </section>
 
 <!-- Featured Videos Section -->
-<section id="videos" class="py-16 bg-light">
-    <div class="container mx-auto px-4">
+<section id="videos" class="h-screen flex flex-col py-16 bg-gradient-to-b from-primary/10 to-light">
+    <div class="container mx-auto px-4 h-full flex flex-col">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-video text-dark ml-2"></i>
@@ -702,7 +702,7 @@ get_header(); ?>
             <a href="<?php echo get_post_type_archive_link('video'); ?>" class="mt-4 md:mt-0 bg-dark text-white px-4 py-2 rounded-full hover:bg-dark/90 transition">عرض كل الفيديوهات</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
             <?php
             // Get videos with age filtering
             $videos_args = array(
@@ -825,7 +825,7 @@ get_header(); ?>
 <?php endif; ?>
 
 <!-- CTA Section -->
-<section class="py-20 relative overflow-hidden">
+<section class="h-screen flex flex-col justify-center py-20 relative overflow-hidden">
     <!-- Enhanced colorful gradient background with more child-friendly colors -->
     <div class="absolute inset-0 bg-gradient-to-br from-[#FF9AA2] via-[#FFDAC1] to-[#B5EAD7] opacity-90"></div>
     
@@ -900,7 +900,7 @@ get_header(); ?>
 </section>
 
 <!-- Newsletter Section -->
-<section class="py-20 bg-gradient-to-b from-light/70 to-white relative overflow-hidden">
+<section class="h-screen flex flex-col justify-center py-20 bg-gradient-to-b from-light/70 to-white relative overflow-hidden">
     <!-- Playful background elements -->
     <div class="absolute -top-16 right-0 w-48 h-48 opacity-20 animate-spin-slow" style="animation-duration: 20s;">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sun.png" alt="" class="w-full h-full object-contain">
@@ -981,7 +981,7 @@ get_header(); ?>
         </div>
         
         <!-- Additional playful elements -->
-        <div class="flex justify-center mt-16 gap-6">
+        <!-- <div class="flex justify-center mt-16 gap-6">
             <div class="w-16 h-16 bg-primary/20 rounded-full animate-bounce" style="animation-delay: 0.2s;">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/star.jpg" alt="" class="w-full h-full object-contain opacity-70">
             </div>
@@ -991,7 +991,7 @@ get_header(); ?>
             <div class="w-16 h-16 bg-accent/20 rounded-full animate-bounce" style="animation-delay: 0.6s;">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/balloons.png" alt="" class="w-full h-full object-contain opacity-70">
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
