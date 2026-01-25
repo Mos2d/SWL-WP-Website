@@ -380,4 +380,9 @@
     }
 </script> 
 
-<main id="content" class="site-content"><?php // Main content will be added here ?>
+<?php 
+// Add top padding to all pages EXCEPT the front page
+// 'pt-20' (approx 112px) pushes content down so it clears the fixed header
+$main_padding = !is_front_page() ? 'pt-20 md:pt-25' : ''; 
+?>
+<main id="content" class="site-content <?php echo $main_padding; ?>">

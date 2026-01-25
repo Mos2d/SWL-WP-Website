@@ -5,11 +5,78 @@ $current_age_data = sarah_loz_get_current_age_group_data();
 
 get_header(); ?>
 
-<!-- Add Animate.css for enhanced animations -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-<!-- Custom styles for child-friendly elements -->
 <style>
+    /* --- NEW: Background Patterns & Colors --- */
+    .bg-pastel-purple { background-color: #F3E8FF; }
+    .bg-pastel-orange { background-color: #FFF7ED; }
+    .bg-pastel-blue { background-color: #EBF8FF; }
+    .bg-pastel-green { background-color: #F0FDF4; }
+    .bg-pastel-pink { background-color: #FFF1F2; }
+
+    .pattern-dots {
+        background-color: #ffffff;
+        background-image: radial-gradient(#e5e7eb 2px, transparent 2px);
+        background-size: 30px 30px;
+    }
+
+    .pattern-grid {
+        background-color: #ffffff;
+        background-image: linear-gradient(#f0f0f0 1px, transparent 1px), linear-gradient(90deg, #f0f0f0 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    /* --- NEW: Wave Separators --- */
+    .section-separator {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+        z-index: 1;
+        pointer-events: none; /* Prevents wave from blocking clicks */
+    }
+
+    .section-separator svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 80px; /* Adjustable height for the wave */
+    }
+
+    .section-separator-up {
+        transform: rotate(0deg) !important;
+        bottom: -1px; /* Ensures it sits perfectly on the next section */
+    }
+
+    .section-separator-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+    
+    .section-separator-top svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 80px;
+    }
+
+    @media (min-width: 768px) {
+        .section-separator svg, .section-separator-top svg {
+            height: 120px;
+        }
+    }
+
+    /* --- EXISTING ANIMATIONS --- */
     /* Enhanced floating animation */
     @keyframes floating {
         0% { transform: translateY(0px) rotate(0deg); }
@@ -146,28 +213,22 @@ get_header(); ?>
     }
 </style>
 
-<!-- Hero Section -->
-<section class="h-screen flex flex-col justify-center relative overflow-hidden py-10 md:py-20 bg-gradient-to-b from-light/30 to-light">
-    <!-- Playful floating elements -->
-    <div class="absolute top-10 left-5 w-16 h-16 animate-bounce">
-    </div>
+<section class="min-h-screen flex flex-col justify-center relative py-20 md:py-32 pb-32 md:pb-48">
+    <div class="absolute top-10 left-5 w-16 h-16 animate-bounce"></div>
     <div class="absolute bottom-10 right-5 w-20 h-20 animate-pulse">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/balloons.png" alt="Decorative balloon" class="w-full h-full object-contain">
     </div>
     <div class="absolute top-1/3 right-10 w-14 h-14 animate-spin-slow">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sun.png" alt="Decorative sun" class="w-full h-full object-contain">
     </div>
-    <!-- Additional floating elements for more playfulness -->
-    <div class="absolute bottom-1/4 left-10 w-12 h-12 animate-bounce" style="animation-delay: 0.5s;">
-    </div>
+    <div class="absolute bottom-1/4 left-10 w-12 h-12 animate-bounce" style="animation-delay: 0.5s;"></div>
     <div class="absolute top-2/3 left-1/4 w-10 h-10 animate-ping" style="animation-delay: 1.2s;">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/balloons.png" alt="Decorative balloon" class="w-full h-full object-contain">
     </div>
     
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 relative z-10">
         <div class="flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 text-center md:text-right mb-10 md:mb-0">
-
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-dark mb-4 animate__animated animate__bounceIn">
                     مرحباً بكم في عالم
                     <div class="mt-3">
@@ -200,31 +261,32 @@ get_header(); ?>
             </div>
             <div class="md:w-1/2 relative">
                 <div class="w-72 h-72 md:w-96 md:h-96 mx-auto relative">
-                    <!-- Hero image bubbles with improved animations -->
                     <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-primary rounded-bubble floating animate-pulse"></div>
                     <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-secondary rounded-bubble right-4 top-4 floating animate-pulse" style="animation-delay: 0.5s"></div>
                     
-                    <!-- Main logo with animation -->
                     <div class="absolute inset-0 flex items-center justify-center text-6xl font-bold text-white animate__animated animate__zoomIn">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/SWL-Logo.png" alt="سارة ولوز" class="w-250 h-250 md:w-350 md:h-350 object-contain">
                     </div>
                     
-                    <!-- Additional visual effects -->
                     <div class="absolute -z-10 inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-xl rounded-full animate-pulse" style="animation-duration: 3s;"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Decorative elements with enhanced visibility -->
     <div class="hidden md:block absolute -top-10 right-10 w-24 h-24 bg-accent rounded-full opacity-40 floating animate-pulse"></div>
     <div class="hidden md:block absolute top-20 left-10 w-20 h-20 bg-primary rounded-full opacity-40 floating animate-bounce" style="animation-delay: 0.7s"></div>
     <div class="hidden md:block absolute bottom-10 right-20 w-28 h-28 bg-secondary rounded-full opacity-40 floating animate-ping" style="animation-delay: 1.2s"></div>
+
+    <div class="section-separator">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff" class="fill-current text-white"></path>
+        </svg>
+    </div>
 </section>
 
-<!-- Features Section -->
-<section class="h-screen flex flex-col py-12 md:py-16 bg-gradient-to-b from-light to-primary/10">
-    <div class="container mx-auto px-4 h-full flex flex-col">
+<section class="min-h-screen flex flex-col justify-center relative py-20 md:py-32 pb-32 md:pb-48 pattern-dots">
+    <div class="container mx-auto px-4 relative z-10">
         <h2 class="text-3xl md:text-4xl font-bold text-center text-dark mb-6 animate__animated animate__bounceIn">
             <?php if ($selected_age_group && $current_age_data) : ?>
                 عالم خاص بـ<?php echo $current_age_data['label']; ?> 
@@ -241,9 +303,8 @@ get_header(); ?>
             <?php endif; ?>
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 my-auto">
-            <!-- Feature 1 - Games -->
-            <div class="bg-gradient-to-br from-primary/10 to-primary/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-gradient-to-br from-primary/10 to-primary/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp border-4 border-white">
                 <div class="w-28 h-28 mx-auto mb-6 group-hover:scale-110 transition-transform">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/1.png" alt="ألعاب ممتعة" class="w-full h-full object-contain animate-bounce-slow">
                 </div>
@@ -251,13 +312,12 @@ get_header(); ?>
                 <p class="text-xl text-gray-600 mb-4">
                     العب وتعلم مع سارة ولوز في ألعابنا التفاعلية الشيقة!
                 </p>
-                <a href="<?php echo get_post_type_archive_link('game'); ?>" class="inline-block bg-primary/20 text-primary font-bold px-6 py-3 rounded-full hover:bg-primary hover:text-white transition-all">
+                <a href="<?php echo get_post_type_archive_link('game'); ?>" class="inline-block bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-primary hover:text-white transition-all shadow-md">
                     هيا نلعب!
                 </a>
             </div>
 
-            <!-- Feature 2 - Activities -->
-            <div class="bg-gradient-to-br from-secondary/10 to-secondary/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="bg-gradient-to-br from-secondary/10 to-secondary/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-1s border-4 border-white">
                 <div class="w-28 h-28 mx-auto mb-6 group-hover:scale-110 transition-transform">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/2.png" alt="أنشطة رائعة" class="w-full h-full object-contain animate-pulse">
                 </div>
@@ -265,13 +325,12 @@ get_header(); ?>
                 <p class="text-xl text-gray-600 mb-4">
                     ارسم والعب واصنع أشياء جميلة مع أنشطتنا الإبداعية!
                 </p>
-                <a href="<?php echo get_post_type_archive_link('activity'); ?>" class="inline-block bg-secondary/20 text-secondary font-bold px-6 py-3 rounded-full hover:bg-secondary hover:text-white transition-all">
+                <a href="<?php echo get_post_type_archive_link('activity'); ?>" class="inline-block bg-white text-secondary font-bold px-6 py-3 rounded-full hover:bg-secondary hover:text-white transition-all shadow-md">
                     اكتشف الأنشطة!
                 </a>
             </div>
 
-            <!-- Feature 3 - Shop -->
-            <div class="bg-gradient-to-br from-accent/10 to-accent/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="bg-gradient-to-br from-accent/10 to-accent/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-2s border-4 border-white">
                 <div class="w-28 h-28 mx-auto mb-6 group-hover:scale-110 transition-transform">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/3.png" alt="متجر الهدايا" class="w-full h-full object-contain animate-bounce-slow">
                 </div>
@@ -280,18 +339,17 @@ get_header(); ?>
                     اكتشف ألعاباً وهدايا مميزة في متجرنا الخاص بالأطفال!
                 </p>
                 <?php if (function_exists('wc_get_page_id') && wc_get_page_id('shop') > 0) : ?>
-                <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="inline-block bg-accent/20 text-accent font-bold px-6 py-3 rounded-full hover:bg-accent hover:text-white transition-all">
+                <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="inline-block bg-white text-accent font-bold px-6 py-3 rounded-full hover:bg-accent hover:text-white transition-all shadow-md">
                     زر المتجر!
                 </a>
                 <?php else: ?>
-                <a href="#products" class="inline-block bg-accent/20 text-accent font-bold px-6 py-3 rounded-full hover:bg-accent hover:text-white transition-all">
+                <a href="#products" class="inline-block bg-white text-accent font-bold px-6 py-3 rounded-full hover:bg-accent hover:text-white transition-all shadow-md">
                     زر المتجر!
                 </a>
                 <?php endif; ?>
             </div>
 
-            <!-- Feature 4 - Videos -->
-            <div class="bg-gradient-to-br from-highlight/10 to-highlight/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-3s">
+            <div class="bg-gradient-to-br from-highlight/10 to-highlight/90 rounded-3xl shadow-lg p-6 text-center transform transition hover:-translate-y-4 hover:shadow-xl cursor-pointer group animate__animated animate__fadeInUp animate__delay-3s border-4 border-white">
                 <div class="w-28 h-28 mx-auto mb-6 group-hover:scale-110 transition-transform">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/4.png" alt="فيديوهات شيقة" class="w-full h-full object-contain animate-pulse">
                 </div>
@@ -299,30 +357,35 @@ get_header(); ?>
                 <p class="text-xl text-gray-600 mb-4">
                     شاهد قصصاً وأنشطة ممتعة في فيديوهاتنا التعليمية!
                 </p>
-                <a href="<?php echo get_post_type_archive_link('video'); ?>" class="inline-block bg-primary/20 text-primary font-bold px-6 py-3 rounded-full hover:bg-primary hover:text-white transition-all">
+                <a href="<?php echo get_post_type_archive_link('video'); ?>" class="inline-block bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-primary hover:text-white transition-all shadow-md">
                     شاهد الآن!
                 </a>
             </div>
         </div>
     </div>
+    
+    <div class="section-separator section-separator-up">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#F3E8FF"></path>
+        </svg>
+    </div>
 </section>
 
-<!-- Fun Games Grid -->
-<section id="games" class="h-screen flex flex-col py-16 bg-gradient-to-b from-primary/10 to-light">
-    <div class="container mx-auto px-4 h-full flex flex-col">
+<section id="games" class="min-h-screen flex flex-col justify-center relative py-24 md:py-32 pb-32 md:pb-48 bg-pastel-purple">
+    <div class="container mx-auto px-4 h-full flex flex-col justify-center relative z-10">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-gamepad text-primary ml-2"></i>
-                <?php if ($selected_age_group && $current_age_data) : ?>
+                <?php if ($selected_age_group && $current_age_data && false) : ?>
                     ألعاب للأطفال من عمر <?php echo $selected_age_group; ?> سنوات
                 <?php else : ?>
                     قسم الألعاب
                 <?php endif; ?>
             </h2>
-            <a href="<?php echo get_post_type_archive_link('game'); ?>" class="mt-4 md:mt-0 bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">عرض كل الألعاب</a>
+            <a href="<?php echo get_post_type_archive_link('game'); ?>" class="mt-4 md:mt-0 bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 transition shadow-md">عرض كل الألعاب</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php
             // Get games with age filtering
             $games_args = array(
@@ -352,12 +415,12 @@ get_header(); ?>
                     $game_category = join(", ", $game_categories);
                 }
             ?>
-                <div class="bg-light rounded-3xl shadow-lg overflow-hidden card-hover">
+                <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover border-4 border-white">
                     <?php if (has_post_thumbnail()) : ?>
                         <div class="h-48 relative">
                             <?php the_post_thumbnail('medium_large', ['class' => 'h-full w-full object-cover']); ?>
                             <?php if ($current_age_data) : ?>
-                                <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold">
+                                <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold shadow">
                                     مناسب لعمرك!
                                 </div>
                             <?php endif; ?>
@@ -396,7 +459,7 @@ get_header(); ?>
                 wp_reset_postdata();
             else: 
                 ?>
-                <div class="col-span-3 text-center py-10 bg-light rounded-lg">
+                <div class="col-span-3 text-center py-10 bg-white/50 rounded-lg">
                     <i class="fas fa-gamepad text-6xl text-primary/30 mb-4"></i>
                     <h3 class="text-2xl font-bold text-gray-600 mb-2">لا توجد ألعاب متاحة</h3>
                     <p class="text-gray-500">
@@ -410,24 +473,29 @@ get_header(); ?>
             <?php endif; ?>
         </div>
     </div>
+    
+    <div class="section-separator" style="transform: translateY(98%); z-index: 20;">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+                fill="#F3E8FF"></path> </svg>
+    </div>
 </section>
 
-<!-- Activities Section -->
-<section id="activities" class="h-screen flex flex-col py-16 bg-gradient-to-b from-light to-light/30">
-    <div class="container mx-auto px-4 h-full flex flex-col">
+<section id="activities" class="min-h-screen flex flex-col justify-center relative py-24 md:py-32 pb-32 md:pb-48 pattern-grid">
+    <div class="container mx-auto px-4 h-full flex flex-col justify-center relative z-10">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-paint-brush text-secondary ml-2"></i>
-                <?php if ($selected_age_group && $current_age_data) : ?>
+                <?php if ($selected_age_group && $current_age_data && false) : ?>
                     أنشطة للأطفال من عمر <?php echo $selected_age_group; ?> سنوات
                 <?php else : ?>
                     قسم الأنشطة
                 <?php endif; ?>
             </h2>
-            <a href="<?php echo get_post_type_archive_link('activity'); ?>" class="mt-4 md:mt-0 bg-secondary text-white px-4 py-2 rounded-full hover:bg-secondary/90 transition">عرض كل الأنشطة</a>
+            <a href="<?php echo get_post_type_archive_link('activity'); ?>" class="mt-4 md:mt-0 bg-secondary text-white px-6 py-3 rounded-full hover:bg-secondary/90 transition shadow-md">عرض كل الأنشطة</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php
             // Get activities with age filtering
             $activities_args = array(
@@ -449,12 +517,12 @@ get_header(); ?>
                     // Get age range if available
                     $age_range = get_field('age_range') ? get_field('age_range') : '';
                     ?>
-                    <div class="bg-light rounded-3xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover border-2 border-gray-100">
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="h-48 relative">
                                 <?php the_post_thumbnail('medium_large', ['class' => 'h-full w-full object-cover']); ?>
                                 <?php if ($current_age_data) : ?>
-                                    <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold">
+                                    <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold shadow">
                                         مناسب لعمرك!
                                     </div>
                                 <?php endif; ?>
@@ -485,7 +553,7 @@ get_header(); ?>
                 wp_reset_postdata();
             else: 
                 ?>
-                <div class="col-span-3 text-center py-10 bg-light rounded-lg">
+                <div class="col-span-3 text-center py-10 bg-white/50 rounded-lg">
                     <i class="fas fa-palette text-6xl text-secondary/30 mb-4"></i>
                     <h3 class="text-2xl font-bold text-gray-600 mb-2">لا توجد أنشطة متاحة</h3>
                     <p class="text-gray-500">
@@ -499,22 +567,27 @@ get_header(); ?>
             <?php endif; ?>
         </div>
     </div>
+
+    <div class="section-separator section-separator-up">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#FFF7ED"></path>
+        </svg>
+    </div>
 </section>
 
-<!-- Products Section -->
-<section id="products" class="h-screen flex flex-col py-16 bg-gradient-to-b from-light/30 to-light">
-    <div class="container mx-auto px-4 h-full flex flex-col">
+<section id="products" class="min-h-screen flex flex-col justify-center relative py-24 md:py-32 pb-32 md:pb-48 bg-pastel-orange">
+    <div class="container mx-auto px-4 h-full flex flex-col justify-center relative z-10">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-shopping-bag text-accent ml-2"></i>
                 متجر سارة ولوز
             </h2>
             <?php if (function_exists('wc_get_page_id') && wc_get_page_id('shop') > 0) : ?>
-                <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="mt-4 md:mt-0 bg-accent text-white px-4 py-2 rounded-full hover:bg-accent/90 transition">تسوق الآن</a>
+                <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="mt-4 md:mt-0 bg-accent text-white px-6 py-3 rounded-full hover:bg-accent/90 transition shadow-md">تسوق الآن</a>
             <?php endif; ?>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php 
             if (function_exists('wc_get_products')) {
                 $products = wc_get_products(array(
@@ -536,7 +609,7 @@ get_header(); ?>
                         // Get product categories
                         $categories = wc_get_product_category_list($product_id);
                         ?>
-                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition transform hover:-translate-y-2 hover:shadow-xl">
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition transform hover:-translate-y-2 hover:shadow-xl border-4 border-white">
                             <div class="h-52 relative">
                                 <?php if ($product_image_id) : ?>
                                     <?php echo wp_get_attachment_image($product_image_id, 'medium_large', false, ['class' => 'h-full w-full object-cover']); ?>
@@ -547,7 +620,7 @@ get_header(); ?>
                                 <?php endif; ?>
                                 <?php if ($product->is_on_sale()) : ?>
                                     <div class="absolute top-2 left-2">
-                                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm">تخفيض</span>
+                                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm shadow">تخفيض</span>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -560,7 +633,7 @@ get_header(); ?>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <div class="text-lg font-bold text-primary"><?php echo $product_price; ?></div>
-                                    <a href="<?php echo esc_url($product->add_to_cart_url()); ?>" data-quantity="1" data-product_id="<?php echo esc_attr($product_id); ?>" class="add_to_cart_button ajax_add_to_cart bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">
+                                    <a href="<?php echo esc_url($product->add_to_cart_url()); ?>" data-quantity="1" data-product_id="<?php echo esc_attr($product_id); ?>" class="add_to_cart_button ajax_add_to_cart bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition shadow-sm">
                                         <i class="fas fa-cart-plus ml-1"></i> أضف للسلة
                                     </a>
                                 </div>
@@ -570,7 +643,7 @@ get_header(); ?>
                 } else {
                     // Fallback static content if no products are found
                     ?>
-                    <div class="col-span-3 text-center py-10 bg-light rounded-lg">
+                    <div class="col-span-3 text-center py-10 bg-white/50 rounded-lg">
                         <i class="fas fa-shopping-bag text-6xl text-accent/30 mb-4"></i>
                         <h3 class="text-2xl font-bold text-gray-600 mb-2">المتجر قريباً</h3>
                         <p class="text-gray-500">سيتم إضافة منتجات رائعة قريباً!</p>
@@ -579,31 +652,37 @@ get_header(); ?>
                 }
             } else {
                 // If WooCommerce functions are not available
-                echo '<div class="col-span-3 text-center py-10 bg-light rounded-lg">';
+                echo '<div class="col-span-3 text-center py-10 bg-white/50 rounded-lg">';
                 echo '<p>المتجر غير متاح حالياً. يرجى التحقق لاحقاً.</p>';
                 echo '</div>';
             }
             ?>
         </div>
     </div>
+    
+    <div class="section-separator" style="transform: translateY(98%); z-index: 20;">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+                fill="#FFF7ED"></path>
+        </svg>
+    </div>
 </section>
 
-<!-- Featured Theaters Section -->
-<section id="theaters" class="h-screen flex flex-col py-16 bg-gradient-to-b from-light to-primary/10">
-    <div class="container mx-auto px-4 h-full flex flex-col">
+<section id="theaters" class="min-h-screen flex flex-col justify-center relative py-24 md:py-32 pb-32 md:pb-48 pattern-dots">
+    <div class="container mx-auto px-4 h-full flex flex-col justify-center relative z-10">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-theater-masks text-dark ml-2"></i>
-                <?php if ($selected_age_group && $current_age_data) : ?>
+                <?php if ($selected_age_group && $current_age_data && false) : ?>
                     مسرحيات للأطفال من عمر <?php echo $selected_age_group; ?> سنوات
                 <?php else : ?>
                     مسرحيات تعليمية
                 <?php endif; ?>
             </h2>
-            <a href="<?php echo get_post_type_archive_link('theater'); ?>" class="mt-4 md:mt-0 bg-dark text-white px-4 py-2 rounded-full hover:bg-dark/90 transition">عرض كل المسرحيات</a>
+            <a href="<?php echo get_post_type_archive_link('theater'); ?>" class="mt-4 md:mt-0 bg-dark text-white px-6 py-3 rounded-full hover:bg-dark/90 transition shadow-md">عرض كل المسرحيات</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php
             // Get theaters with age filtering
             $theaters_args = array(
@@ -627,12 +706,12 @@ get_header(); ?>
                     // Get theater type if available
                     $theater_type = get_field('theater_type') ? get_field('theater_type') : '';
                     ?>
-                    <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover border-2 border-gray-100">
                         <div class="h-48 relative group">
                             <?php if (has_post_thumbnail()) : ?>
                                 <?php the_post_thumbnail('medium_large', ['class' => 'h-full w-full object-cover']); ?>
                                 <?php if ($current_age_data) : ?>
-                                    <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold">
+                                    <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold shadow">
                                         مناسب لعمرك!
                                     </div>
                                 <?php endif; ?>
@@ -642,7 +721,7 @@ get_header(); ?>
                                 </div>
                             <?php endif; ?>
                             <div class="absolute inset-0 bg-dark/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                <a href="<?php echo get_permalink(); ?>" class="w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center hover:bg-primary transition-colors">
+                                <a href="<?php echo get_permalink(); ?>" class="w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center hover:bg-primary transition-colors shadow-lg">
                                     <i class="fas fa-play text-white text-xl"></i>
                                 </a>
                             </div>
@@ -671,7 +750,7 @@ get_header(); ?>
                 wp_reset_postdata();
             else: 
                 ?>
-                <div class="col-span-3 text-center py-10 bg-white rounded-lg">
+                <div class="col-span-3 text-center py-10 bg-white/50 rounded-lg">
                     <i class="fas fa-theater-masks text-6xl text-dark/30 mb-4"></i>
                     <h3 class="text-2xl font-bold text-gray-600 mb-2">لا توجد مسرحيات متاحة</h3>
                     <p class="text-gray-500">
@@ -685,24 +764,29 @@ get_header(); ?>
             <?php endif; ?>
         </div>
     </div>
+    
+    <div class="section-separator section-separator-up">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#EBF8FF"></path>
+        </svg>
+    </div>
 </section>
 
-<!-- Featured Videos Section -->
-<section id="videos" class="h-screen flex flex-col py-16 bg-gradient-to-b from-primary/10 to-light">
-    <div class="container mx-auto px-4 h-full flex flex-col">
+<section id="videos" class="min-h-screen flex flex-col justify-center relative py-24 md:py-32 pb-32 md:pb-48 bg-pastel-blue">
+    <div class="container mx-auto px-4 h-full flex flex-col justify-center relative z-10">
         <div class="flex flex-col md:flex-row items-center justify-between mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-dark">
                 <i class="fas fa-video text-dark ml-2"></i>
-                <?php if ($selected_age_group && $current_age_data) : ?>
+                <?php if ($selected_age_group && $current_age_data && false) : ?>
                     فيديوهات للأطفال من عمر <?php echo $selected_age_group; ?> سنوات
                 <?php else : ?>
                     فيديوهات تعليمية
                 <?php endif; ?>
             </h2>
-            <a href="<?php echo get_post_type_archive_link('video'); ?>" class="mt-4 md:mt-0 bg-dark text-white px-4 py-2 rounded-full hover:bg-dark/90 transition">عرض كل الفيديوهات</a>
+            <a href="<?php echo get_post_type_archive_link('video'); ?>" class="mt-4 md:mt-0 bg-dark text-white px-6 py-3 rounded-full hover:bg-dark/90 transition shadow-md">عرض كل الفيديوهات</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php
             // Get videos with age filtering
             $videos_args = array(
@@ -723,15 +807,13 @@ get_header(); ?>
                 while ($featured_videos->have_posts()) : $featured_videos->the_post(); 
                     // Get age range if available
                     $age_range = get_field('age_range') ? get_field('age_range') : '';
-                    // Get video URL if available
-                    $video_url = get_field('video_url') ? get_field('video_url') : '';
                     ?>
-                    <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-white rounded-3xl shadow-lg overflow-hidden card-hover border-4 border-white">
                         <div class="h-48 relative group">
                             <?php if (has_post_thumbnail()) : ?>
                                 <?php the_post_thumbnail('medium_large', ['class' => 'h-full w-full object-cover']); ?>
                                 <?php if ($current_age_data) : ?>
-                                    <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold">
+                                    <div class="absolute top-2 right-2 bg-<?php echo $current_age_data['color']; ?> text-white px-2 py-1 rounded-full text-xs font-bold shadow">
                                         مناسب لعمرك!
                                     </div>
                                 <?php endif; ?>
@@ -741,7 +823,7 @@ get_header(); ?>
                                 </div>
                             <?php endif; ?>
                             <div class="absolute inset-0 bg-dark/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                <a href="<?php echo get_permalink(); ?>" class="w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center hover:bg-primary transition-colors">
+                                <a href="<?php echo get_permalink(); ?>" class="w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center hover:bg-primary transition-colors shadow-lg">
                                     <i class="fas fa-play text-white text-xl"></i>
                                 </a>
                             </div>
@@ -765,7 +847,7 @@ get_header(); ?>
                 wp_reset_postdata();
             else: 
                 ?>
-                <div class="col-span-3 text-center py-10 bg-white rounded-lg">
+                <div class="col-span-3 text-center py-10 bg-white/50 rounded-lg">
                     <i class="fas fa-film text-6xl text-dark/30 mb-4"></i>
                     <h3 class="text-2xl font-bold text-gray-600 mb-2">لا توجد فيديوهات متاحة</h3>
                     <p class="text-gray-500">
@@ -779,13 +861,18 @@ get_header(); ?>
             <?php endif; ?>
         </div>
     </div>
+    
+    <div class="section-separator" style="transform: translateY(98%); z-index: 20;">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+                fill="#EBF8FF"></path>
+        </svg>
+    </div>
 </section>
 
-<!-- Age Groups Section -->
 <?php if (!$selected_age_group) : ?>
-    <!-- Only show this section if no age group is selected -->
-    <section class="bg-gradient-to-b from-white to-light py-16">
-        <div class="container mx-auto px-4">
+    <section class="min-h-screen flex flex-col justify-center relative py-24 md:py-32 pb-32 md:pb-48 pattern-grid">
+        <div class="container mx-auto px-4 h-full flex flex-col justify-center relative z-10">
             <header class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-dark mb-4">
                     <span class="text-primary">🌈</span> 
@@ -800,8 +887,8 @@ get_header(); ?>
                 $age_groups = sarah_loz_get_age_groups();
                 foreach ($age_groups as $range => $group) : 
                 ?>
-                    <div class="bg-gradient-to-br from-<?php echo $group['color']; ?>/10 to-white rounded-3xl p-8 text-center hover:shadow-xl transition-all transform hover:-translate-y-2 cursor-pointer">
-                        <div class="w-32 h-32 bg-<?php echo $group['color']; ?>/20 rounded-full flex flex-col items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                    <div class="bg-gradient-to-br from-<?php echo $group['color']; ?>/10 to-white rounded-3xl p-8 text-center hover:shadow-xl transition-all transform hover:-translate-y-2 cursor-pointer border-2 border-<?php echo $group['color']; ?>/20">
+                        <div class="w-32 h-32 bg-<?php echo $group['color']; ?>/20 rounded-full flex flex-col items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-inner">
                             <?php if (isset($group['custom_image'])) : ?>
                                 <img src="<?php echo esc_url($group['custom_image']); ?>" alt="<?php echo esc_attr($group['label']); ?>" class="w-20 h-20 object-cover rounded-full mb-2">
                             <?php else : ?>
@@ -812,7 +899,7 @@ get_header(); ?>
                         <h3 class="text-2xl font-bold mb-4"><?php echo $group['label']; ?></h3>
                         <p class="text-xl text-gray-600 mb-6"><?php echo $group['description']; ?></p>
                         <a href="<?php echo add_query_arg('age_group', $range, get_permalink(get_page_by_path('age-group'))); ?>" 
-                           class="inline-block bg-<?php echo $group['color']; ?> text-white px-8 py-4 rounded-full text-xl hover:bg-opacity-90 transition-colors transform hover:scale-105"
+                           class="inline-block bg-<?php echo $group['color']; ?> text-white px-8 py-4 rounded-full text-xl hover:bg-opacity-90 transition-colors transform hover:scale-105 shadow-md"
                            onclick="selectAgeGroupFromFrontPage('<?php echo $range; ?>')">
                             <span class="ml-2"><?php echo $range === '3-5' ? '🎮' : ($range === '6-7' ? '🎨' : '🏆'); ?></span>
                             اختر هذا العمر!
@@ -821,36 +908,34 @@ get_header(); ?>
                 <?php endforeach; ?>
             </div>
         </div>
+        
+        <div class="section-separator section-separator-up">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#FF9AA2"></path>
+            </svg>
+        </div>
     </section>
 <?php endif; ?>
 
-<!-- CTA Section -->
-<section class="h-screen flex flex-col justify-center py-20 relative overflow-hidden">
-    <!-- Enhanced colorful gradient background with more child-friendly colors -->
+<section class="min-h-screen flex flex-col justify-center relative py-24 md:py-32 pb-32 md:pb-48 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-[#FF9AA2] via-[#FFDAC1] to-[#B5EAD7] opacity-90"></div>
     
-    <!-- Animated background elements -->
     <div class="absolute inset-0">
-        <!-- Floating bubbles -->
         <div class="absolute top-10 left-10 w-24 h-24 bg-white/20 rounded-full animate-float blur-sm"></div>
         <div class="absolute bottom-10 right-10 w-20 h-20 bg-white/20 rounded-full animate-float-delayed blur-sm"></div>
         <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-white/20 rounded-full animate-float-slow blur-sm"></div>
         
-        <!-- Additional animated elements -->
         <div class="absolute top-1/3 right-1/4 w-28 h-28 bg-white/10 rounded-bubble animate-spin-slow blur-md"></div>
         <div class="absolute bottom-1/4 left-1/3 w-36 h-36 bg-white/10 rounded-bubble animate-float-reverse blur-md"></div>
         
-        <!-- Cartoon-style clouds and elements -->
         <div class="absolute top-1/4 left-10 w-40 h-20 bg-white/70 rounded-full blur-md animate-float-slow"></div>
         <div class="absolute top-1/4 left-20 w-32 h-16 bg-white/70 rounded-full blur-md animate-float-slow" style="animation-delay: 0.3s;"></div>
         <div class="absolute bottom-1/4 right-10 w-40 h-20 bg-white/70 rounded-full blur-md animate-float-delayed"></div>
         <div class="absolute bottom-1/4 right-20 w-32 h-16 bg-white/70 rounded-full blur-md animate-float-delayed" style="animation-delay: 0.3s;"></div>
         
-        <!-- Shooting stars -->
         <div class="absolute -top-4 -right-4 w-10 h-10 bg-white/50 rounded-full animate-shooting-star"></div>
         <div class="absolute -top-4 -left-4 w-8 h-8 bg-white/40 rounded-full animate-shooting-star-delayed"></div>
         
-        <!-- Animated stars -->
         <div class="absolute top-1/3 right-1/3 w-6 h-6 animate-ping" style="animation-duration: 3s;">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/star.jpg" alt="" class="w-full h-full object-contain opacity-70">
         </div>
@@ -883,7 +968,6 @@ get_header(); ?>
                 </a>
             </div>
             
-            <!-- Character illustrations at the bottom -->
             <div class="flex justify-center mt-12 gap-4">
                 <div class="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center animate-bounce" style="animation-delay: 0.1s;">
                     <span class="text-5xl">🦁</span>
@@ -897,11 +981,15 @@ get_header(); ?>
             </div>
         </div>
     </div>
+    
+    <div class="section-separator">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff" class="fill-current text-white"></path>
+        </svg>
+    </div>
 </section>
 
-<!-- Newsletter Section -->
-<section class="h-screen flex flex-col justify-center py-20 bg-gradient-to-b from-light/70 to-white relative overflow-hidden">
-    <!-- Playful background elements -->
+<section class="min-h-screen flex flex-col justify-center relative py-20 md:py-32 bg-gradient-to-b from-white to-light overflow-hidden">
     <div class="absolute -top-16 right-0 w-48 h-48 opacity-20 animate-spin-slow" style="animation-duration: 20s;">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sun.png" alt="" class="w-full h-full object-contain">
     </div>
@@ -909,18 +997,16 @@ get_header(); ?>
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/balloons.png" alt="" class="w-full h-full object-contain">
     </div>
     
-    <!-- Additional decorative elements -->
     <div class="absolute top-1/4 left-10 w-16 h-16 bg-primary/20 rounded-full animate-ping" style="animation-duration: 4s;"></div>
     <div class="absolute bottom-1/4 right-10 w-16 h-16 bg-secondary/20 rounded-full animate-ping" style="animation-duration: 5s;"></div>
     
-    <!-- Cloud-like shapes -->
     <div class="absolute top-0 left-1/4 w-64 h-16 bg-white rounded-full blur-md"></div>
     <div class="absolute top-8 left-1/4 w-48 h-16 bg-white rounded-full blur-md"></div>
     <div class="absolute bottom-0 right-1/4 w-64 h-16 bg-white rounded-full blur-md"></div>
     <div class="absolute bottom-8 right-1/4 w-48 h-16 bg-white rounded-full blur-md"></div>
 
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-4xl mx-auto transform hover:scale-105 transition-transform animate__animated animate__fadeInUp">
+    <div class="container mx-auto px-4 relative z-10 h-full flex flex-col justify-center">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-4xl mx-auto transform hover:scale-105 transition-transform animate__animated animate__fadeInUp border-4 border-white/50">
             <div class="absolute -top-10 -right-10 w-20 h-20 bg-primary/20 rounded-full animate-bounce-slow"></div>
             <div class="absolute -bottom-10 -left-10 w-20 h-20 bg-secondary/20 rounded-full animate-bounce-slow" style="animation-delay: 0.5s;"></div>
             
@@ -948,7 +1034,7 @@ get_header(); ?>
                         </li>
                     </ul>
                 </div>
-                <div class="md:w-1/2 w-full bg-gradient-to-br from-light/50 to-white p-6 rounded-3xl shadow-lg">
+                <div class="md:w-1/2 w-full bg-gradient-to-br from-light/50 to-white p-6 rounded-3xl shadow-lg border-2 border-primary/10">
                     <form class="swl-newsletter-form flex flex-col space-y-5">
                         <h3 class="text-2xl font-bold text-center mb-4">انضم إلينا الآن! 🚀</h3>
                         
@@ -979,25 +1065,11 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        
-        <!-- Additional playful elements -->
-        <!-- <div class="flex justify-center mt-16 gap-6">
-            <div class="w-16 h-16 bg-primary/20 rounded-full animate-bounce" style="animation-delay: 0.2s;">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/star.jpg" alt="" class="w-full h-full object-contain opacity-70">
-            </div>
-            <div class="w-16 h-16 bg-secondary/20 rounded-full animate-bounce" style="animation-delay: 0.4s;">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sun.png" alt="" class="w-full h-full object-contain opacity-70">
-            </div>
-            <div class="w-16 h-16 bg-accent/20 rounded-full animate-bounce" style="animation-delay: 0.6s;">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/balloons.png" alt="" class="w-full h-full object-contain opacity-70">
-            </div>
-        </div> -->
     </div>
 </section>
 
 <?php get_footer(); ?>
 
-<!-- Child-friendly interactive JS enhancements -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Add animation classes on scroll for better performance

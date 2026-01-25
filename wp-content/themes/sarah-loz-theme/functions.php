@@ -194,18 +194,18 @@ function sarah_loz_tailwind_config() {
     <script>
         tailwind.config = {
             theme: {
-                colors: {
-                    primary: "#3B82F6",   // Bright Blue
-                    secondary: "#EC4899", // Hot Pink
-                    accent: "#F59E0B",    // Golden Yellow
-                    highlight: "#10B981", // Emerald Green
-                    light: "#F3F4F6",     // Cool Light Gray
-                    bright: "#FDE047",    // Bright Lemon
-                    soft: "#F472B6",      // Soft Pink
-                    dark: "#1F2937",      // Dark Gray
-                    white: "#ffffff",
-                },
                 extend: {
+                    colors: {
+                        primary: "#3B82F6",   // Bright Blue
+                        secondary: "#EC4899", // Hot Pink
+                        accent: "#F59E0B",    // Golden Yellow
+                        highlight: "#10B981", // Emerald Green
+                        light: "#F3F4F6",     // Cool Light Gray
+                        bright: "#FDE047",    // Bright Lemon
+                        soft: "#F472B6",      // Soft Pink
+                        dark: "#1F2937",      // Dark Gray
+                        white: "#ffffff",
+                    },
                     fontFamily: {
                         arabic: ["Harmattan", "sans-serif"],
                     },
