@@ -98,7 +98,7 @@ get_header(); ?>
     if ($games_query->have_posts()) : ?>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php while ($games_query->have_posts()) : $games_query->the_post(); ?>
-                <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow transform hover:-translate-y-2 duration-300 border-2 border-primary/20">
+                <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all ease-in-out transform hover:-translate-y-2 duration-300 border-2 border-primary/20">
                     <?php if (has_post_thumbnail()) : ?>
                         <div class="aspect-w-16 aspect-h-9 relative overflow-hidden">
                             <?php the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover']); ?>
